@@ -1,0 +1,110 @@
+* {
+  text-transform: uppercase;
+  font-family: "Fredoka";
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+#cover {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  background-color: rgba(0, 0, 0, 0.342);
+}
+#map-frame {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: none;
+  z-index: 1; /* Fondo */
+}
+
+#character img {
+  width: 150px;
+}
+
+#dialogue-box {
+  max-width: fit-content;
+  max-width: fit-content;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 10px;
+}
+
+#dialogue-text {
+  font-size: 2rem;
+}
+
+#personaje {
+  z-index: 4;
+  width: 100%;
+  display: flexbox;
+  flex-direction: row;
+  position: absolute;
+}
+
+#next-btn {
+  padding: 10px;
+  font-size: 10px;
+  font-family: "Fredoka" cursive;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+#next-btn svg {
+  color: rgb(94, 189, 11);
+  transform: rotate(-90deg); /* Lo rotás */
+  width: 60px;
+  height: 60px;
+  pointer-events: none; /* el SVG no intercepta el clic */
+  user-select: none;
+}
+#next-btn:hover {
+  transform: scale(1.05);
+}
+
+#next-btn:active {
+  transform: scale(0.95);
+}
+
+svg {
+  width: 20px;
+}
+
+@media (max-width: 450px) {
+  * {
+    margin: 0;
+    padding: 0%;
+  }
+  #character img {
+    width: 150px;
+  }
+
+  #dialogue-box {
+    background: rgba(255, 255, 255, 0.9);
+    max-width: fit-content;
+    max-height: fit-content;
+  }
+
+  #personaje {
+    z-index: 4;
+    width: 100%;
+    display: flexbox;
+    flex-direction: row;
+    position: absolute;
+  }
+
+  #dialogue-text {
+    font-size: 1rem;
+  }
+
+  #next-btn svg {
+    width: 50px;
+  }
+}

@@ -1,0 +1,223 @@
+* {
+  text-transform: uppercase;
+  font-family: "Chewy";
+}
+
+body {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: #9fc9eee3;
+}
+
+object#mapa {
+  height: 80%;
+  display: flex;
+}
+
+#region-info {
+  position: absolute;
+  right: 0%;
+  bottom: 30%;
+  background: rgba(0, 0, 0, 0.75);
+  color: #fff;
+  padding: 12px 16px;
+  border-radius: 8px;
+  max-width: 250px;
+  font-size: 1rem;
+  display: none;
+  z-index: 998;
+  margin: 50px;
+}
+
+#confirmacion {
+  margin: 10px;
+  padding: 20px 20px;
+  background-color: #454fbc91;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  box-shadow: 0 3px 6px black;
+  font-family: "Chewy", cursive;
+  display: none;
+  text-shadow: 1.5px 0px 5px rgba(39, 0, 79, 0.823);
+  font-size: 1rem;
+}
+
+#nmr-correcto,
+#nmr-incorrecto {
+  margin: 10px;
+  padding: 10px 20px;
+  color: rgb(5, 24, 27);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+
+#btn-reiniciar {
+  margin: 10px;
+  padding: 8px 16px;
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+#btn-reiniciar:hover {
+  background-color: #c0392b;
+}
+.monedas {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  align-items: center;
+  background-color: #fcfa9d;
+  border: 2px solid rgba(214, 143, 62, 0.637);
+  border-radius: 10px;
+  padding: 5px 10px;
+  gap: 0px;
+  z-index: 999;
+}
+
+.monedas img {
+  width: 40px;
+}
+
+.cantidad-moneda {
+  font-size: 1.2rem;
+  padding: 2px 8px;
+}
+
+@media (min-width: 480px) {
+  .monedas img {
+    width: 50px;
+  }
+
+  .cantidad-moneda {
+    font-size: 1.5rem;
+    padding: 4px 10px;
+  }
+
+  #confirmacion {
+    font-size: 1.2rem;
+  }
+
+  #region-info {
+    font-size: 1.2rem;
+    bottom: 5%;
+  }
+}
+
+@media (min-width: 768px) {
+  .monedas img {
+    width: 60px;
+  }
+
+  .cantidad-moneda {
+    font-size: 2rem;
+    padding: 5px 12px;
+  }
+
+  #confirmacion {
+    font-size: 1.5rem;
+  }
+
+  #region-info {
+    font-size: 1.5rem;
+  }
+
+  object#mapa {
+    width: 70%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .monedas img {
+    width: 80px;
+  }
+
+  .cantidad-moneda {
+    font-size: 3rem;
+    padding: 6px 15px;
+  }
+
+  #confirmacion {
+    font-size: 2rem;
+  }
+
+  #nmr-correcto,
+  #nmr-incorrecto {
+    font-size: 1.8rem;
+  }
+
+  #region-info {
+    font-size: 2rem;
+  }
+
+  object#mapa {
+    width: 50%;
+  }
+}
+
+@media (min-width: 1440px) {
+  .monedas img {
+    width: 100px;
+  }
+
+  .cantidad-moneda {
+    font-size: 4rem;
+    padding: 8px 20px;
+  }
+
+  #confirmacion {
+    font-size: 3rem;
+  }
+
+  #nmr-correcto,
+  #nmr-incorrecto {
+    font-size: 2.5rem;
+  }
+
+  #region-info {
+    font-size: 3.5rem;
+  }
+
+  object#mapa {
+    width: 50%;
+  }
+}
+
+@media (min-width: 2560px) {
+  .monedas img {
+    width: 120px;
+  }
+
+  .cantidad-moneda {
+    font-size: 6rem;
+    padding: 10px 30px;
+  }
+
+  #confirmacion {
+    font-size: 4.5rem;
+  }
+
+  #nmr-correcto,
+  #nmr-incorrecto {
+    font-size: 4rem;
+  }
+
+  #region-info {
+    font-size: 5rem;
+    max-width: 500px;
+  }
+
+  object#mapa {
+    height: 80%;
+  }
+}

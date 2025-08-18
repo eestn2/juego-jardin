@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rompecabezas</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baloo+2&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="estilo-puzzle.css" />
+  </head>
+  <body>
+    <div class="header">
+      <h2 id="titulo-region"></h2>
+    </div>
+    <div id="personaje">
+      <!-- Sprite del personaje -->
+      <div id="character">
+        <img
+          id="sprite"
+          src="../personajes-y-textos/nenaMUÑECO.png"
+          alt="Personaje"
+        />
+      </div>
+
+      <!-- Globo de diálogo -->
+      <div id="dialogue-box">
+        <p id="dialogue-text">
+          ¡Juguemos <b id="letras">seleccionando una pieza</b> y probemos
+          <b id="letras">cambiándola por otra</b> hasta que formemos la imagen
+          misteriosa!
+        </p>
+      </div>
+    </div>
+
+    <button
+      id="boton-volver"
+      onclick="window.location.href='mapa-test.html'"
+      class="boton"
+    >
+      Volver al mapa
+    </button>
+
+    <div id="nivel"></div>
+
+    <div id="contenedor"></div>
+
+    <div id="mensaje">
+      <b>¡Felicitaciones!</b>
+      <b>Completaste el rompecabezas.</b>
+      <button id="btnContinuar" class="boton">Continuar</button>
+    </div>
+
+    <script src="java-puzzle.js"></script>
+  </body>
+</html>

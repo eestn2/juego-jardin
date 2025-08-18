@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Regiones sobre ruedas</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap"
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Chewy&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="estilo-mapa.css" />
+  </head>
+  <body>
+    <div class="monedas">
+      <img src="/imgs/Icono-moneda.png" id="Icono-moneda" />
+      <span class="cantidad-moneda" id="contador-monedas">0</span>
+    </div>
+    
+    <object id="mapa" type="image/svg+xml" data="ar_corrigido.svg"></object>
+
+
+    <div id="region-info">
+      <strong id="region-title"></strong><br />
+      <span id="region-provincias"></span>
+    </div>
+
+    <div id="confirmacion">
+      <p id="mensaje-confirmacion"></p>
+      <button id="nmr-correcto"></button>
+      <button id="nmr-incorrecto"></button>
+    </div>
+
+    <button id="btn-reiniciar">Reiniciar progreso</button>
+
+    <script src="mapa.js"></script>
+  </body>
+</html>

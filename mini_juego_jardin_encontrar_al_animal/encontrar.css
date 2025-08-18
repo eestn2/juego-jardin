@@ -1,0 +1,176 @@
+* {
+  font-family: "Baloo 2";
+  text-transform: uppercase;
+}
+body {
+  background-color: rgb(66, 133, 77);
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+}
+
+.color-fondo {
+  background-color: rgb(22, 139, 67);
+  width: 100vw;
+  min-height: 100vh;
+  text-align: center;
+  margin: 0 auto;
+  padding-top: 10px;
+  box-sizing: border-box;
+}
+
+.imagenfondo {
+  width: 90vw;
+  max-width: 340px;
+  height: 350px;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  margin-bottom: 50px;
+}
+
+.imagenfondo img[alt="imagen del fondo"] {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 16px;
+  margin-top: 20px;
+}
+
+.nene {
+  position: absolute;
+  right: 0;
+  bottom: -50px;
+  width: 160px;
+  z-index: 6;
+  object-fit: contain;
+}
+
+.animaloculto {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 80px;
+  height: 80px;
+  z-index: 5;
+  align-self: center;
+}
+
+.yaguarete {
+  position: absolute;
+  left: 55%;
+  bottom: 40%;
+  width: 50px;
+  height: 50px;
+  z-index: 3;
+  opacity: 80%;
+}
+
+.arbusto {
+  position: absolute;
+  left: 45%;
+  bottom: 40%;
+  width: 100px;
+  height: 100px;
+  z-index: 4;
+  cursor: pointer;
+  transition: opacity 0.3s;
+  opacity: 85%;
+}
+
+.cuadrodetexto {
+  text-transform: uppercase;
+  background-color: #fff;
+  color: black;
+  width: 90vw;
+  height: auto;
+  border-radius: 16px;
+  border: 2px solid #99d4e7;
+  z-index: 10;
+  padding: 10px;
+  box-sizing: border-box;
+  margin: 20px auto;
+  text-align: center;
+}
+.abajo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.audio-btn {
+  background: #fff;
+  border: 2px solid #27ae60;
+  border-radius: 50%;
+  font-size: 1em;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  margin-right: 8px;
+  box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.12);
+  transition: background 0.2s;
+}
+.audio-btn:hover {
+  background: #e0ffe0;
+}
+
+.audio-btn img {
+  width: 24px;
+  height: 24px;
+}
+.volver-inicio {
+  background-color: rgb(94, 252, 94);
+  color: #fff;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 20px;
+  font-size: 1em;
+}
+
+/* --- Tablets --- */
+@media (min-width: 600px) {
+  .imagenfondo {
+    max-width: 480px;
+    height: 420px;
+  }
+  .cuadrodetexto {
+    max-width: 480px;
+    min-height: 120px;
+    font-size: 1.1em;
+  }
+  .nene {
+    width: 180px;
+  }
+  .arbusto,
+  .yaguarete {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+/* --- Desktop --- */
+@media (min-width: 900px) {
+  .color-fondo {
+    max-width: 900px;
+    margin: 0 auto;
+    padding-top: 30px;
+  }
+  .imagenfondo {
+    max-width: 600px;
+    height: 500px;
+  }
+  .cuadrodetexto {
+    max-width: 600px;
+    font-size: 1.2em;
+  }
+  .nene {
+    width: 220px;
+  }
+  .arbusto,
+  .yaguarete {
+    width: 120px;
+    height: 120px;
+  }
+}

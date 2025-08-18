@@ -1,0 +1,101 @@
+body {
+  box-sizing: border-box;
+  margin: 0;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url(/home.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.fondo {
+  background-image: url(/home.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+button {
+  height: 70px;
+  width: 70px;
+  font-size: 16px;
+  font-family: "Fredoka" cursive; 
+  border: 5px solid  rgb(224, 153, 0);
+  background-color: rgb(255, 174, 0);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: exaltar 1.5s ease-in-out infinite;
+}
+
+@keyframes exaltar {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.08);
+  }
+}
+
+button svg {
+  color: rgba(255, 255, 253, 0.856);
+  transform: rotate(-90deg); /* Lo rotás */
+  width: 50px;
+  height: 40px;
+  margin-right: -7px;
+}
+
+button:hover {
+  transform: scale(1.05);
+  background-color: rgba(255, 174, 0, 0.868);
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+.logos {
+  display: flex;
+  justify-content: center;
+  gap: 100px;
+  margin-bottom: 20px;
+}
+
+.logos #tecnica2 {
+  width: 100px;
+  height: 100px;
+}
+
+.logos img {
+  width: 100px;
+  height: 100px;
+}
+
+.logos #sancayetano {
+  border-radius: 50%;
+}
+
+@media (min-width: 1500px) {
+  button {
+    height: 80px;
+    width: 80px;
+  }
+
+  button svg {
+    width: 60px;
+    height: 50px;
+  }
+}
+@media (max-width: 400px) {
+  .fondo {
+    background-size: cover;
+  }
+}

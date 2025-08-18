@@ -1,0 +1,109 @@
+@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
+body{
+    background-color: rgb(11, 177, 39);
+}
+
+.color-fondo{
+    background-color: rgb(22, 139, 67);
+    width: 450px;
+    height: 634px !important;
+    text-align: center; 
+    padding-top: 20px;
+    position: relative;
+    /* Agrega estas dos líneas para centrar el div horizontalmente */
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 20px; 
+    position: relative; 
+}
+
+
+
+.imagenfondo{
+    display: flex;
+    justify-content: center;
+    margin-top: -4.5%; 
+    position: relative; /* Asegúrate de que este también tenga position: relative; si quieres que la superpuesta se posicione con respecto a él */
+}
+
+.nenita{
+    position: absolute; /* Esto es clave para superponerla */
+    margin-top: 170px; /* Ajusta este valor para mover la imagen verticalmente */
+    top: 50px; /* Ajusta estos valores para mover la imagen verticalmente */
+    left: 100px; /* Ajusta estos valores para mover la imagen horizontalmente */
+    width: auto; /* Opcional: define el ancho de la imagen superpuesta */
+    height: 450px; /* Opcional: mantén la proporción */
+    z-index: 5 !important;
+    margin-left: -30%;
+}
+
+.lugares{
+    display: flex;
+    justify-content: center;
+    width: 100px;
+    height: 120px;
+    margin-left: 150px;
+    z-index: 11;
+    gap: 30px; /* Espacio entre las imágenes */
+    margin-top: -20px;
+}
+
+.lugar{
+    color: #ffe600; /* Color del texto amarillo */
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000; /* Sombra para borde negro alrededor del texto */
+    background-color: #16b943; /* Fondo verde del recuadro */
+    border-radius: 18px; /* Bordes redondeados del recuadro */
+    padding: 10px 7px; /* Espaciado interno para que el texto no toque los bordes */
+    display: inline-block; /* Hace que el recuadro se ajuste al texto */
+    font-family: 'Luckiest Guy', Arial, sans-serif; /* Fuente divertida y alternativa Arial */
+    font-size: 1.2em; /* Tamaño de letra más grande */
+    border: 2px solid #0bb127; /* Borde verde más oscuro alrededor del recuadro */
+    margin: 2px; /* Espacio exterior entre recuadros si hay varios */
+}
+
+.cuadrodetexto{
+    margin-top: -230px;
+    font-family: Arial, sans-serif;
+    text-transform: uppercase;
+    position: absolute;
+    background-color: rgb(255, 255, 255);
+    color: black;
+    width: 450px;
+    height: 250px;
+    border-radius: 11%;
+    border: 3px solid rgb(153, 212, 231); 
+    z-index: 10 !important; 
+    padding: 15px; /* Agrega un poco de espacio interno para el texto */
+    box-sizing: border-box; /* Asegura que el padding no aumente el ancho/alto total */
+}
+
+.cuadrodetexto h2 {
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+    color: white; /* Hace que el borde negro sea visible, puedes ajustar el color si lo prefieres */
+}
+
+
+
+
+.volver-inicio {
+    display: none; 
+    background-color: rgb(94, 252, 94);
+    color: #fff;
+    padding: 12px 28px;
+    border: none;
+    border-radius: 20px;
+    font-family: 'Luckiest Guy', cursive;
+    font-size: 1.2em;
+    cursor: pointer;
+    margin-top: -272px;
+    margin-bottom: 10px;
+    box-shadow: 2px 2px 6px rgba(0,0,0,0.15);
+    transition: background 0.3s, transform 0.2s;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.volver-inicio:hover {
+    background-color: rgb(82, 226, 82);
+    transform: scale(1.05);
+}
