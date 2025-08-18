@@ -200,17 +200,17 @@ function verificarTodo() {
 
         // Verificar si ya se completaron todos los minijuegos de esta región
         const juegosEsperados = {
-          Noroeste: ["/puzzzlee", "../mini_juego_jardin_lugar/lugar"],
-          Noreste: ["/puzzzlee", "../mini_juego_jardin_lugar/lugar"],
+          Noroeste: ["./puzzzlee", "../mini_juego_jardin_lugar/lugar"],
+          Noreste: ["./puzzzlee", "../mini_juego_jardin_lugar/lugar"],
           Cuyo: [
-            "/puzzzlee",
+            "./puzzzlee",
             "../mini_juego_jardin_encontrar_al_animal/encontrar",
           ],
           Centro: [
-            "/puzzzlee",
+            "./puzzzlee",
             "../mini_juego_jardin_encontrar_al_animal/encontrar",
           ],
-          Patagonia: ["/puzzzlee", "../mini_juego_jardin_lugar/lugar"],
+          Patagonia: ["./puzzzlee", "../mini_juego_jardin_lugar/lugar"],
         };
 
         const todos = juegosEsperados[region] || [];
@@ -251,11 +251,11 @@ function irAlSiguienteJuego() {
 
   // Obtener lista de minijuegos de la región
   const juegosPorRegion = {
-    Noroeste: ["/puzzzlee.html", "../mini_juego_jardin_lugar/lugar.html"],
-    Noreste: ["/puzzzlee.html", "mini_juego_jardin_lugar/lugar.html"],
-    Cuyo: ["/puzzzlee", "../mini_juego_jardin_encontrar_al_animal/encontrar"],
-    Centro: ["/puzzzlee", "/mini_juego_jardin_encontrar_al_animal/encontrar"],
-    Patagonia: ["/puzzzlee", "../mini_juego_jardin_lugar/lugar"],
+    Noroeste: ["./puzzzlee.html", "../mini_juego_jardin_lugar/lugar.html"],
+    Noreste: ["./puzzzlee.html", "mini_juego_jardin_lugar/lugar.html"],
+    Cuyo: ["./puzzzlee", "../mini_juego_jardin_encontrar_al_animal/encontrar"],
+    Centro: ["./puzzzlee", "/mini_juego_jardin_encontrar_al_animal/encontrar"],
+    Patagonia: ["./puzzzlee", "../mini_juego_jardin_lugar/lugar"],
   };
   // Agrega las demás regiones
 
@@ -268,7 +268,7 @@ function irAlSiguienteJuego() {
     window.location.href = `${juegos[indiceActual + 1]}?region=${region}`;
   } else {
     // Si era el último, volver al mapa
-    window.location.href = "mapa-test.html";
+    window.location.href = "./mapa-test.html";
   }
 }
 
@@ -276,7 +276,7 @@ function irAlSiguienteJuego() {
 iniciarNivel(nivelActual);
 
 document.getElementById("boton-volver").onclick = function () {
-  window.location.href = "mapa-test.html";
+  window.location.href = "./mapa-test.html";
 };
 
 document.getElementById("boton-siguiente").onclick = function () {
@@ -287,5 +287,5 @@ if (boton - siguiente) {
 }
 if (!juegosPorRegion[region]) {
   alert("Región no válida.");
-  window.location.href = "mapa-test.html";
+  window.location.href = "./mapa-test.html";
 }

@@ -9,8 +9,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const juegosPorRegion = {
     Noroeste: ["../mapa-y-puzzle/puzzzlee", "../mini_juego_jardin_lugar/lugar"],
     Noreste: ["../mapa-y-puzzle/puzzzlee", "../mini_juego_jardin_lugar/lugar"],
-    Cuyo: ["../mapa-y-puzzle/puzzzlee", "/encontrar"],
-    Centro: ["../mapa-y-puzzle/puzzzlee", "/encontrar"],
+    Cuyo: ["../mapa-y-puzzle/puzzzlee", "./encontrar"],
+    Centro: ["../mapa-y-puzzle/puzzzlee", "./encontrar"],
     Patagonia: [
       "../mapa-y-puzzle/puzzzlee",
       "../mini_juego_jardin_lugar/lugar",
@@ -105,7 +105,7 @@ document.addEventListener("DOMContentLoaded", () => {
       )}`;
     } else {
       // Si era el último, volver al mapa
-      window.location.href = "/mapa-y-puzzle/mapa-test.html";
+      window.location.href = "./mapa-y-puzzle/mapa-test.html";
     }
   }
 
@@ -145,7 +145,7 @@ document.addEventListener("DOMContentLoaded", () => {
           monedas += 3;
           localStorage.setItem("monedas", monedas);
         }
-        window.location.href = "/mapa-y-puzzle/mapa-test.html";
+        window.location.href = "./mapa-y-puzzle/mapa-test.html";
       }
     };
   }

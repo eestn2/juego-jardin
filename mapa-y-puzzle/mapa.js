@@ -354,7 +354,6 @@ document.addEventListener("DOMContentLoaded", () => {
           "regionesDesbloqueadas",
           JSON.stringify(["Centro"])
         );
-        alert("Progreso reiniciado. Recargando el mapa...");
         window.location.reload();
       }
     });
