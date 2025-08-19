@@ -238,7 +238,7 @@ function verificarTodo() {
             )}`;
           } else {
             // Si era el último, volver al mapa
-            window.location.href = "./mapa-test.html";
+            window.location.href = "../mapa-test.html";
           }
         }, 2000);
       }
@@ -251,11 +251,11 @@ function irAlSiguienteJuego() {
 
   // Obtener lista de minijuegos de la región
   const juegosPorRegion = {
-    Noroeste: ["./puzzzlee.html", "../mini_juego_jardin_lugar/lugar.html"],
-    Noreste: ["./puzzzlee.html", "mini_juego_jardin_lugar/lugar.html"],
-    Cuyo: ["./puzzzlee", "../mini_juego_jardin_encontrar_al_animal/encontrar"],
-    Centro: ["./puzzzlee", "/mini_juego_jardin_encontrar_al_animal/encontrar"],
-    Patagonia: ["./puzzzlee", "../mini_juego_jardin_lugar/lugar"],
+    Noroeste: ["/puzzzlee", "../mini_juego_jardin_lugar/lugar"],
+    Noreste: ["/puzzzlee", "/mini_juego_jardin_lugar/lugar"],
+    Cuyo: ["/puzzzlee", "../mini_juego_jardin_encontrar_al_animal/encontrar"],
+    Centro: ["./puzzzlee", "../mini_juego_jardin_encontrar_al_animal/encontrar"],
+    Patagonia: ["/puzzzlee", "../mini_juego_jardin_lugar/lugar"],
   };
   // Agrega las demás regiones
 
@@ -268,7 +268,7 @@ function irAlSiguienteJuego() {
     window.location.href = `${juegos[indiceActual + 1]}?region=${region}`;
   } else {
     // Si era el último, volver al mapa
-    window.location.href = "./mapa-test.html";
+    window.location.href = "../mapa-test.html";
   }
 }
 

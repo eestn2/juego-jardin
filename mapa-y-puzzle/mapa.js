@@ -60,14 +60,11 @@ document.getElementById("mapa").addEventListener("load", function () {
 
   // Juegos por región
   const juegosPorRegion = {
-    Noroeste: ["./puzzzlee", "../mini_juego_jardin_lugar/lugar"],
-    Noreste: ["./puzzzlee", "../mini_juego_jardin_lugar/lugar"],
-    Cuyo: ["./puzzzlee", "../mini_juego_jardin_encontrar_al_animal/encontrar"],
-    Centro: [
-      "./puzzzlee",
-      "../mini_juego_jardin_encontrar_al_animal/encontrar",
-    ],
-    Patagonia: ["./puzzzlee", "../mini_juego_jardin_lugar/lugar"],
+    Noroeste: ["/puzzzlee", "../mini_juego_jardin_lugar/lugar"],
+    Noreste: ["/puzzzlee", "/mini_juego_jardin_lugar/lugar"],
+    Cuyo: ["/puzzzlee", "../mini_juego_jardin_encontrar_al_animal/encontrar"],
+    Centro: ["./puzzzlee", "../mini_juego_jardin_encontrar_al_animal/encontrar"],
+    Patagonia: ["/puzzzlee", "../mini_juego_jardin_lugar/lugar"],
   };
 
   // 🔓 Desbloquear automáticamente la región Centro si no hay progreso

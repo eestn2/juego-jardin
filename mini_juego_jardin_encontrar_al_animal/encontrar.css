@@ -105,21 +105,26 @@ body {
   border: 2px solid #27ae60;
   border-radius: 50%;
   font-size: 1em;
-  width: 40px;
-  height: 40px;
+  width: 10vw;   /* 10% del ancho de la pantalla */
+  height: 10vw;
   cursor: pointer;
   margin-right: 8px;
   box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.12);
   transition: background 0.2s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .audio-btn:hover {
   background: #e0ffe0;
 }
 
 .audio-btn img {
-  width: 24px;
-  height: 24px;
+  max-width: 60%;
+  height: auto;
+  object-fit: cover;
 }
+
 .volver-inicio {
   background-color: rgb(94, 252, 94);
   color: #fff;
