@@ -105,7 +105,7 @@ document.addEventListener("DOMContentLoaded", () => {
       )}`;
     } else {
       // Si era el último, volver al mapa
-      window.location.href = "./mapa-y-puzzle/mapa-test.html";
+      window.location.href = "../mapa-y-puzzle/mapa-test.html";
     }
   }
 
@@ -145,8 +145,8 @@ document.addEventListener("DOMContentLoaded", () => {
           monedas += 3;
           localStorage.setItem("monedas", monedas);
         }
-        window.location.href = "./mapa-y-puzzle/mapa-test.html";
       }
+        window.location.href = "../mapa-y-puzzle/mapa-test.html";
     };
   }
 

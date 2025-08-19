@@ -74,7 +74,7 @@ if (btnVolverInicio) {
     // Ocultar el botón al inicio
     btnVolverInicio.style.display = 'none';
     btnVolverInicio.addEventListener('click', () => {
-        window.location.href = "../mapa-y-puzzle/mapa-test.html";
+        window.location.href = "./mapa-y-puzzle/mapa-test.html";
     });
 }
 });
