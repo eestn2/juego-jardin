@@ -3,49 +3,64 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="encontrar.css" />
+    <link rel="stylesheet" href="./encontrar.css" />
     <title>Encontrar al Animal</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baloo+2&display=swap"
+      rel="stylesheet"
+    />
   </head>
-  <div class="cuadrodetexto">
-    <h3>Encuentra el yaguarete escondido</h3>
-    <div class="abajo">
-      <button id="audioo" class="audio-btn" title="Escuchar">
-        <img src="/imgs/audio.png" alt="" />
-      </button>
-      <button class="volver-inicio" id="btnVolverInicio">
-        VOLVER AL INICIO
-      </button>
-    </div>
-  </div>
+
   <body>
+    <div class="cuadrodetexto">
+      <h3>Encuentra el yaguarete escondido</h3>
+
+      <p>
+        El animal a encontrar se encuentra en peligro de extinción. Es
+        importante que lo protajamos y cuidemos su hábitat. ¡Diviértete
+        encontrándolo!
+        <br />
+        <br />
+        <strong>Instrucciones:</strong> Busca el yaguarete escondido en la
+        imagen. Haz clic en él cuando lo encuentres.
+      </p>
+      <div class="abajo">
+        <button id="audioo" class="audio-btn" title="Escuchar">
+          <img src="../imgs/audio.png" alt="audio" />
+        </button>
+        <button class="volver-inicio" id="btnVolverInicio">
+          VOLVER AL INICIO
+        </button>
+      </div>
+    </div>
     <div class="imagenfondo">
       <img
-        src="Imagenes/selvafondo.jpg"
+        src="./Imagenes/selvafondo.jpg"
         alt="imagen del fondo"
         width="450"
         height="auto"
       />
       <div class="animaloculto">
         <img
-          src="Imagenes/arbusto-removebg-preview.png"
+          src="./Imagenes/arbusto-removebg-preview.png"
           alt="arbusto"
           class="arbusto"
           id="arbusto"
         />
         <img
-          src="Imagenes/yaguareteuwu-removebg-preview.png"
+          src="./Imagenes/jaguar.png"
           alt="yaguarete"
           class="yaguarete"
           id="yaguarete"
         />
       </div>
       <img
-        src="Imagenes/niño-juego-jardin-removebg-preview.png"
+        src="./Imagenes/niño-juego-jardin-removebg-preview.png"
         alt="nene"
         class="nene"
         id="nene"
       />
     </div>
-    <script src="encontrar.js"></script>
+    <script src="./encontrar.js"></script>
   </body>
 </html>

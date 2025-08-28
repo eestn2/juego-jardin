@@ -70,7 +70,7 @@ function obtenerImagenParaRegion(region) {
   imagenesUsadasPorRegion[region].push(seleccionada);
   return seleccionada;
 }
-
+// Almacenar imágenes usadas por región
 const imagenesUsadasPorRegion = {};
 
 // Iniciar nivel
@@ -238,7 +238,7 @@ function verificarTodo() {
             )}`;
           } else {
             // Si era el último, volver al mapa
-            window.location.href = "./mapa-test.html";
+            window.location.href = "../mapa-test.html";
           }
         }, 2000);
       }
@@ -251,13 +251,12 @@ function irAlSiguienteJuego() {
 
   // Obtener lista de minijuegos de la región
   const juegosPorRegion = {
-    Noroeste: ["./puzzzlee.html", "../mini_juego_jardin_lugar/lugar.html"],
-    Noreste: ["./puzzzlee.html", "mini_juego_jardin_lugar/lugar.html"],
-    Cuyo: ["./puzzzlee", "../mini_juego_jardin_encontrar_al_animal/encontrar"],
-    Centro: ["./puzzzlee", "/mini_juego_jardin_encontrar_al_animal/encontrar"],
-    Patagonia: ["./puzzzlee", "../mini_juego_jardin_lugar/lugar"],
+    Noroeste: ["/puzzzlee", "../mini_juego_jardin_lugar/lugar"],
+    Noreste: ["/puzzzlee", "/mini_juego_jardin_lugar/lugar"],
+    Cuyo: ["/puzzzlee", "../mini_juego_jardin_encontrar_al_animal/encontrar"],
+    Centro: ["./puzzzlee", "../mini_juego_jardin_encontrar_al_animal/encontrar"],
+    Patagonia: ["/puzzzlee", "../mini_juego_jardin_lugar/lugar"],
   };
-  // Agrega las demás regiones
 
   const juegos = juegosPorRegion[region];
   const actual = window.location.pathname.split("/").pop();
@@ -278,14 +277,11 @@ iniciarNivel(nivelActual);
 document.getElementById("boton-volver").onclick = function () {
   window.location.href = "./mapa-test.html";
 };
-
-document.getElementById("boton-siguiente").onclick = function () {
+const btnContinuar = document.getElementById("btnContinuar");
+document.getElementById("btnContinuar").onclick = function () {
   irAlSiguienteJuego();
 };
-if (boton - siguiente) {
-  boton - siguiente.addEventListener("click", irAlSiguienteJuego);
+if (btnContinuar) {
+  btnContinuar.addEventListener("click", irAlSiguienteJuego);
 }
-if (!juegosPorRegion[region]) {
-  alert("Región no válida.");
-  window.location.href = "./mapa-test.html";
-}
+

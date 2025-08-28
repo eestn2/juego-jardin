@@ -14,8 +14,6 @@ body {
   grid-template-rows: repeat(3, 1fr);
   width: 80vw;
   height: 90vw;
-  max-width: 80vw;
-  max-height: 90vw;
   margin: 0 auto;
   border: 5px solid #ffffff;
   background-color: white;
@@ -25,11 +23,8 @@ body {
 .pieza {
   width: 25vw;
   height: 30vw;
-  max-width: 20vw;
-  max-height: 10vh;
   margin: 0 auto;
   background-color: white;
-  background-image: url(empanada.jpg);
   opacity: 0.83;
   background-size: cover;
   box-sizing: border-box;

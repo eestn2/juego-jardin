@@ -105,21 +105,26 @@ body {
   border: 2px solid #27ae60;
   border-radius: 50%;
   font-size: 1em;
-  width: 40px;
-  height: 40px;
+  width: 10vw; /* 10% del ancho de la pantalla */
+  height: 10vw;
   cursor: pointer;
   margin-right: 8px;
   box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.12);
   transition: background 0.2s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .audio-btn:hover {
   background: #e0ffe0;
 }
 
 .audio-btn img {
-  width: 24px;
-  height: 24px;
+  max-width: 60%;
+  height: auto;
+  object-fit: cover;
 }
+
 .volver-inicio {
   background-color: rgb(94, 252, 94);
   color: #fff;
@@ -143,13 +148,19 @@ body {
   .nene {
     width: 180px;
   }
-  .arbusto,
-  .yaguarete {
+  .arbusto {
     width: 100px;
     height: 100px;
   }
+  .yaguarete {
+    width: 40px;
+    height: 40px;
+  }
+  .audio-btn {
+    width: 8vw; /* 7% del ancho de la pantalla */
+    height: 7vw;
+  }
 }
-
 /* --- Desktop --- */
 @media (min-width: 900px) {
   .color-fondo {
@@ -165,12 +176,19 @@ body {
     max-width: 600px;
     font-size: 1.2em;
   }
+  .audio-btn {
+    width: 5vw; /* 8% del ancho de la pantalla */
+    height: 5vw;
+  }
   .nene {
     width: 220px;
   }
-  .arbusto,
-  .yaguarete {
+  .arbusto {
     width: 120px;
     height: 120px;
+  }
+  .yaguarete {
+    width: 50px;
+    height: 50px;
   }
 }

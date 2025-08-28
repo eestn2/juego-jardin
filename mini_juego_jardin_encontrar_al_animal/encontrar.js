@@ -1,11 +1,10 @@
-// Espera a que el DOM (Document Object Model) esté completamente cargado
 document.addEventListener("DOMContentLoaded", () => {
   const cuadroDeTexto = document.querySelector(".cuadrodetexto");
   const arbustoImg = document.getElementById("arbusto");
-  const yaguateImg = document.getElementById("yaguarete");
   const btnVolverInicio = document.getElementById("btnVolverInicio");
+  const animalImg = document.getElementById("yaguarete"); // Selecciona el img existente
 
-  // Minijuegos por región
+  // Configuración por región
   const juegosPorRegion = {
     Noroeste: ["../mapa-y-puzzle/puzzzlee", "../mini_juego_jardin_lugar/lugar"],
     Noreste: ["../mapa-y-puzzle/puzzzlee", "../mini_juego_jardin_lugar/lugar"],
@@ -16,109 +15,60 @@ document.addEventListener("DOMContentLoaded", () => {
       "../mini_juego_jardin_lugar/lugar",
     ],
   };
+  const imagenesPorRegion = {
+    Centro: ["./Imagenes/jaguar.png", "¡Muy bien, has encontrado al jaguar!"],
+    Cuyo: ["./Imagenes/Huemul.png", "¡Muy bien, has encontrado al huemul!"],
+  };
 
-  // Solo agrega el listener si ambos existen
-  [arbustoImg, yaguateImg].forEach((img) => {
-    if (img) {
-      img.addEventListener("click", () => {
-        arbustoImg.style.display = "none";
-        const h3 = cuadroDeTexto.querySelector("h3");
-        if (h3) h3.textContent = "¡Muy bien, has encontrado al yaguarete!";
-        btnVolverInicio.textContent = "Continuar";
-        const elemento = document.querySelector(".cuadrodetexto");
-        elemento.scrollIntoView({ behavior: "smooth" });
-        const region = new URLSearchParams(window.location.search).get(
-          "region"
-        );
-        const juego = window.location.pathname
-          .split("/")
-          .pop()
-          .replace(".html", "");
+  // Obtener región desde la URL
+  const params = new URLSearchParams(window.location.search);
+  const region = params.get("region");
 
-        // Guardar progreso del minijuego
-        const completados =
-          JSON.parse(localStorage.getItem("juegosCompletados")) || {};
-        const regionCompletida = completados[region] || [];
-        if (!regionCompletida.includes(juego)) {
-          regionCompletida.push(juego);
-          completados[region] = regionCompletida;
-          localStorage.setItem(
-            "juegosCompletados",
-            JSON.stringify(completados)
-          );
-        }
-
-        // Verificar si completó todos los juegos de la región
-        const juegosDeEstaRegion = juegosPorRegion[region] || [];
-        const completos = regionCompletida.filter((j) =>
-          juegosDeEstaRegion.includes(j)
-        );
-        if (completos.length >= juegosDeEstaRegion.length) {
-          const progreso =
-            JSON.parse(localStorage.getItem("progresoRegiones")) || {};
-          if (!progreso[region]) {
-            progreso[region] = true;
-            localStorage.setItem("progresoRegiones", JSON.stringify(progreso));
-            let monedas = parseInt(localStorage.getItem("monedas")) || 0;
-            monedas += 3;
-            localStorage.setItem("monedas", monedas);
-            // Desbloquear siguientes regiones
-            const estadoRegiones =
-              JSON.parse(localStorage.getItem("estadoRegiones")) || {};
-            const desbloqueo = {
-              Centro: ["Noreste", "Cuyo"],
-              Noreste: ["Noroeste"],
-              Cuyo: ["Patagonia"],
-              Noroeste: [],
-              Patagonia: [],
-            };
-            (desbloqueo[region] || []).forEach(
-              (r) => (estadoRegiones[r] = true)
-            );
-            localStorage.setItem(
-              "estadoRegiones",
-              JSON.stringify(estadoRegiones)
-            );
-          }
-        }
-      });
+  // Mostrar animal según la región
+  function mostrarAnimal() {
+    if (imagenesPorRegion[region]) {
+      animalImg.src = imagenesPorRegion[region][0];
+      animalImg.alt = `Animal de la región ${region}`;
+      animalImg.style.display = "block";
+    } else {
+      animalImg.style.display = "none";
     }
-  });
+  }
+  mostrarAnimal();
 
-  // Función para ir al siguiente minijuego pendiente o al mapa
-  function irAlSiguienteJuego() {
-    const region = new URLSearchParams(window.location.search).get("region");
-    const juegos = juegosPorRegion[region] || [];
+  // Mostrar cuadro de texto
+  if (cuadroDeTexto) {
+    cuadroDeTexto.style.display = "block";
+    cuadroDeTexto.scrollIntoView({ behavior: "smooth" });
+  }
+
+  // Al encontrar el animal
+  function animalEncontrado() {
+    arbustoImg.style.display = "none";
+    animalImg.style.display = "block";
+    const pText = cuadroDeTexto.querySelector("p");
+    pText.style.display = "none"; // Ocultar el texto de instrucciones
+    const h3 = cuadroDeTexto.querySelector("h3");
+    h3.textContent =
+      imagenesPorRegion[region]?.[1] || "¡Muy bien, has encontrado al animal!";
+    btnVolverInicio.textContent = "Continuar";
+    cuadroDeTexto.scrollIntoView({ behavior: "smooth" });
+
+    // Guardar progreso
+    const juego = juegoNombre(window.location.pathname.split("/").pop());
     const completados =
       JSON.parse(localStorage.getItem("juegosCompletados")) || {};
-    const jugados = completados[region] || [];
-    const juegosRestantes = juegos.filter(
-      (j) => !jugados.includes(juegoNombre(j))
-    );
-
-    if (juegosRestantes.length > 0) {
-      // Ir al siguiente minijuego pendiente (aleatorio)
-      const siguienteJuego =
-        juegosRestantes[Math.floor(Math.random() * juegosRestantes.length)];
-      window.location.href = `${siguienteJuego}.html?region=${encodeURIComponent(
-        region
-      )}`;
-    } else {
-      // Si era el último, volver al mapa
-      window.location.href = "./mapa-y-puzzle/mapa-test.html";
+    const regionCompletada = completados[region] || [];
+    if (!regionCompletada.includes(juego)) {
+      regionCompletada.push(juego);
+      completados[region] = regionCompletada;
+      localStorage.setItem("juegosCompletados", JSON.stringify(completados));
     }
   }
 
-  // Helper para obtener el nombre del juego sin ruta ni extensión
-  function juegoNombre(juegoRuta) {
-    return juegoRuta.replace(/^.*[\\/]/, "").replace(".html", "");
-  }
-
-  // Botón volver al mapa o siguiente minijuego
+  // Botón para continuar o volver al menú
   if (btnVolverInicio) {
-    btnVolverInicio.style.display = "block";
     btnVolverInicio.onclick = () => {
-      const region = new URLSearchParams(window.location.search).get("region");
       const juegos = juegosPorRegion[region] || [];
       const completados =
         JSON.parse(localStorage.getItem("juegosCompletados")) || {};
@@ -128,14 +78,14 @@ document.addEventListener("DOMContentLoaded", () => {
       );
 
       if (juegosRestantes.length > 0) {
-        // Redirige al siguiente minijuego pendiente (aleatorio)
+        // Ir al siguiente minijuego pendiente (aleatorio)
         const siguienteJuego =
           juegosRestantes[Math.floor(Math.random() * juegosRestantes.length)];
         window.location.href = `${siguienteJuego}.html?region=${encodeURIComponent(
           region
         )}`;
       } else {
-        // Marca la región como completada, agrega monedas y reproduce audio
+        // Si era el último, volver al mapa y marcar región completada
         const progreso =
           JSON.parse(localStorage.getItem("progresoRegiones")) || {};
         if (!progreso[region]) {
@@ -144,23 +94,39 @@ document.addEventListener("DOMContentLoaded", () => {
           let monedas = parseInt(localStorage.getItem("monedas")) || 0;
           monedas += 3;
           localStorage.setItem("monedas", monedas);
+        } else {
+          window.location.href = "../mapa-y-puzzle/mapa-test.html";
         }
-        window.location.href = "./mapa-y-puzzle/mapa-test.html";
       }
     };
   }
 
-  // Audio al presionar el botón del micrófono
+  // Listener para encontrar el animal
+  if (arbustoImg) {
+    arbustoImg.addEventListener("click", animalEncontrado);
+  }
+
+  // Audio pista
   const btnAudio = document.getElementById("audioo");
-  const audioPista = new Audio("\Santii.mp3"); // Asegúrate que la ruta es correcta y el archivo existe
+  const audioPista = new Audio("Santii.mp3");
   if (btnAudio) {
     btnAudio.addEventListener("click", () => {
-      audioPista.currentTime = 0; // Reinicia el audio si ya se reprodujo
+      audioPista.currentTime = 0;
       audioPista.play();
     });
   }
 
-  // Audio al iniciar el minijuego
-  // const audioInicio = new Audio("/Santii.mp3");
-  // audioInicio.play();
+  // Actualizar título con la región
+  const titulo = document.querySelector("h1");
+  if (titulo && region) {
+    titulo.textContent = `Minijuego de la Región ${region}`;
+  }
+
+  function juegoNombre(path) {
+    // Quita la extensión y posibles rutas
+    return path
+      .replace(/\.html?$/, "")
+      .split("/")
+      .pop();
+  }
 });
