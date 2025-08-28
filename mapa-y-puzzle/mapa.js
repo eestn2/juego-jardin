@@ -63,7 +63,10 @@ document.getElementById("mapa").addEventListener("load", function () {
     Noroeste: ["/puzzzlee", "../mini_juego_jardin_lugar/lugar"],
     Noreste: ["/puzzzlee", "/mini_juego_jardin_lugar/lugar"],
     Cuyo: ["/puzzzlee", "../mini_juego_jardin_encontrar_al_animal/encontrar"],
-    Centro: ["./puzzzlee", "../mini_juego_jardin_encontrar_al_animal/encontrar"],
+    Centro: [
+      "./puzzzlee",
+      "../mini_juego_jardin_encontrar_al_animal/encontrar",
+    ],
     Patagonia: ["/puzzzlee", "../mini_juego_jardin_lugar/lugar"],
   };
 
@@ -150,8 +153,6 @@ document.getElementById("mapa").addEventListener("load", function () {
                   Math.floor(Math.random() * juegosRestantes.length)
                 ];
 
-              // NO marcar como jugado aquí
-
               window.location.href = `${juegoAleatorio}.html?region=${encodeURIComponent(
                 region
               )}`;
@@ -159,17 +160,17 @@ document.getElementById("mapa").addEventListener("load", function () {
               alert("Ya completaste todos los minijuegos de esta región.");
             }
           } else {
-            // Procedimiento normal con resta de monedas
+            // Procedimiento normal with resta de monedas
             const precioRegion = Math.floor(Math.random() * 3) + 1;
             const monedasActuales =
               parseInt(localStorage.getItem("monedas")) || 0;
-            const resultadoCorrecto = monedasActuales - precioRegion;
+            const nmrCorrecto = monedasActuales - precioRegion;
 
             mensaje.textContent = `La región "${region}" cuesta ${precioRegion} monedas y tienes ${monedasActuales} monedas. ¿Cuántas monedas te quedarían?`;
 
-            nmrCorrecto.textContent = resultadoCorrecto;
+            nmrCorrecto.textContent = nmrCorrecto;
             nmrIncorrecto.textContent =
-              resultadoCorrecto + (Math.random() < 0.5 ? 1 : -1);
+              nmrCorrecto + (Math.random() < 0.5 ? 1 : -1);
             confirmacionBox.style.display = "block";
 
             nmrCorrecto.onclick = () => {
@@ -184,9 +185,9 @@ document.getElementById("mapa").addEventListener("load", function () {
           }
 
           // Asignar valores a botones
-          nmrCorrecto.textContent = resultadoCorrecto;
+          nmrCorrecto.textContent = nmrCorrecto;
           nmrIncorrecto.textContent =
-            resultadoCorrecto + (Math.random() < 0.5 ? 1 : -1);
+            nmrCorrecto + (Math.random() < 0.5 ? 1 : -1);
 
           confirmacionBox.style.display = "block";
 
@@ -356,37 +357,4 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
-btnConfirmar.onclick = () => {
-  const juegos = juegosPorRegion[region];
-  const jugados = obtenerJuegosCompletados()[region] || [];
 
-  const juegosRestantes = juegos.filter((j) => !jugados.includes(j));
-
-  if (juegosRestantes.length > 0) {
-    localStorage.setItem("regionActual", region);
-
-    const juegoAleatorio =
-      juegosRestantes[Math.floor(Math.random() * juegosRestantes.length)];
-
-    // Guardar como "jugado"
-    const completados = obtenerJuegosCompletados();
-    completados[region] = [...jugados, juegoAleatorio];
-    guardarJuegosCompletados(completados);
-
-    // Verificar si se completaron todos
-    if (completados[region].length >= juegos.length) {
-      const progreso = obtenerProgreso();
-      progreso[region] = true;
-      guardarProgreso(progreso);
-      agregarMonedas(3); // <--- Agrega monedas al completar la región
-    }
-
-    descontarMoneda(); // <--- Descuenta moneda al entrar a un minijuego
-
-    window.location.href = `${juegoAleatorio}.html?region=${encodeURIComponent(
-      region
-    )}`;
-  } else {
-    alert("Ya completaste todos los minijuegos de esta región.");
-  }
-};

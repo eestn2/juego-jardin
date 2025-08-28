@@ -267,7 +267,7 @@ function irAlSiguienteJuego() {
     window.location.href = `${juegos[indiceActual + 1]}?region=${region}`;
   } else {
     // Si era el último, volver al mapa
-    window.location.href = "../mapa-test.html";
+    window.location.href = "./mapa-test.html";
   }
 }
 
@@ -277,14 +277,11 @@ iniciarNivel(nivelActual);
 document.getElementById("boton-volver").onclick = function () {
   window.location.href = "./mapa-test.html";
 };
-
-document.getElementById("boton-siguiente").onclick = function () {
+const btnContinuar = document.getElementById("btnContinuar");
+document.getElementById("btnContinuar").onclick = function () {
   irAlSiguienteJuego();
 };
-if (boton - siguiente) {
-  boton - siguiente.addEventListener("click", irAlSiguienteJuego);
+if (btnContinuar) {
+  btnContinuar.addEventListener("click", irAlSiguienteJuego);
 }
-if (!juegosPorRegion[region]) {
-  alert("Región no válida.");
-  window.location.href = "./mapa-test.html";
-}
+

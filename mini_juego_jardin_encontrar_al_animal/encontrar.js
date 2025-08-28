@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const h3 = cuadroDeTexto.querySelector("h3");
     h3.textContent =
       imagenesPorRegion[region]?.[1] || "¡Muy bien, has encontrado al animal!";
-    actualizarBoton();
+    btnVolverInicio.textContent = "Continuar";
     cuadroDeTexto.scrollIntoView({ behavior: "smooth" });
 
     // Guardar progreso
@@ -68,7 +68,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Botón para continuar o volver al menú
   if (btnVolverInicio) {
-    actualizarBoton();
     btnVolverInicio.onclick = () => {
       const juegos = juegosPorRegion[region] || [];
       const completados =
@@ -121,5 +120,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const titulo = document.querySelector("h1");
   if (titulo && region) {
     titulo.textContent = `Minijuego de la Región ${region}`;
+  }
+
+  function juegoNombre(path) {
+    // Quita la extensión y posibles rutas
+    return path
+      .replace(/\.html?$/, "")
+      .split("/")
+      .pop();
   }
 });
