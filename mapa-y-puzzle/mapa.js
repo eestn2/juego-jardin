@@ -160,7 +160,7 @@ document.getElementById("mapa").addEventListener("load", function () {
             }
           } else {
             // Procedimiento normal con resta de monedas
-            const precioRegion = Math.floor(Math.random() * 3) + 3;
+            const precioRegion = Math.floor(Math.random() * 3) + 1;
             const monedasActuales =
               parseInt(localStorage.getItem("monedas")) || 0;
             const resultadoCorrecto = monedasActuales - precioRegion;
@@ -240,9 +240,9 @@ document.getElementById("mapa").addEventListener("load", function () {
   // Verificar qué regiones ya están completas al cargar el mapa
   const progresoActual = obtenerProgreso();
 
-  Object.keys(progresoActual).forEach((regionNombre) => {
-    if (progresoActual[regionNombre] === true) {
-      marcarRegionComoCompleta(regionNombre, svgDoc, regiones);
+  Object.keys(progresoActual).forEach((region) => {
+    if (progresoActual[region] === true) {
+      marcarRegionComoCompleta(region, svgDoc, regiones);
     }
   });
 
@@ -307,8 +307,8 @@ function desbloquearRegiones(regionCompletada) {
   localStorage.setItem("estadoRegiones", JSON.stringify(estadoRegiones));
 }
 // Marcar región como completa y pintarla de verde
-function marcarRegionComoCompleta(regionNombre, svgDoc, regiones) {
-  regiones[regionNombre].forEach((provId) => {
+function marcarRegionComoCompleta(region, svgDoc, regiones) {
+  regiones[region].forEach((provId) => {
     const p = svgDoc.getElementById(provId);
     if (p) p.setAttribute("fill", "green");
   });

@@ -42,19 +42,6 @@ document.addEventListener("DOMContentLoaded", () => {
     cuadroDeTexto.scrollIntoView({ behavior: "smooth" });
   }
 
-  // Cambia el texto del botón según si quedan minijuegos
-  function actualizarBoton() {
-    const juegos = juegosPorRegion[region] || [];
-    const completados =
-      JSON.parse(localStorage.getItem("juegosCompletados")) || {};
-    const jugados = completados[region] || [];
-    const juegosRestantes = juegos.filter(
-      (j) => !jugados.includes(juegoNombre(j))
-    );
-    btnVolverInicio.textContent =
-      juegosRestantes.length > 0 ? "Continuar" : "Volver al menú";
-  }
-
   // Al encontrar el animal
   function animalEncontrado() {
     arbustoImg.style.display = "none";
@@ -71,17 +58,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const juego = juegoNombre(window.location.pathname.split("/").pop());
     const completados =
       JSON.parse(localStorage.getItem("juegosCompletados")) || {};
-    const regionCompletida = completados[region] || [];
-    if (!regionCompletida.includes(juego)) {
-      regionCompletida.push(juego);
-      completados[region] = regionCompletida;
+    const regionCompletada = completados[region] || [];
+    if (!regionCompletada.includes(juego)) {
+      regionCompletada.push(juego);
+      completados[region] = regionCompletada;
       localStorage.setItem("juegosCompletados", JSON.stringify(completados));
     }
-  }
-
-  // Helper para obtener el nombre del juego sin ruta ni extensión
-  function juegoNombre(juegoRuta) {
-    return juegoRuta.replace(/^.*[\\/]/, "").replace(".html", "");
   }
 
   // Botón para continuar o volver al menú
@@ -113,8 +95,9 @@ document.addEventListener("DOMContentLoaded", () => {
           let monedas = parseInt(localStorage.getItem("monedas")) || 0;
           monedas += 3;
           localStorage.setItem("monedas", monedas);
+        } else {
+          window.location.href = "../mapa-y-puzzle/mapa-test.html";
         }
-        window.location.href = "../mapa-y-puzzle/mapa-test.html";
       }
     };
   }
