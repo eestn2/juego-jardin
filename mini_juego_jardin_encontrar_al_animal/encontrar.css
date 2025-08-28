@@ -170,6 +170,11 @@ body {
     max-width: 600px;
     font-size: 1.2em;
   }
+  .audio-btn {
+    width: 5vw;   /* 8% del ancho de la pantalla */
+    height: 5vw;
+
+  }
   .nene {
     width: 220px;
   }

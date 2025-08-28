@@ -70,7 +70,7 @@ function obtenerImagenParaRegion(region) {
   imagenesUsadasPorRegion[region].push(seleccionada);
   return seleccionada;
 }
-
+// Almacenar imágenes usadas por región
 const imagenesUsadasPorRegion = {};
 
 // Iniciar nivel
@@ -257,7 +257,6 @@ function irAlSiguienteJuego() {
     Centro: ["./puzzzlee", "../mini_juego_jardin_encontrar_al_animal/encontrar"],
     Patagonia: ["/puzzzlee", "../mini_juego_jardin_lugar/lugar"],
   };
-  // Agrega las demás regiones
 
   const juegos = juegosPorRegion[region];
   const actual = window.location.pathname.split("/").pop();
