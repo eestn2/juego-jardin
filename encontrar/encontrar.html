@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./encontrar.css" />
+  </head>
+  <body>
+    <div class="contenedorInformacion">
+      <h1>Animal pérdido</h1>
+
+      <div class="personaje">
+        <div class="infoTexto">
+          <br>
+          <p id="Info">
+            ¡El animal está perdido, ayúdanos a encontrarlo para cuidarlo!
+          </p>
+          <p>cuando lo encuentres hazle click</p>
+        </div>
+        <img src="./multimedia/ninio.png" id="ninio" />
+      </div>
+      <div class="abajo">
+        <audio src="./multimedia/Santii.mp3"></audio>
+        <button id="Volver">Volver al mapa</button>
+      </div>
+    </div>
+
+    <div class="juego">
+      <img src="" id="fondo" />
+      <div class="escondite">
+        <img src="./multimedia/arbusto.png" id="esconditeImg" />
+      </div>
+      <div class="animalOculto">
+        <img src="./multimedia/jaguar.png" id="animal" />
+      </div>
+    </div>
+    <div class="mensaje">
+      <div id="mensajeGanador">
+        <h2>¡Felicitaciones!</h2>
+        <p>¡Encontraste al animal perdido!</p>
+        <button id="btnContinuar">Continuar</button>
+      </div>
+    </div>
+
+    <script src="./encontrar.js"></script>
+  </body>
+</html>
