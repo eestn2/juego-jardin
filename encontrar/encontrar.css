@@ -1,15 +1,25 @@
 * {
   text-transform: uppercase;
+  font-weight: bold;
+  font-family: "MiFuente", sans-serif;
 }
+@font-face {
+  font-family: "MiFuente";
+  src: url("./tipografia/Letters\ for\ Learners.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
 body {
   text-align: center;
   background-color: rgb(166, 248, 166);
 }
 
-.contenedorInformacion h1 {
+h1 {
   color: white;
   border-radius: 30px;
   background-color: rgb(101, 162, 101);
+  padding: 10px 5px;
 }
 .contenedorInformacion {
   background-color: white;
@@ -39,6 +49,29 @@ body {
   flex-direction: row;
 }
 
+.abajo {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+.abajo button {
+  border: none;
+  border-radius: 20px;
+  padding: 10px;
+  transition: transform 0.3s;
+}
+.abajo button:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+  background-color: rgb(200, 200, 200);
+}
+
+.abajo img {
+  width: 30px;
+  height: auto;
+}
 #Volver {
   border: none;
   border-radius: 20px;
@@ -52,7 +85,67 @@ body {
   cursor: pointer;
   background-color: rgb(58, 144, 58);
 }
-.juego #esconditeImg {
-  width: 300px;
-  height: auto;
+
+.juego {
+  border-radius: 20px;
+  padding: 10px;
+  background: url(./multimedia/sierrasCordoba.jfif);
+  background-size: cover;
+  background-position: center;
+  border: 4px solid white;
+  position: relative;
+  z-index: 1;
+  height: 70vh;
+  justify-content: space-around;
+}
+
+.juego .escondite {
+  width: 80px;
+  position: relative;
+}
+.escondites {
+  display: flex;
+  position: relative;
+  flex-direction: row !important;
+  width: 90%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 60px;
+  position: absolute;
+  bottom: 5%;
+  justify-content: space-between;
+}
+
+.juego .escondite img {
+  height: 100%;
+  width: auto;
+  position: absolute;
+  bottom: 0;
+  transform: translate(-38%, 0%);
+  object-fit: contain;
+  scale: 1.3;
+}
+
+.mensaje{
+  background-color: rgb(24, 120, 11);
+  border-radius: 20px;
+  padding: 10px;
+  margin-top: 20px;
+  color: white;
+  font-size: 1.2em;
+}
+
+.mensaje button {
+  border: none;
+  border-radius: 20px;
+  background-color: rgb(201, 248, 201);
+  color: white;
+  padding: 10px;
+  transition: transform 0.3s;
+  color: rgb(15, 12, 12);
+}
+.mensaje button:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+  background-color: rgb(119, 188, 119);
 }
