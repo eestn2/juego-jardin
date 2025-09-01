@@ -1,8 +1,14 @@
 * {
   text-transform: uppercase;
   font-family: "Baloo 2", cursive;
+font-family: "MiFuente", sans-serif;
 }
-
+@font-face {
+  font-family: "MiFuente";
+  src: url("../encontrar/tipografia/Letters_for_Learners.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
 body {
   text-align: center;
   background-color: rgb(166, 248, 166);
@@ -273,4 +279,18 @@ body {
     font-size: 2rem;
     padding: 20px 0px;
   }
+}
+
+@media (min-width: 1024px) {
+  #contenedor {
+    width: 40vw;
+    height: 30vw;
+    gap: 0;
+  }
+
+  .pieza {
+    width: 12vw;
+    height: 9vw;
+  }
+  
 }

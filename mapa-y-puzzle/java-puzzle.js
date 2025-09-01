@@ -16,29 +16,89 @@ titulo.textContent = `Rompecabezas de la Región ${region}`;
 // Imágenes específicas por región
 const imagenesPorRegion = {
   Noroeste: [
-    "imgs/norte/Capybara.jfif",
-    "imgs/norte/Osezno-de-anteojos.jfif",
-    "imgs/norte/Puma.jfif",
+    {
+      src: "./imgs/norte/Capybara.jfif",
+      nombre: "Carpincho",
+      info: "El carpincho es el roedor más grande del mundo y vive en zonas húmedas.",
+    },
+    {
+      src: "./imgs/norte/Osezno-de-anteojos.jfif",
+      nombre: "Osezno de anteojos",
+      info: "El oso de anteojos es el único oso nativo de Sudamérica.",
+    },
+    {
+      src: "./imgs/norte/Puma.jfif",
+      nombre: "Puma",
+      info: "El puma es un felino nativo de América y está protegido en muchas regiones.",
+    },
   ],
   Noreste: [
-    "imgs/norte/Capybara.jfif",
-    "imgs/norte/Osezno-de-anteojos.jfif",
-    "imgs/norte/Puma.jfif",
+    {
+      src: "./imgs/norte/Capybara.jfif",
+      nombre: "Carpincho",
+      info: "El carpincho es el roedor más grande del mundo y vive en zonas húmedas.",
+    },
+    {
+      src: "./imgs/norte/Osezno-de-anteojos.jfif",
+      nombre: "Osezno de anteojos",
+      info: "El oso de anteojos es el único oso nativo de Sudamérica.",
+    },
+    {
+      src: "./imgs/norte/Puma.jfif",
+      nombre: "Puma",
+      info: "El puma es un felino nativo de América y está protegido en muchas regiones.",
+    },
   ],
   Centro: [
-    "imgs/pampeana/carpincho.jfif",
-    "imgs/pampeana/peludo.jfif",
-    "imgs/pampeana/Zorro-gris.jfif",
+    {
+      src: "./imgs/pampeana/carpincho.jfif",
+      nombre: "Carpincho",
+      info: "El carpincho es el roedor más grande del mundo y vive en zonas húmedas.",
+    },
+    {
+      src: "./imgs/pampeana/peludo.jfif",
+      nombre: "Peludo",
+      info: "El peludo es un armadillo típico de la región pampeana.",
+    },
+    {
+      src: "./imgs/pampeana/Zorro-gris.jfif",
+      nombre: "Zorro gris",
+      info: "El zorro gris es un mamífero carnívoro que habita en la región pampeana.",
+    },
   ],
   Cuyo: [
-    "imgs/cuyo/ciervo.jfif",
-    "imgs/cuyo/guanaco.jfif",
-    "imgs/cuyo/pudu.jfif",
+    {
+      src: "./imgs/cuyo/ciervo.jfif",
+      nombre: "Ciervo",
+      info: "El ciervo es un mamífero herbívoro que vive en bosques y montañas.",
+    },
+    {
+      src: "./imgs/cuyo/guanaco.jfif",
+      nombre: "Guanaco",
+      info: "El guanaco es un camélido sudamericano que habita zonas áridas y frías.",
+    },
+    {
+      src: "./imgs/cuyo/pudu.jfif",
+      nombre: "Pudú",
+      info: "El pudú es el ciervo más pequeño del mundo y vive en bosques densos.",
+    },
   ],
   Patagonia: [
-    "imgs/patagonica/condor.jfif",
-    "imgs/patagonica/huemul.jpg",
-    "imgs/patagonica/pinguino.jfif",
+    {
+      src: "./imgs/patagonica/condor.jfif",
+      nombre: "Cóndor",
+      info: "El cóndor andino es el ave voladora más grande de Sudamérica.",
+    },
+    {
+      src: "./imgs/patagonica/huemul.jpg",
+      nombre: "Huemul",
+      info: "El huemul es un ciervo en peligro de extinción, símbolo nacional de Argentina.",
+    },
+    {
+      src: "./imgs/patagonica/pinguino.jfif",
+      nombre: "Pingüino",
+      info: "El pingüino de Magallanes es típico de las costas patagónicas.",
+    },
   ],
 };
 
@@ -74,16 +134,24 @@ function obtenerImagenParaRegion(region) {
 const imagenesUsadasPorRegion = {};
 
 // Iniciar nivel
+let imagenSeleccionada = null; // <-- Variable global
+
 function iniciarNivel(nivel) {
   contenedor.innerHTML = "";
   seleccionada = null;
   nivelTexto.textContent = `Nivel: ${nivel}`;
 
-  const imagenSeleccionada = obtenerImagenParaRegion(region);
+  imagenSeleccionada = obtenerImagenParaRegion(region); // <-- Guardar imagen global
   if (!imagenSeleccionada) {
     alert("No hay imágenes disponibles para esta región.");
     return;
   }
+
+  // Ocultar mensaje y botones al iniciar nivel
+  document.getElementById("mensaje").style.display = "none";
+  document.getElementById("btnNivel").style.display = "none";
+  document.getElementById("btnContinuar").style.display = "none";
+  document.getElementById("personaje").style.display = "flex";
 
   // Crear posiciones correctas
   const posiciones = [];
@@ -110,7 +178,7 @@ function iniciarNivel(nivel) {
 
     const mez = mezcladas[i];
 
-    pieza.style.backgroundImage = `url('${imagenSeleccionada}')`;
+    pieza.style.backgroundImage = `url('${imagenSeleccionada.src}')`;
     pieza.style.backgroundSize = `${total * 100}% ${total * 100}%`;
     pieza.style.backgroundPosition = `-${pos.x * 100}% -${pos.y * 100}%`;
 
@@ -177,85 +245,64 @@ function verificarTodo() {
     (p) => p.dataset.current === p.dataset.correct
   );
 
-  if (completo) {
-    document.getElementById("personaje").style.display = "none";
+  const mensaje = document.getElementById("mensaje");
+  const btnNivel = document.getElementById("btnNivel");
+  const btnContinuar = document.getElementById("btnContinuar");
+  const infoAnimal = document.getElementById("infoAnimal");
 
-    setTimeout(() => {
-      if (nivelActual < nivelMax) {
+  if (completo) {
+
+    document.getElementById("personaje").style.display = "none";
+    
+    mensaje.style.display = "flex";
+    mensaje.querySelector("h2").textContent = "¡Nivel completado!";
+    infoAnimal.textContent = `${imagenSeleccionada.nombre}: ${imagenSeleccionada.info}`;
+
+    if (nivelActual < nivelMax) {
+      mensaje.scrollIntoView({ behavior: "smooth" });
+      btnNivel.style.display = "inline-block";
+      btnContinuar.style.display = "none";
+      btnNivel.textContent = "Siguiente nivel";
+      btnNivel.onclick = function () {
+        mensaje.style.display = "none";
         nivelActual++;
         iniciarNivel(nivelActual);
-      } else {
-        // Guardar que este minijuego fue completado
-        let juegosCompletados =
-          JSON.parse(localStorage.getItem("juegosCompletados")) || {};
-        if (!juegosCompletados[region]) juegosCompletados[region] = [];
-
-        if (!juegosCompletados[region].includes("puzzzlee")) {
-          juegosCompletados[region].push("puzzzlee");
-          localStorage.setItem(
-            "juegosCompletados",
-            JSON.stringify(juegosCompletados)
-          );
-        }
-
-        // Verificar si ya se completaron todos los minijuegos de esta región
-        const juegosEsperados = {
-          Noroeste: ["./puzzzlee", "../mini_juego_jardin_lugar/lugar"],
-          Noreste: ["./puzzzlee", "../mini_juego_jardin_lugar/lugar"],
-          Cuyo: [
-            "./puzzzlee",
-            "../mini_juego_jardin_encontrar_al_animal/encontrar",
-          ],
-          Centro: [
-            "./puzzzlee",
-            "../mini_juego_jardin_encontrar_al_animal/encontrar",
-          ],
-          Patagonia: ["./puzzzlee", "../mini_juego_jardin_lugar/lugar"],
-        };
-
-        const todos = juegosEsperados[region] || [];
-        const completados = juegosCompletados[region];
-
-        const juegosRestantes = todos.filter((j) => !completados.includes(j));
-        if (completo) {
-          // Mostrar mensaje y redirigir
-          const mensaje = document.getElementById("mensaje");
-          mensaje.style.display = "flex";
-          mensaje.scrollIntoView({ behavior: "smooth" });
-        }
-
-        document.getElementById("boton-volver").style.display = "none";
-
-        setTimeout(() => {
-          if (juegosRestantes.length > 0) {
-            // Elegir siguiente minijuego aleatorio
-            const siguienteJuego =
-              juegosRestantes[
-                Math.floor(Math.random() * juegosRestantes.length)
-              ];
-            window.location.href = `${siguienteJuego}.html?region=${encodeURIComponent(
-              region
-            )}`;
-          } else {
-            // Si era el último, volver al mapa
-            window.location.href = "../mapa-test.html";
-          }
-        }, 2000);
-      }
-    }, 1000);
+      };
+    } else {
+      btnNivel.style.display = "none";
+      btnContinuar.style.display = "inline-block";
+      btnContinuar.textContent = "Finalizar";
+      btnContinuar.onclick = function () {
+        mensaje.style.display = "none";
+        irAlSiguienteJuego();
+      };
+    }
   }
 }
+
+// Cambiar de nivel solo cuando el usuario haga click en el botón
+btnNivel.onclick = function () {
+  mensaje.style.display = "none";
+  if (nivelActual < nivelMax) {
+    nivelActual++;
+    iniciarNivel(nivelActual);
+  } else {
+    // Aquí va la lógica de fin de juego o pasar al siguiente minijuego
+    irAlSiguienteJuego();
+  }
+};
+
 function irAlSiguienteJuego() {
   const params = new URLSearchParams(window.location.search);
   const region = params.get("region");
 
   // Obtener lista de minijuegos de la región
   const juegosPorRegion = {
-    Noroeste: ["/puzzzlee", "../mini_juego_jardin_lugar/lugar"],
-    Noreste: ["/puzzzlee", "/mini_juego_jardin_lugar/lugar"],
-    Cuyo: ["/puzzzlee", "../mini_juego_jardin_encontrar_al_animal/encontrar"],
-    Centro: ["./puzzzlee", "../mini_juego_jardin_encontrar_al_animal/encontrar"],
-    Patagonia: ["/puzzzlee", "../mini_juego_jardin_lugar/lugar"],
+    Noroeste: ["./puzzzlee", "../mini_juego_jardin_lugar/lugar"],
+    Noreste: ["./puzzzlee", "/mini_juego_jardin_lugar/lugar"],
+    Cuyo: ["./puzzzlee", "../encontrar/encontrar"],
+    Centro: ["../encontrar/encontrar", "./puzzzlee"],
+    Patagonia: ["./puzzzlee", "../mini_juego_jardin_lugar/lugar"],
   };
 
   const juegos = juegosPorRegion[region];
@@ -284,4 +331,3 @@ document.getElementById("btnContinuar").onclick = function () {
 if (btnContinuar) {
   btnContinuar.addEventListener("click", irAlSiguienteJuego);
 }
-

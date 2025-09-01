@@ -55,25 +55,25 @@ document.addEventListener("DOMContentLoaded", () => {
       arbustoImg.src = arbustoImg.dataset.animalSrc;
 
       // Mostrar mensaje ganador
-        const mensajeGanador = document.getElementById("mensajeGanador");
-        mensajeGanador.style.display = "block";
-        mensajeGanador.querySelector("h2").textContent =
+      const mensajeGanador = document.getElementById("mensajeGanador");
+      mensajeGanador.style.display = "block";
+      mensajeGanador.querySelector("h2").textContent =
         mensajeGanador.scrollIntoView({ behavior: "smooth" });
-          arbustoImg.dataset.correcto === "true" ? "¡Felicitaciones!" : "¡Ups!";
-        mensajeGanador.querySelector("p").textContent =
-          arbustoImg.dataset.mensaje;
+      arbustoImg.dataset.correcto === "true" ? "¡Felicitaciones!" : "¡Ups!";
+      mensajeGanador.querySelector("p").textContent =
+        arbustoImg.dataset.mensaje;
 
-        const btnContinuar = document.getElementById("btnContinuar");
+      const btnContinuar = document.getElementById("btnContinuar");
 
-        if (arbustoImg.dataset.correcto === "true") {
-          // 🔹 Ganó → mostrar botón continuar y bloquear el juego
-          btnContinuar.style.display = "inline-block";
-          juegoActivo = false; // ya no se pueden clickear más
-        } else {
-          btnContinuar.style.display = "none";
-          juegoActivo = false; // bloquear mientras se reinicia
-          setTimeout(reiniciarJuego, 8000);
-        }
+      if (arbustoImg.dataset.correcto === "true") {
+        // 🔹 Ganó → mostrar botón continuar y bloquear el juego
+        btnContinuar.style.display = "inline-block";
+        juegoActivo = false; // ya no se pueden clickear más
+      } else {
+        btnContinuar.style.display = "none";
+        juegoActivo = false; // bloquear mientras se reinicia
+        setTimeout(reiniciarJuego, 5000);
+      }
     };
   });
 
@@ -82,8 +82,73 @@ document.addEventListener("DOMContentLoaded", () => {
     window.location.href = "../mapa-y-puzzle/mapa-test.html";
   };
 
-  // Botón continuar (solo si es el puma)
-  document.getElementById("btnContinuar").onclick = () => {
-    window.location.href = "../mapa-y-puzzle/mapa-test.html";
-  };
+  // Función para pasar al siguiente minijuego o completar
+  function pasarAlSiguienteMinijuegoOCompletar() {
+    const params = new URLSearchParams(window.location.search);
+    const region = params.get("region");
+
+    // Lista de minijuegos por región
+    const juegosPorRegion = {
+      Noroeste: [
+        "../mapa-y-puzzle/puzzzlee",
+        "../mini_juego_jardin_lugar/lugar",
+        "./encontrar/encontrar",
+      ],
+      Noreste: [
+        "../mapa-y-puzzle/puzzzlee",
+        "../mini_juego_jardin_lugar/lugar",
+        "./encontrar/encontrar",
+      ],
+      Cuyo: ["../mapa-y-puzzle/puzzzlee", "./encontrar/encontrar"],
+      Centro: ["../mapa-y-puzzle/puzzzlee", "./encontrar/encontrar"],
+      Patagonia: [
+        "../mapa-y-puzzle/puzzzlee",
+        "../mini_juego_jardin_lugar/lugar",
+        "./encontrar/encontrar",
+      ],
+    };
+
+    // Guardar progreso de minijuegos jugados
+    const actual = window.location.pathname
+      .split("/")
+      .pop()
+      .replace(/\.html?$/, "");
+    const completados =
+      JSON.parse(localStorage.getItem("juegosCompletados")) || {};
+    const jugados = completados[region] || [];
+    if (!jugados.includes(actual)) {
+      jugados.push(actual);
+      completados[region] = jugados;
+      localStorage.setItem("juegosCompletados", JSON.stringify(completados));
+    }
+
+    const juegos = juegosPorRegion[region] || [];
+    const juegosRestantes = juegos.filter(
+      (j) => !jugados.includes(j.replace(/.*\//, ""))
+    );
+
+    if (juegosRestantes.length > 0) {
+      // Ir al siguiente minijuego pendiente
+      const siguienteJuego = juegosRestantes[0];
+      window.location.href = `${siguienteJuego}.html?region=${encodeURIComponent(
+        region
+      )}`;
+    } else {
+      // Si era el último, marcar región completada y dar monedas
+      const progreso =
+        JSON.parse(localStorage.getItem("progresoRegiones")) || {};
+      if (!progreso[region]) {
+        progreso[region] = true;
+        localStorage.setItem("progresoRegiones", JSON.stringify(progreso));
+        let monedas = parseInt(localStorage.getItem("monedas")) || 0;
+        monedas += 3;
+        localStorage.setItem("monedas", monedas);
+      }
+      window.location.href = "../mapa-y-puzzle/mapa-test.html";
+    }
+  }
+
+  // Reemplaza el onclick del botón continuar:
+  document.getElementById("btnContinuar").onclick =
+    pasarAlSiguienteMinijuegoOCompletar;
 });

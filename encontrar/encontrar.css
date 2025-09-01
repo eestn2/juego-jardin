@@ -5,7 +5,7 @@
 }
 @font-face {
   font-family: "MiFuente";
-  src: url("./tipografia/Letters\ for\ Learners.ttf") format("truetype");
+  src: url("./tipografia/Letters_for_Learners.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
@@ -24,7 +24,7 @@ h1 {
 .contenedorInformacion {
   background-color: white;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-self: center;
   padding: 10px 15px;
   margin: 20px;
@@ -32,14 +32,21 @@ h1 {
   justify-content: space-evenly;
   gap: 20px;
 }
-
+.contenedorInformacion .infoTexto {
+  align-content: center;
+}
+.contenedorInformacion p {
+  margin-top: 0;
+ font-size: 1.5;
+  padding: 0;
+}
 #infoTexto {
   display: flex;
   flex-direction: row;
   justify-content: center;
 }
 .personaje img {
-  width: 150px;
+  width: 110px;
   height: auto;
   margin: 0;
 }
@@ -97,6 +104,7 @@ h1 {
   z-index: 1;
   height: 70vh;
   justify-content: space-around;
+    background-position: bottom center;
 }
 
 .juego .escondite {
@@ -126,7 +134,7 @@ h1 {
   scale: 1.3;
 }
 
-.mensaje{
+.mensaje {
   background-color: rgb(24, 120, 11);
   border-radius: 20px;
   padding: 10px;
@@ -148,4 +156,468 @@ h1 {
   transform: scale(1.1);
   cursor: pointer;
   background-color: rgb(119, 188, 119);
+}
+
+@media (min-width: 360px) {
+  body {
+    font-size: 1rem;
+    justify-items: center;
+  }
+  h1{
+    width: 90%;
+  }
+  .juego {
+    width: 95%;
+    margin: 0 auto;
+    padding: 8px;
+    border-width: 3px;
+    background-size:cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  .escondites {
+    width: 95%;
+    height: 70px;
+    left: 50%;
+    bottom: 4%;
+    transform: translate(-50%, 0%);
+  }
+  .juego .escondite {
+    width: 70px;
+  }
+  .juego .escondite img {
+    scale: 1.2;
+  }
+  .mensaje {
+    font-size: 1rem;
+    padding: 8px;
+    margin-top: 15px;
+    width: 95%;
+    justify-self: center;
+  }
+  .contenedorInformacion {
+    margin: 15px;
+    padding: 8px 10px;
+    gap: 15px;
+    width: 80%;
+  }
+  .contenedorInformacion p {
+    margin-top: 0;
+    padding: 0;
+  }
+  .abajo {
+    width: 80%;
+    margin: 10px auto;
+  }
+  button{
+    font-size: 0.8rem;
+  }
+  .personaje img {
+    width: 80px;
+  }
+  
+}
+@media (min-width: 400px){
+  body {
+    font-size: 1.2rem;
+    justify-items: center;
+  }
+  h1{
+    width: 70%;
+  }
+  .juego {
+    width: 90%;
+    margin: 0 auto;
+    padding: 10px;
+    border-width: 4px;
+    background-size:cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-position: bottom center;
+  }
+
+  .escondites {
+    width: 90%;
+    height: 80px;
+    left: 50%;
+    bottom: 5%;
+    transform: translate(-50%, 0%);
+  }
+  .juego .escondite {
+    width: 80px;
+  }
+  .juego .escondite img {
+    scale: 1.3;
+  }
+  .mensaje {
+    font-size: 1.2rem;
+    padding: 10px;
+    margin-top: 20px;
+    width: 90%;
+    justify-self: center;
+  }
+  .contenedorInformacion {
+    margin: 20px;
+    padding: 10px 15px;
+    gap: 20px;
+    width: 60%;
+  }
+  .contenedorInformacion p {
+    margin-top: 0;
+    padding: 0;
+  }
+  .abajo {
+    width: 90%;
+    margin: 10px auto;
+  }
+  button{
+    font-size: 1rem;
+  }
+  .personaje img {
+    width: 100px;
+  }
+}
+@media (min-width: 768px) {
+  body {
+    font-size: 1.5rem;
+    justify-items: center;
+  }
+  h1{
+    width: 50%;
+  }
+  .juego {
+    width: 60%;
+    margin: 0 auto;
+    padding: 15px;
+    border-width: 4px;
+    background-size:cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-position: bottom center;
+  }
+  .escondites {
+    width: 80%;
+    height: 100px;
+    left: 50%;
+    bottom: 6%;
+    transform: translate(-50%, 0%);
+  }
+  .juego .escondite {
+    width: 90px;
+  }
+  .juego .escondite img {
+    scale: 1.4;
+  }
+  .mensaje {
+    font-size: 1.5rem;
+    padding: 15px;
+    margin-top: 25px;
+    width: 70%;
+    justify-self: center;
+  }
+  .contenedorInformacion {
+    margin: 25px;
+    padding: 15px 20px;
+    gap: 25px;
+    width: 40%;
+  }
+  .abajo {
+    width: 40%;
+    margin: 10px auto;
+  }
+  button{
+    font-size: 1.2rem;
+  }
+  .personaje img {
+    width: 120px;
+  }
+  
+}
+
+@media (min-width: 992px) {
+  body {
+    font-size: 1.7rem;
+    justify-items: center;
+  }
+  h1{
+    width: 50%;
+  }
+  .juego {
+    width: 50%;
+    margin: 0 auto;
+    padding: 18px;
+    border-width: 5px;
+    background-size:cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-position: bottom center;
+  }
+  .escondites {
+    width: 80%;
+    height: 100px;
+    left: 50%;
+    bottom: 7%;
+    transform: translate(-50%, 0%);
+  }
+  .juego .escondite {
+    width: 100px;
+  }
+  .juego .escondite img {
+    scale: 1.5;
+  }
+  .mensaje {
+    font-size: 1.7rem;
+    padding: 18px;
+    margin-top: 30px;
+    width: 60%;
+    justify-self: center;
+  }
+  .contenedorInformacion {
+    margin: 30px;
+    padding: 20px 30px;
+    gap: 30px;
+    width: 40%;
+  }
+  .abajo {
+    width: 30%;
+    margin: 10px auto;
+  }
+  button{
+    font-size: 1.5rem;
+  }
+  .personaje img {
+    width: 150px;
+  }
+  
+}
+
+@media (min-width: 1024px) {
+  body {
+    font-size: 2rem;
+    justify-items: center;
+  }
+  h1{
+    width: 55%;
+  }
+  .juego {
+    width: 70%;
+    margin: 0 auto;
+    padding: 20px;
+    border-width: 5px;
+    background-size:cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-position: bottom center;
+  }
+  .escondites {
+    width: 80%;
+    height: 130px;
+    left: 50%;
+    bottom: 8%;
+    transform: translate(-50%, 0%);
+  }
+  .juego .escondite {
+    width: 110px;
+  }
+  .juego .escondite img {
+    scale: 1.5;
+  }
+  .mensaje {
+    font-size: 2rem;
+    padding: 18px;
+    margin-top: 30px;
+    width: 70%;
+    justify-self: center;
+  }
+  .contenedorInformacion {
+    margin: 30px;
+    padding: 25px 40px;
+    gap: 30px;
+    width: 40%;
+  }
+  .abajo {
+    width: 30%;
+    margin: 10px auto;
+  }
+  button{
+    font-size: 1.8rem;
+  }
+  .personaje img {
+    width: 180px;
+  }
+  
+}
+
+@media (min-width: 1200px) {
+  body {
+    font-size: 2.5rem;
+    justify-items: center;
+  }
+  h1{
+    width: 40%;
+  }
+  .juego {
+    width: 60%;
+    margin: 0 auto;
+    padding: 20px;
+    border-width: 5px;
+    background-size:cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-position: bottom center;
+  }
+  .escondites {
+    width: 70%;
+    height: 150px;
+    left: 50%;
+    bottom: 8%;
+    transform: translate(-50%, 0%);
+  }
+  .juego .escondite {
+    width: 110px;
+  }
+  .juego .escondite img {
+    scale: 1.5;
+  }
+  .mensaje {
+    font-size: 2rem;
+    padding: 18px;
+    margin-top: 30px;
+    width: 60%;
+    justify-self: center;
+  }
+  .contenedorInformacion {
+    margin: 30px;
+    padding: 25px 40px;
+    gap: 30px;
+    width: 50%;
+  }
+  .abajo {
+    width: 30%;
+    margin: 10px auto;
+  }
+  button{
+    font-size: 1.7rem;
+  }
+  .personaje img {
+    width: 200px;
+  }
+}
+@media (min-width: 1440px) {
+
+  body {
+    font-size: 2.5rem;
+    justify-items: center;
+  }
+  h1{
+    width: 40%;
+  }
+  .juego {
+    width: 70%;
+    margin: 0 auto;
+    padding: 20px;
+    border-width: 5px;
+    background-size:cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-position: bottom center;
+  }
+  .escondites {
+    width: 70%;
+    height: 150px;
+    left: 50%;
+    bottom: 8%;
+    transform: translate(-50%, 0%);
+  }
+  .juego .escondite {
+    width: 110px;
+  }
+  .juego .escondite img {
+    scale: 1.5;
+  }
+  .mensaje {
+    font-size: 2.5rem;
+    padding: 18px;
+    margin-top: 30px;
+    width: 60%;
+    justify-self: center;
+  }
+  .contenedorInformacion {
+    margin: 30px;
+    padding: 25px 40px;
+    gap: 30px;
+    width: 50%;
+  }
+  .abajo {
+    width: 30%;
+    margin: 10px auto;
+  }
+  button{
+    font-size: 2rem;
+  }
+  .personaje img {
+    width: 200px;
+  }
+}
+@media (min-width: 2560px) {
+
+  body {
+    font-size: 5rem;
+    justify-items: center;
+  }
+  h1{
+    width: 50%;
+  }
+  .juego {
+    width: 70%;
+    margin: 0 auto;
+    padding: 20px;
+    border-width: 5px;
+    background-size:cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-position: bottom center;
+    border: 15px solid white;
+  }
+  .escondites {
+    width: 60%;
+    height: 250px;
+    left: 50%;
+    bottom: 8%;
+    transform: translate(-50%, 0%);
+  }
+  .juego .escondite {
+    width: 110px;
+  }
+  .juego .escondite img {
+    scale: 1.5;
+  }
+  .mensaje {
+    font-size: 4.5rem;
+    padding: 18px;
+    margin-top: 30px;
+    width: 60%;
+    justify-self: center;
+  }
+  .contenedorInformacion {
+    margin: 30px;
+    padding: 25px 40px;
+    gap: 30px;
+    width: 40%;
+  }
+  .abajo {
+    width: 30%;
+    margin: 20px auto;
+  }
+  .abajo img{
+    width: 60px;
+  }
+  button{
+    font-size: 4rem;
+    padding: 10px 10px;
+  }
+  .personaje img {
+    width: 400px;
+  }
+  
 }
