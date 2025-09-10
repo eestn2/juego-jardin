@@ -256,7 +256,7 @@ function verificarTodo() {
     
     mensaje.style.display = "flex";
     mensaje.querySelector("h2").textContent = "¡Nivel completado!";
-    infoAnimal.textContent = `${imagenSeleccionada.nombre}: ${imagenSeleccionada.info}`;
+    infoAnimal.textContent = `${imagenSeleccionada.nombre} : ${imagenSeleccionada.info}`;
 
     if (nivelActual < nivelMax) {
       mensaje.scrollIntoView({ behavior: "smooth" });
