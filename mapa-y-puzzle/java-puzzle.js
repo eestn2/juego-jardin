@@ -249,11 +249,11 @@ function verificarTodo() {
   const btnNivel = document.getElementById("btnNivel");
   const btnContinuar = document.getElementById("btnContinuar");
   const infoAnimal = document.getElementById("infoAnimal");
+  const BtnVolver = document.getElementById("boton-volver");
 
   if (completo) {
-
     document.getElementById("personaje").style.display = "none";
-    
+
     mensaje.style.display = "flex";
     mensaje.querySelector("h2").textContent = "¡Nivel completado!";
     infoAnimal.textContent = `${imagenSeleccionada.nombre} : ${imagenSeleccionada.info}`;
@@ -272,6 +272,8 @@ function verificarTodo() {
       btnNivel.style.display = "none";
       btnContinuar.style.display = "inline-block";
       btnContinuar.textContent = "Finalizar";
+      BtnVolver.style.display = "none";
+      btnContinuar.scrollIntoView({ behavior: "smooth" });
       btnContinuar.onclick = function () {
         mensaje.style.display = "none";
         irAlSiguienteJuego();
@@ -298,21 +300,28 @@ function irAlSiguienteJuego() {
 
   // Obtener lista de minijuegos de la región
   const juegosPorRegion = {
-    Noroeste: ["./puzzzlee", "../mini_juego_jardin_lugar/lugar"],
-    Noreste: ["./puzzzlee", "/mini_juego_jardin_lugar/lugar"],
-    Cuyo: ["./puzzzlee", "../encontrar/encontrar"],
-    Centro: ["../encontrar/encontrar", "./puzzzlee"],
-    Patagonia: ["./puzzzlee", "../mini_juego_jardin_lugar/lugar"],
+    Noroeste: ["/puzzzlee", "./encontrar/encontrar"],
+    Noreste: ["/puzzzlee", "./encontrar/encontrar"],
+    Cuyo: ["/puzzzlee", "./encontrar/encontrar"],
+    Centro: ["./encontrar/encontrar", "/puzzzlee"],
+    Patagonia: ["/puzzzlee", "./encontrar/encontrar"],
   };
 
   const juegos = juegosPorRegion[region];
-  const actual = window.location.pathname.split("/").pop();
+  const actual = window.location.pathname.split("/", ".").pop();
   const indiceActual = juegos.indexOf(actual);
 
   if (indiceActual >= 0 && indiceActual < juegos.length - 1) {
     // Ir al siguiente minijuego
     window.location.href = `${juegos[indiceActual + 1]}?region=${region}`;
   } else {
+    let progreso = JSON.parse(localStorage.getItem("progresoRegiones")) || {};
+    progreso[region] = true;
+    localStorage.setItem("progresoRegiones", JSON.stringify(progreso));
+    // Desbloquear nuevas regiones
+    if (typeof desbloquearRegiones === "function") {
+      desbloquearRegiones(region);
+    }
     // Si era el último, volver al mapa
     window.location.href = "./mapa-test.html";
   }
@@ -330,4 +339,24 @@ document.getElementById("btnContinuar").onclick = function () {
 };
 if (btnContinuar) {
   btnContinuar.addEventListener("click", irAlSiguienteJuego);
+}
+
+function desbloquearRegiones(regionCompletada) {
+  const estadoRegiones =
+    JSON.parse(localStorage.getItem("estadoRegiones")) || {};
+
+  const desbloqueoPorRegion = {
+    Noreste: ["Cuyo"],
+    Cuyo: ["Patagonia", "Noroeste"],
+    Noroeste: [],
+    Patagonia: [],
+    Centro: [],
+  };
+
+  const nuevas = desbloqueoPorRegion[regionCompletada] || [];
+  nuevas.forEach((region) => {
+    estadoRegiones[region] = true;
+  });
+
+  localStorage.setItem("estadoRegiones", JSON.stringify(estadoRegiones));
 }
