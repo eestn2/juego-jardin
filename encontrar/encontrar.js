@@ -89,24 +89,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Lista de minijuegos por región
     const juegosPorRegion = {
-      Noroeste: [
-        "../mapa-y-puzzle/puzzzlee",
-        "../mini_juego_jardin_lugar/lugar",
-        "./encontrar/encontrar",
-      ],
-      Noreste: [
-        "../mapa-y-puzzle/puzzzlee",
-        "../mini_juego_jardin_lugar/lugar",
-        "./encontrar/encontrar",
-      ],
-      Cuyo: ["../mapa-y-puzzle/puzzzlee", "./encontrar/encontrar"],
-      Centro: ["../mapa-y-puzzle/puzzzlee", "./encontrar/encontrar"],
-      Patagonia: [
-        "../mapa-y-puzzle/puzzzlee",
-        "../mini_juego_jardin_lugar/lugar",
-        "./encontrar/encontrar",
-      ],
-    };
+    Noroeste: ["../mapa-y-puzzle/puzzzlee", "/encontrar"],
+    Noreste: ["../mapa-y-puzzle/puzzzlee", "/encontrar"],
+    Cuyo: ["../mapa-y-puzzle/puzzzlee", "/encontrar"],
+    Centro: ["../mapa-y-puzzle/puzzzlee","/encontrar"],
+    Patagonia: ["../mapa-y-puzzle/puzzzlee", "/encontrar"],
+  };
 
     // Guardar progreso de minijuegos jugados
     const actual = window.location.pathname

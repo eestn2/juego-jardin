@@ -298,31 +298,53 @@ function irAlSiguienteJuego() {
   const params = new URLSearchParams(window.location.search);
   const region = params.get("region");
 
-  // Obtener lista de minijuegos de la región
+  // Lista de minijuegos por región
   const juegosPorRegion = {
-    Noroeste: ["/puzzzlee", "./encontrar/encontrar"],
-    Noreste: ["/puzzzlee", "./encontrar/encontrar"],
-    Cuyo: ["/puzzzlee", "./encontrar/encontrar"],
-    Centro: ["./encontrar/encontrar", "/puzzzlee"],
-    Patagonia: ["/puzzzlee", "./encontrar/encontrar"],
+    Noroeste: ["/puzzzlee", "../encontrar/encontrar"],
+    Noreste: ["/puzzzlee", "../encontrar/encontrar"],
+    Cuyo: ["/puzzzlee", "../encontrar/encontrar"],
+    Centro: ["/puzzzlee", "../encontrar/encontrar"],
+    Patagonia: ["/puzzzlee", "../encontrar/encontrar"],
   };
+  // Guardar progreso de minijuegos jugados
+  const actual = window.location.pathname
+    .split("/")
+    .pop()
+    .replace(/\.html?$/, "");
+  const completados =
+    JSON.parse(localStorage.getItem("juegosCompletados")) || {};
+  const jugados = completados[region] || [];
+  if (!jugados.includes(actual)) {
+    jugados.push(actual);
+    completados[region] = jugados;
+    localStorage.setItem("juegosCompletados", JSON.stringify(completados));
+  }
 
-  const juegos = juegosPorRegion[region];
-  const actual = window.location.pathname.split("/", ".").pop();
-  const indiceActual = juegos.indexOf(actual);
+  const juegos = juegosPorRegion[region] || [];
+  const juegosRestantes = juegos.filter(
+    (j) => !jugados.includes(j.replace(/.*\//, ""))
+  );
 
-  if (indiceActual >= 0 && indiceActual < juegos.length - 1) {
-    // Ir al siguiente minijuego
-    window.location.href = `${juegos[indiceActual + 1]}?region=${region}`;
+  if (juegosRestantes.length > 0) {
+    // Ir al siguiente minijuego pendiente
+    const siguienteJuego = juegosRestantes[0];
+    window.location.href = `${siguienteJuego}.html?region=${encodeURIComponent(
+      region
+    )}`;
   } else {
+    // Si era el último, marcar región completada y dar monedas
     let progreso = JSON.parse(localStorage.getItem("progresoRegiones")) || {};
-    progreso[region] = true;
-    localStorage.setItem("progresoRegiones", JSON.stringify(progreso));
+    if (!progreso[region]) {
+      progreso[region] = true;
+      localStorage.setItem("progresoRegiones", JSON.stringify(progreso));
+      let monedas = parseInt(localStorage.getItem("monedas")) || 0;
+      monedas += 3;
+      localStorage.setItem("monedas", monedas);
+    }
     // Desbloquear nuevas regiones
     if (typeof desbloquearRegiones === "function") {
       desbloquearRegiones(region);
     }
-    // Si era el último, volver al mapa
     window.location.href = "./mapa-test.html";
   }
 }
