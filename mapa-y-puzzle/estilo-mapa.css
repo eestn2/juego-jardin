@@ -100,8 +100,17 @@ object#mapa {
 #btn-reiniciar:hover {
   background-color: #c0392b;
 }
-.monedas {
+.barra-superior {
   position: fixed;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 999;
+}
+.monedas-y-exp {
+  position: static;
   top: 10px;
   right: 10px;
   display: flex;
@@ -111,24 +120,24 @@ object#mapa {
   border-radius: 10px;
   padding: 5px 10px;
   gap: 0px;
-  z-index: 999;
+
 }
 
-.monedas img {
+.monedas-y-exp img {
   width: 40px;
 }
 
-.cantidad-moneda {
+.cantidad-moneda, .cantidad-exp{
   font-size: 1.2rem;
   padding: 2px 8px;
 }
 
 @media (max-width: 4670px) {
-  .monedas img {
+  .monedas-y-exp img {
     width: 30px;
   }
 
-  .cantidad-moneda {
+  .cantidad-moneda, .cantidad-exp {
     font-size: 1rem;
     padding: 2px 6px;
   }
@@ -156,11 +165,11 @@ object#mapa {
   }
 }
 @media (min-width: 480px) {
-  .monedas img {
+  .monedas-y-exp img {
     width: 50px;
   }
 
-  .cantidad-moneda {
+  .cantidad-moneda, .cantidad-exp {
     font-size: 1.5rem;
     padding: 4px 10px;
   }
@@ -179,11 +188,11 @@ object#mapa {
 }
 
 @media (min-width: 768px) {
-  .monedas img {
+  .monedas-y-exp img {
     width: 60px;
   }
 
-  .cantidad-moneda {
+  .cantidad-moneda, .cantidad-exp {
     font-size: 2rem;
     padding: 5px 12px;
   }
@@ -202,11 +211,11 @@ object#mapa {
 }
 
 @media (min-width: 1024px) {
-  .monedas img {
+  .monedas-y-exp img {
     width: 80px;
   }
 
-  .cantidad-moneda {
+  .cantidad-moneda, .cantidad-exp {
     font-size: 3rem;
     padding: 6px 15px;
   }
@@ -229,11 +238,11 @@ object#mapa {
 }
 
 @media (min-width: 1920px) {
-  .monedas img {
+  .monedas-y-exp img {
     width: 110px;
   }
 
-  .cantidad-moneda {
+  .cantidad-moneda, .cantidad-exp {
     font-size: 5rem;
     padding: 10px 25px;
   }
@@ -256,11 +265,11 @@ object#mapa {
   }
 }
 @media (min-width: 2560px) {
-  .monedas img {
+  .monedas-y-exp img {
     width: 120px;
   }
 
-  .cantidad-moneda {
+  .cantidad-moneda, .cantidad-exp {
     font-size: 6rem;
     padding: 10px 30px;
   }
@@ -284,11 +293,11 @@ object#mapa {
 }
 
 @media (min-width: 1440px) {
-  .monedas img {
+  .monedas-y-exp img {
     width: 100px;
   }
 
-  .cantidad-moneda {
+  .cantidad-moneda, .cantidad-exp {
     font-size: 4rem;
     padding: 10px 40px;
   }

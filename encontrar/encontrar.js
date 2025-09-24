@@ -89,12 +89,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Lista de minijuegos por región
     const juegosPorRegion = {
-    Noroeste: ["../mapa-y-puzzle/puzzzlee", "/encontrar"],
-    Noreste: ["../mapa-y-puzzle/puzzzlee", "/encontrar"],
-    Cuyo: ["../mapa-y-puzzle/puzzzlee", "/encontrar"],
-    Centro: ["../mapa-y-puzzle/puzzzlee","/encontrar"],
-    Patagonia: ["../mapa-y-puzzle/puzzzlee", "/encontrar"],
-  };
+      Noroeste: ["../mapa-y-puzzle/puzzzlee", "/encontrar"],
+      Noreste: ["../mapa-y-puzzle/puzzzlee", "/encontrar"],
+      Cuyo: ["../mapa-y-puzzle/puzzzlee", "/encontrar"],
+      Centro: ["../mapa-y-puzzle/puzzzlee", "/encontrar"],
+      Patagonia: ["../mapa-y-puzzle/puzzzlee", "/encontrar"],
+    };
 
     // Guardar progreso de minijuegos jugados
     const actual = window.location.pathname
@@ -128,9 +128,15 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!progreso[region]) {
         progreso[region] = true;
         localStorage.setItem("progresoRegiones", JSON.stringify(progreso));
-        let monedas = parseInt(localStorage.getItem("monedas")) || 0;
-        monedas += 3;
+        let monedas = parseInt(localStorage.getItem("monedas"));
+        if (isNaN(monedas)) monedas = 15;
+        monedas = Math.max(0, monedas - 3);
         localStorage.setItem("monedas", monedas);
+
+        // Actualizar exp y dar una exp al terminar nivel
+        let exp = parseInt(localStorage.getItem("exp")) || 0;
+        exp += 1;
+        localStorage.setItem("exp", exp);
       }
       window.location.href = "../mapa-y-puzzle/mapa-test.html";
     }

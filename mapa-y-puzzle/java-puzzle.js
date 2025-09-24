@@ -332,14 +332,22 @@ function irAlSiguienteJuego() {
       region
     )}`;
   } else {
-    // Si era el último, marcar región completada y dar monedas
+    // Si era el último, marcar región completada, sacar 3 monedas y dar 1 exp
     let progreso = JSON.parse(localStorage.getItem("progresoRegiones")) || {};
     if (!progreso[region]) {
       progreso[region] = true;
       localStorage.setItem("progresoRegiones", JSON.stringify(progreso));
-      let monedas = parseInt(localStorage.getItem("monedas")) || 0;
-      monedas += 3;
+
+      // Quitar 3 monedas al completar todos los juegos de la región
+      let monedas = parseInt(localStorage.getItem("monedas"));
+      if (isNaN(monedas)) monedas = 15;
+      monedas = Math.max(0, monedas - 3);
       localStorage.setItem("monedas", monedas);
+
+      // Actualizar exp y dar una exp al terminar nivel
+      let exp = parseInt(localStorage.getItem("exp")) || 0;
+      exp += 1;
+      localStorage.setItem("exp", exp);
     }
     // Desbloquear nuevas regiones
     if (typeof desbloquearRegiones === "function") {

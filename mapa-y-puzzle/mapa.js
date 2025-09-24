@@ -156,6 +156,7 @@ document.getElementById("mapa").addEventListener("load", function () {
                 }
               };
             }
+            
           }
         }
       });
@@ -184,17 +185,27 @@ function guardarProgreso(progreso) {
   localStorage.setItem("progresoRegiones", JSON.stringify(progreso));
 }
 
-function agregarMonedas(cantidad) {
-  let monedas = parseInt(localStorage.getItem("monedas")) || 0;
-  monedas += cantidad;
-  localStorage.setItem("monedas", monedas);
-  actualizarContadorMonedas();
+//CAMBIAR ESTO A EXP
+function agregarExp(cantidadexp) {
+  let experiencia = parseInt(localStorage.getItem("exp")) || 0;
+  experiencia += cantidadexp; // Sumar la cantidad recibida
+  localStorage.setItem("exp", experiencia);
+  actualizarContadorExp();
+}
+//AGREGAR ESTO Y MODIFICAR SI ES NECESARIO
+
+function actualizarContadorExp() {
+  const contadorExp = document.getElementById("contador-exp");
+  if (contadorExp) {
+    const exp = parseInt(localStorage.getItem("exp")) || 0;
+    contadorExp.textContent = `${exp}`;
+  }
 }
 
 function actualizarContadorMonedas() {
   const contador = document.getElementById("contador-monedas");
   if (contador) {
-    const monedas = parseInt(localStorage.getItem("monedas")) || 0;
+    const monedas = parseInt(localStorage.getItem("monedas")) || 15;
     contador.textContent = `${monedas}`;
   }
 }
@@ -208,6 +219,7 @@ function restarMonedas(cantidad) {
 
 // Al cargar el mapa, actualiza el contador de monedas
 document.addEventListener("DOMContentLoaded", actualizarContadorMonedas);
+document.addEventListener("DOMContentLoaded", actualizarContadorExp);
 
 function desbloquearRegiones(regionCompletada) {
   const estadoRegiones =
@@ -267,8 +279,8 @@ document.addEventListener("DOMContentLoaded", () => {
         localStorage.removeItem("progresoRegiones");
         localStorage.removeItem("juegosCompletados");
         localStorage.removeItem("monedas");
+        localStorage.removeItem("exp");
         localStorage.removeItem("estadoRegiones");
-        localStorage.setItem("monedas", "0");
         localStorage.setItem(
           "regionesDesbloqueadas",
           JSON.stringify(["Centro"])
