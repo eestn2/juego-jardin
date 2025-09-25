@@ -138,6 +138,11 @@ document.addEventListener("DOMContentLoaded", () => {
         exp += 1;
         localStorage.setItem("exp", exp);
       }
+
+      // DESBLOQUEAR NUEVAS REGIONES
+      if (typeof desbloquearRegiones === "function") {
+        desbloquearRegiones(region);
+      }
       window.location.href = "../mapa-y-puzzle/mapa-test.html";
     }
   }
