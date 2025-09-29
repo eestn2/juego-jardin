@@ -137,15 +137,36 @@ document.addEventListener("DOMContentLoaded", () => {
         let exp = parseInt(localStorage.getItem("exp")) || 0;
         exp += 1;
         localStorage.setItem("exp", exp);
+        // DESBLOQUEAR NUEVAS REGIONES
+        if (typeof desbloquearRegiones === "function") {
+          desbloquearRegiones(region);
+        }
       }
 
-      // DESBLOQUEAR NUEVAS REGIONES
-      if (typeof desbloquearRegiones === "function") {
-        desbloquearRegiones(region);
-      }
       window.location.href = "../mapa-y-puzzle/mapa-test.html";
     }
   }
+  // Función para desbloquear nuevas regiones
+  function desbloquearRegiones(regionCompletada) {
+    const estadoRegiones =
+      JSON.parse(localStorage.getItem("estadoRegiones")) || {};
+
+    const desbloqueoPorRegion = {
+      Noreste: ["Cuyo"],
+      Cuyo: ["Patagonia", "Noroeste"],
+      Noroeste: [],
+      Patagonia: [],
+      Centro: [],
+    };
+
+    const nuevas = desbloqueoPorRegion[regionCompletada] || [];
+    nuevas.forEach((region) => {
+      estadoRegiones[region] = true;
+    });
+
+    localStorage.setItem("estadoRegiones", JSON.stringify(estadoRegiones));
+  }
+
 
   // Reemplaza el onclick del botón continuar:
   document.getElementById("btnContinuar").onclick =

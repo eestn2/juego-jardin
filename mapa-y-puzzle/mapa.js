@@ -240,6 +240,9 @@ function desbloquearRegiones(regionCompletada) {
 
   localStorage.setItem("estadoRegiones", JSON.stringify(estadoRegiones));
 }
+
+//Debo desbloquear el boton jugar luego de ver todas las infos 
+
 // Marcar región como completa y pintarla de verde
 function marcarRegionComoCompleta(region, svgDoc, regiones) {
   regiones[region].forEach((provId) => {
