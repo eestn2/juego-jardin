@@ -1,23 +1,23 @@
 const infoPorRegion = {
   Noreste: {
-    titulo: "Flora y Fauna del Noreste",
+    titulo: "Recetas del Noreste",
     texto: "Aquí hay selvas, yacarés, etc.",
     imagen: "noreste.jpg",
   },
   Patagonia: {
-    titulo: "Flora y Fauna de la Patagonia",
+    titulo: "Recetas de la Patagonia",
     texto: "Aquí hay guanacos, ñandúes, etc.",
     imagen: "patagonia.jpg",
     audio: "/temas/audios/fyf/patagonia.mp3",
   },
   Cuyo: {
-    titulo: "Flora y Fauna de Cuyo",
+    titulo: "Recetas de Cuyo",
     texto: "Aquí hay cactus, cóndores, etc.",
     imagen: "cuyo.jpg",
   },
   Centro: {},
   Noroeste: {
-    titulo: "Flora y Fauna del Noroeste",
+    titulo: "Recetas del Noroeste",
     texto: "Aquí hay yungas, vicuñas, etc.",
     imagen: "noroeste.jpg",
   },

@@ -344,10 +344,6 @@ function irAlSiguienteJuego() {
       monedas = Math.max(0, monedas - 3);
       localStorage.setItem("monedas", monedas);
 
-      // Actualizar exp y dar una exp al terminar nivel
-      let exp = parseInt(localStorage.getItem("exp")) || 0;
-      exp += 1;
-      localStorage.setItem("exp", exp);
     }
     // Desbloquear nuevas regiones
     if (typeof desbloquearRegiones === "function") {

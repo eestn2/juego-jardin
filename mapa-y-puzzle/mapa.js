@@ -132,9 +132,55 @@ document.getElementById("mapa").addEventListener("load", function () {
             setTimeout(() => {
               datosBox.scrollIntoView({ behavior: "smooth" });
             }, 300);
+
+            // Configurar botones de temas
+            const temas = [
+              "fauna-y-flora",
+              "paisajes",
+              "danzas",
+              "recetas",
+              "turismo",
+              "pueblos-originarios",
+            ];
+
+            temas.forEach((tema) => {
+              const btn = datosBox.querySelector(`.btn-${tema}`);
+              
+              if (btn) {
+                btn.onclick = () => {
+                  marcarTemaVisitado(tema, region);
+                  btn.disabled = true;
+                  chequeartemasVisitados(region);
+                  window.open(
+                    `../temas/${tema}.html?region=${region}`,
+                    "_blank"
+                  );
+                };
+                // Verificar si el tema ya fue visitado
+                const visitados = obtenerTemasVisitados(region);
+                if (visitados.includes(tema)) {
+                  btn.disabled = true;
+                  btn.setAttribute("style", "background-color: green");
+                } else {
+                  btn.disabled = false;
+                  btn.setAttribute("style", "");
+                }
+              }
+            });
+
+            // Verificar temas visitados para habilitar botón de jugar
+            chequeartemasVisitados(region);
+
             // Configurar botón de jugar
             const btnJugar = datosBox.querySelector(".btn-jugar");
             if (btnJugar) {
+              btnJugar.disabled = true; // Deshabilitado por defecto
+              btnJugar.setAttribute("style", "background-color: red");
+
+              if (obtenerTemasVisitados(region).length >= 6) {
+                btnJugar.disabled = false;
+                btnJugar.setAttribute("style", "");
+              }
               btnJugar.onclick = () => {
                 const juegos = juegosPorRegion[region];
                 if (juegos && juegos.length > 0) {
@@ -156,12 +202,21 @@ document.getElementById("mapa").addEventListener("load", function () {
                 }
               };
             }
-            
           }
         }
       });
     }
   });
+
+  // --- Mueve esta función afuera del forEach ---
+  function chequeartemasVisitados(region) {
+    const visitados = obtenerTemasVisitados(region);
+    const btnJugar = document.querySelector(".btn-jugar");
+    if (btnJugar) {
+      btnJugar.disabled = visitados.length < 6; // Habilitar si se visitaron todos los temas
+    }
+  }
+
   // Verificar qué regiones ya están completas al cargar el mapa
   const progresoActual = obtenerProgreso();
 
@@ -241,7 +296,20 @@ function desbloquearRegiones(regionCompletada) {
   localStorage.setItem("estadoRegiones", JSON.stringify(estadoRegiones));
 }
 
-//Debo desbloquear el boton jugar luego de ver todas las infos 
+function marcarTemaVisitado(tema, region) {
+  const key = `temasVisitados_${region}`;
+  let temasVisitados = JSON.parse(localStorage.getItem(key)) || [];
+  if (!temasVisitados.includes(tema)) {
+    temasVisitados.push(tema);
+    localStorage.setItem(key, JSON.stringify(temasVisitados));
+  }
+  return temasVisitados;
+}
+function obtenerTemasVisitados(region) {
+  const key = `temasVisitados_${region}`;
+  return JSON.parse(localStorage.getItem(key)) || [];
+}
+//Debo desbloquear el boton jugar luego de ver todas las infos
 
 // Marcar región como completa y pintarla de verde
 function marcarRegionComoCompleta(region, svgDoc, regiones) {
@@ -284,6 +352,12 @@ document.addEventListener("DOMContentLoaded", () => {
         localStorage.removeItem("monedas");
         localStorage.removeItem("exp");
         localStorage.removeItem("estadoRegiones");
+        localStorage.removeItem("temasVisitados_Noreste");
+        localStorage.removeItem("temasVisitados_Cuyo");
+        localStorage.removeItem("temasVisitados_Noroeste");
+        localStorage.removeItem("temasVisitados_Patagonia");
+        localStorage.removeItem("temasVisitados_Centro");
+        localStorage.removeItem("exp");
         localStorage.setItem(
           "regionesDesbloqueadas",
           JSON.stringify(["Centro"])
