@@ -145,16 +145,14 @@ document.getElementById("mapa").addEventListener("load", function () {
 
             temas.forEach((tema) => {
               const btn = datosBox.querySelector(`.btn-${tema}`);
-              
+
               if (btn) {
                 btn.onclick = () => {
                   marcarTemaVisitado(tema, region);
                   btn.disabled = true;
                   chequeartemasVisitados(region);
-                  window.open(
-                    `../temas/${tema}.html?region=${region}`,
-                    "_blank"
-                  );
+                  window.location.href = `../temas/${tema}.html?region=${region}`,
+                    "_blank";
                 };
                 // Verificar si el tema ya fue visitado
                 const visitados = obtenerTemasVisitados(region);
