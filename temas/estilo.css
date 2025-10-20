@@ -20,8 +20,8 @@ body {
   background-color: white;
   font-size: 2rem;
   margin: 20px auto;
-  padding: 10px;
-  max-width: 400px;
+  padding: 20px;
+  max-width: fit-content;
   border-radius: 100px;
 }
 
@@ -34,7 +34,7 @@ body {
   background-color: #91bf56;
   padding: 5px 15px;
   margin: 10px auto;
-  max-width: 300px;
+  max-width: fit-content;
   border-radius: 15px;
   font-size: 1.5rem;
 }
@@ -87,6 +87,9 @@ ul.slider {
   aspect-ratio: 16 / 9; /* hace que se mantenga la proporción */
   overflow: hidden;
   margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 ul.slider li {
@@ -94,13 +97,16 @@ ul.slider li {
   inset: 0;
   opacity: 0;
   transition: opacity 1s;
-  background: #fff;
+  background: #807a7a94;
+  display: flex; 
+  align-items: center;
+  justify-content: center;
 }
 
 ul.slider li img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit:contain;
 }
 
 ul.slider li:first-child {
@@ -123,6 +129,7 @@ ul.slider li:nth-child(3) {
   animation-delay: 10s;
 }
 
+/* Definición de la animación */
 @keyframes slide {
   0% {
     opacity: 0;
@@ -158,6 +165,7 @@ ul.slider li:target {
   text-align: center;
 }
 
+/* Estilo de los botones del menú */
 .menu li a {
   display: inline-block;
   color: white;
