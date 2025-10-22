@@ -2,14 +2,73 @@
   text-transform: uppercase;
   font-family: "Chewy";
 }
-html{
-  scroll-behavior: smooth;}
+html {
+  scroll-behavior: smooth;
+}
 body {
   text-align: center;
   display: flex;
   align-items: center;
   flex-direction: column;
   background-color: #9fc9eee3;
+}
+
+.barra-superior {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 999;
+}
+.monedas-y-exp {
+  position: static;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  align-items: center;
+  background-color: #fcfa9d;
+  border: 2px solid rgba(214, 143, 62, 0.637);
+  border-radius: 10px;
+  padding: 5px 10px;
+  gap: 0px;
+}
+
+.monedas-y-exp img {
+  width: 40px;
+  cursor: pointer;
+}
+
+.cantidad-moneda,
+.cantidad-exp {
+  font-size: 1.2rem;
+  padding: 2px 8px;
+}
+
+.contenedor-info-botones {
+  max-width: min-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 5px;
+  background-color: rgba(241, 224, 72, 0.619);
+  border-radius: 10px;
+  margin-top: 20px;
+  margin-right: 20px;
+  color: rgb(90, 136, 16);
+  box-shadow: 0px 5px 5px 0px rgb(104, 101, 84);
+  padding: 10px;
+}
+.contenedor-info-botones #objeto {
+  text-decoration: underline wavy rgb(97, 180, 3);
+  color:rgb(90, 136, 16);
+  background-color: #ffffff8b ;
+  padding: 10px;
+  border-radius: 10px;
 }
 
 object#mapa {
@@ -56,7 +115,7 @@ object#mapa {
   font-size: 0.9rem;
 }
 
-.botonesabajo{
+.botonesabajo {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -64,7 +123,7 @@ object#mapa {
   flex-wrap: wrap;
   gap: 10px;
 }
-.btn-jugar{
+.btn-jugar {
   background-color: #eb8074;
 }
 .region-datos button:hover {
@@ -72,7 +131,7 @@ object#mapa {
   color: white;
 }
 
-.cerrar{
+.cerrar {
   background-color: #e74c3c;
   color: white;
   border: none;
@@ -100,44 +159,14 @@ object#mapa {
 #btn-reiniciar:hover {
   background-color: #c0392b;
 }
-.barra-superior {
-  position: fixed;
-  top: 10px;
-  right: 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  z-index: 999;
-}
-.monedas-y-exp {
-  position: static;
-  top: 10px;
-  right: 10px;
-  display: flex;
-  align-items: center;
-  background-color: #fcfa9d;
-  border: 2px solid rgba(214, 143, 62, 0.637);
-  border-radius: 10px;
-  padding: 5px 10px;
-  gap: 0px;
-
-}
-
-.monedas-y-exp img {
-  width: 40px;
-}
-
-.cantidad-moneda, .cantidad-exp{
-  font-size: 1.2rem;
-  padding: 2px 8px;
-}
 
 @media (max-width: 4670px) {
   .monedas-y-exp img {
     width: 30px;
   }
 
-  .cantidad-moneda, .cantidad-exp {
+  .cantidad-moneda,
+  .cantidad-exp {
     font-size: 1rem;
     padding: 2px 6px;
   }
@@ -156,7 +185,7 @@ object#mapa {
     width: 250%;
   }
 
-  .region-datos{
+  .region-datos {
     width: 80%;
     font-size: 0.8rem;
   }
@@ -169,7 +198,8 @@ object#mapa {
     width: 50px;
   }
 
-  .cantidad-moneda, .cantidad-exp {
+  .cantidad-moneda,
+  .cantidad-exp {
     font-size: 1.5rem;
     padding: 4px 10px;
   }
@@ -192,7 +222,8 @@ object#mapa {
     width: 60px;
   }
 
-  .cantidad-moneda, .cantidad-exp {
+  .cantidad-moneda,
+  .cantidad-exp {
     font-size: 2rem;
     padding: 5px 12px;
   }
@@ -215,7 +246,8 @@ object#mapa {
     width: 80px;
   }
 
-  .cantidad-moneda, .cantidad-exp {
+  .cantidad-moneda,
+  .cantidad-exp {
     font-size: 3rem;
     padding: 6px 15px;
   }
@@ -242,7 +274,8 @@ object#mapa {
     width: 110px;
   }
 
-  .cantidad-moneda, .cantidad-exp {
+  .cantidad-moneda,
+  .cantidad-exp {
     font-size: 5rem;
     padding: 10px 25px;
   }
@@ -269,7 +302,8 @@ object#mapa {
     width: 120px;
   }
 
-  .cantidad-moneda, .cantidad-exp {
+  .cantidad-moneda,
+  .cantidad-exp {
     font-size: 6rem;
     padding: 10px 30px;
   }
@@ -297,7 +331,8 @@ object#mapa {
     width: 100px;
   }
 
-  .cantidad-moneda, .cantidad-exp {
+  .cantidad-moneda,
+  .cantidad-exp {
     font-size: 4rem;
     padding: 10px 40px;
   }

@@ -1,7 +1,7 @@
 const infoPorRegion = {
   Noreste: {
     titulo: "Paisajes del Noreste",
-    texto: "Aquí hay yaguareté, yacarés, etc.",
+    texto: "Aquí hay paisajes desérticos de gran altura, valles y quebradas y muchas más cosas.",
     srcs: [
       "./imgs/NORTE(LUCIANA)/PAISAJES/esta-uno.jpeg",
       "./imgs/NORTE(LUCIANA)/PAISAJES/esta-dos.jpeg",

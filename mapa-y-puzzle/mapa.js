@@ -371,4 +371,53 @@ document.addEventListener("DOMContentLoaded", () => {
       datosBox.style.display = "none";
     });
   }
+
+  // abrir/cerrar contenedor-info-botones al click en moneda o exp
+  const iconMoneda = document.getElementById("Icono-moneda");
+  const iconExp = document.getElementById("Icono-exp");
+  const contenedorInfo = document.querySelector(".contenedor-info-botones");
+  contenedorInfo.style.display = "none";
+  function mostrarContenedor(visible) {
+    if (!contenedorInfo) return;
+    contenedorInfo.style.display = visible ? "flex" : "none";
+  }
+
+  function toggleContenedor() {
+    if (!contenedorInfo) return;
+    const isOpen = getComputedStyle(contenedorInfo).display !== "none";
+    mostrarContenedor(!isOpen);
+  }
+
+  if (iconMoneda) iconMoneda.addEventListener("click", (e) => {
+    e.stopPropagation();
+    toggleContenedor();
+    
+    contenedorInfo.querySelector("strong").textContent = `Monedas`;
+    contenedorInfo.querySelector("span").textContent = `Se utilizan para viajar a otras regiones`;
+  });
+  if (iconExp) iconExp.addEventListener("click", (e) => {
+    e.stopPropagation();
+    toggleContenedor();
+    contenedorInfo.querySelector("strong").textContent = `Experiencia`;
+    contenedorInfo.querySelector("span").textContent = `Se recibe experiencia cuando aprendes algo nuevo sobre una región`;
+  });
+
+  // Cerrar al click fuera del contenedor
+  document.addEventListener("click", (e) => {
+    if (!contenedorInfo) return;
+    const target = e.target;
+    if (
+      getComputedStyle(contenedorInfo).display !== "none" &&
+      !contenedorInfo.contains(target) &&
+      target !== iconMoneda &&
+      target !== iconExp
+    ) {
+      mostrarContenedor(false);
+    }
+  });
+
+  // Cerrar con Escape
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") mostrarContenedor(false);
+  });
 });
