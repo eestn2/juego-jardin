@@ -101,6 +101,27 @@ svg {
   width: 20px;
 }
 
+
+#audio {
+  border: none;
+  border-radius: 20px;
+  padding: 10px;
+  transition: transform 0.3s;
+  display: flex;
+  cursor: pointer;
+}
+#audio:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+  background-color: rgba(200, 200, 200, 0.365);
+}
+
+#audio img {
+  width: 30px;
+  height: auto;
+}
+
+
 @media (max-width: 320px) {
   #dialogue-box {
     background: rgba(255, 255, 255, 0.9);
