@@ -35,7 +35,7 @@ body {
   background-color: #91bf56;
   padding: 5px 10px;
   margin: 10px auto;
-  width: 90%;
+  width: fit-content;
   border-radius: 15px;
   font-size: 1.5rem;
 }
@@ -65,9 +65,9 @@ p {
 .container {
   margin: auto;
   background-color: white;
-  max-width: 90%;
-  width: 80%;
+  max-width: 80%;
   padding: 20px;
+  padding-top: 50px;
   border-radius: 10px;
 }
 
@@ -267,4 +267,8 @@ ul.slider li {
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s;
+}
+
+#btn-volver:hover {
+  background-color: #246324;
 }

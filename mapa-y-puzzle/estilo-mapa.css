@@ -79,12 +79,12 @@ object#mapa {
 #region-info {
   position: absolute;
   right: 0%;
-  bottom: 00%;
+  bottom: 0%;
   background: rgba(0, 0, 0, 0.75);
   color: #fff;
   padding: 12px 16px;
   border-radius: 8px;
-  max-width: 250px;
+  width: fit-content;
   font-size: 1rem;
   display: none;
   z-index: 998;

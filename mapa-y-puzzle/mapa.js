@@ -72,14 +72,18 @@ document.getElementById("mapa").addEventListener("load", function () {
     provs.forEach((id) => (provinciaARegion[id] = region));
   });
 
+
+  //Habilitar region centro
+
+
   Object.entries(provincias).forEach(([id]) => {
     const el = svgDoc.getElementById(id);
     if (el) {
       el.style.cursor = "pointer";
       const region = provinciaARegion[id];
 
-      // Solo deshabilitar regiones no desbloqueadas, excepto Centro
-      if (!estadoRegiones[region] && region !== "Centro") {
+      // Solo deshabilitar regiones no desbloqueadas
+      if (!estadoRegiones[region] ) {
         el.style.opacity = "0.5";
         el.style.pointerEvents = "none";
       }
@@ -101,11 +105,22 @@ document.getElementById("mapa").addEventListener("load", function () {
           regionTitle.textContent = region;
           regionProvincias.textContent = provNombres;
           regionBox.style.display = "block";
+        }
+      });
+      
+      el.addEventListener("mouseover", () => {
+        if (region && !progreso[region]) {
+          regiones[region].forEach((provId) => {
+            const p = svgDoc.getElementById(provId);
+            if (p) p.setAttribute("fill", "#f1c40f");
+          });
 
-          if (region === "Centro") {
-            regionProvincias.textContent =
-              "En esta región vivimos, ¡viajemos a conocer otras!";
-          }
+          const provNombres = regiones[region]
+            .map((pid) => provincias[pid])
+            .join(", ");
+          regionTitle.textContent = region;
+          regionProvincias.textContent = provNombres;
+          regionBox.style.display = "block";
         }
       });
 
@@ -114,15 +129,15 @@ document.getElementById("mapa").addEventListener("load", function () {
         if (region && !progreso[region]) {
           regiones[region].forEach((provId) => {
             const p = svgDoc.getElementById(provId);
-            if (p) p.setAttribute("fill", p.dataset.originalColor || "#6f9c76");
+            if (p) p.setAttribute("fill", p.dataset.originalColor || "#6f9c76", opacity = "1" );
           });
         }
         regionBox.style.display = "none";
       });
 
       el.addEventListener("click", () => {
-        // Solo permitir abrir el menú si NO es Centro
-        if (region && region !== "Centro") {
+        
+        if (region) {
           const datosBox = document.querySelector(".region-datos");
           if (datosBox) {
             datosBox.querySelector(
@@ -206,7 +221,6 @@ document.getElementById("mapa").addEventListener("load", function () {
     }
   });
 
-  // --- Mueve esta función afuera del forEach ---
   function chequeartemasVisitados(region) {
     const visitados = obtenerTemasVisitados(region);
     const btnJugar = document.querySelector(".btn-jugar");
@@ -282,7 +296,7 @@ function desbloquearRegiones(regionCompletada) {
     Noreste: ["Cuyo"],
     Cuyo: ["Patagonia", "Noroeste"],
     Noroeste: [],
-    Patagonia: [],
+    Patagonia: ["Centro"],
     Centro: [],
   };
 
@@ -293,7 +307,7 @@ function desbloquearRegiones(regionCompletada) {
 
   localStorage.setItem("estadoRegiones", JSON.stringify(estadoRegiones));
 }
-
+// Guardar y obtener temas visitados
 function marcarTemaVisitado(tema, region) {
   const key = `temasVisitados_${region}`;
   let temasVisitados = JSON.parse(localStorage.getItem(key)) || [];
@@ -307,7 +321,7 @@ function obtenerTemasVisitados(region) {
   const key = `temasVisitados_${region}`;
   return JSON.parse(localStorage.getItem(key)) || [];
 }
-//Debo desbloquear el boton jugar luego de ver todas las infos
+
 
 // Marcar región como completa y pintarla de verde
 function marcarRegionComoCompleta(region, svgDoc, regiones) {
@@ -318,7 +332,7 @@ function marcarRegionComoCompleta(region, svgDoc, regiones) {
 }
 
 // Mostrar mensaje de felicitación si todas las regiones están completas
-function verificarMapaCompleto(regiones, svgDoc) {
+function verificarMapaCompleto(regiones, _svgDoc) {
   const progreso = obtenerProgreso();
   const regionesCompletas = Object.keys(regiones).every(
     (r) => progreso[r] === true

@@ -300,30 +300,31 @@ function irAlSiguienteJuego() {
 
   // Lista de minijuegos por región
   const juegosPorRegion = {
-    Noroeste: ["/puzzzlee", "../encontrar/encontrar"],
-    Noreste: ["/puzzzlee", "../encontrar/encontrar"],
-    Cuyo: ["/puzzzlee", "../encontrar/encontrar"],
-    Centro: ["/puzzzlee", "../encontrar/encontrar"],
-    Patagonia: ["/puzzzlee", "../encontrar/encontrar"],
+    Noroeste: ["../mapa-y-puzzle/puzzzlee", "../encontrar/encontrar"],
+    Noreste: ["../mapa-y-puzzle/puzzzlee", "../encontrar/encontrar"],
+    Cuyo: ["../mapa-y-puzzle/puzzzlee", "../encontrar/encontrar"],
+    Centro: ["../mapa-y-puzzle/puzzzlee", "../encontrar/encontrar"],
+    Patagonia: ["../mapa-y-puzzle/puzzzlee", "../encontrar/encontrar"],
   };
-  // Guardar progreso de minijuegos jugados
-  const actual = window.location.pathname
-    .split("/")
-    .pop()
-    .replace(/\.html?$/, "");
-  const completados =
-    JSON.parse(localStorage.getItem("juegosCompletados")) || {};
+
+  const normalize = (s) =>
+    String(s || "")
+      .replace(/\\/g, "/")
+      .replace(/.*\//, "")
+      .replace(/\.html?$/, "");
+
+  const actual = normalize(window.location.pathname.split("/").pop());
+  const completados = JSON.parse(localStorage.getItem("juegosCompletados")) || {};
   const jugados = completados[region] || [];
+
   if (!jugados.includes(actual)) {
     jugados.push(actual);
     completados[region] = jugados;
     localStorage.setItem("juegosCompletados", JSON.stringify(completados));
   }
 
-  const juegos = juegosPorRegion[region] || [];
-  const juegosRestantes = juegos.filter(
-    (j) => !jugados.includes(j.replace(/.*\//, ""))
-  );
+  const juegos = (juegosPorRegion[region] || []).map(normalize);
+  const juegosRestantes = juegos.filter((j) => !jugados.includes(j));
 
   if (juegosRestantes.length > 0) {
     // Ir al siguiente minijuego pendiente
@@ -346,9 +347,7 @@ function irAlSiguienteJuego() {
 
     }
     // Desbloquear nuevas regiones
-    if (typeof desbloquearRegiones === "function") {
-      desbloquearRegiones(region);
-    }
+    if (typeof desbloquearRegiones === "function") desbloquearRegiones(region);
     window.location.href = "./mapa-test.html";
   }
 }

@@ -4,39 +4,46 @@ const infoPorRegion = {
     texto: "Aquí hay danzas como la chacarera, zamba, gato, etc.",
     srcs: [
       "./imgs/NORTE(LUCIANA)/DANZAS/uno.jpg",
-      "./imgs/NORTE(LUCIANA)/DANZAS/zamba_dos.jpg",
+      "./videos/danzas/noreste.mp4",
       "./imgs/NORTE(LUCIANA)/DANZAS/gato_tres.jpg",
     ],
   },
+
   Patagonia: {
     titulo: "Danzas de la Patagonia",
-    texto: "Aquí hay guanacos, ñandúes, etc.",
+    texto: "Aquí hay danzas como la pericona, el chamamé patagónico, el chorrillero, etc.",
     srcs: [
-      "./imgs/PATAGONIA/FAUNA/ejemplo1.jpg",
-      "./imgs/PATAGONIA/FAUNA/ejemplo2.jpg",
+      "./imgs/patagonia(SOFÍA-y-CANDELA)/DANZAS/pericona.jpg",
+      "./videos/danzas/patagonia.mp4",
+      "./imgs/patagonia(SOFÍA-y-CANDELA)/DANZAS/chorrillero.jpg",
     ],
     audio: "./audios/fyf/patagonia.mp3",
   },
   Cuyo: {
     titulo: "Danzas de Cuyo",
-    texto: "Aquí hay cactus, cóndores, etc.",
+    texto: "Aquí hay danzas como la zamba cuyana, la cueca cuyana, escondido, etc.",
     srcs: [
-      "./imgs/CUYO/FAUNA/ejemplo1.jpg",
-      "./imgs/CUYO/FAUNA/ejemplo2.jpg",
-      "./imgs/CUYO/FAUNA/ejemplo3.jpg",
+      "./imgs/cuyo(JULIANA)/DANZAS/zamba.jpg",
+      "./videos/danzas/cueca-Cuyana.mp4",
+      "./imgs/cuyo(JULIANA)/DANZAS/Escondido.jpg",
     ],
   },
   Centro: {
     titulo: "Danzas del Centro",
-    texto: "Info del centro...",
-    srcs: [],
+    texto: "Aquí hay danzas como el gato, chamamé, la ranchera, etc.",
+    srcs: [
+      "./imgs/centro(AGUSTINA)/DANZAS/gato.jpg",
+      "./videos/danzas/.mp4",
+      "./imgs/centro(AGUSTINA)/DANZAS/ranchera.jpeg",
+    ],
   },
   Noroeste: {
     titulo: "Danzas del Noroeste",
-    texto: "Aquí hay alpacas, vicuñas, etc.",
+    texto: "Aquí hay danzas como la cueca, carnavalito, etc.",
     srcs: [
       "./imgs/NORTE(LUCIANA)/DANZAS/esta-uno.jpeg",
-      "./imgs/NORTE(LUCIANA)/DANZAS/esta-dos.jpeg",
+      "/videos/danzas/carnavalito.mp4",
+      "./imgs/NORTE(LUCIANA)/DANZAS/esta-tres.jpeg",
     ],
   },
 };
@@ -51,10 +58,10 @@ if (tituloDiv) tituloDiv.innerHTML = `<h1>${info.titulo}</h1>`;
 const infoP = document.getElementById("info");
 if (infoP) infoP.textContent = info.texto;
 
-// Slider: asignar imágenes (los ids en tu HTML: imagen-uno, imagen-dos, imagen-tres)
+// Slider: asignar imágenes (los ids en tu HTML: imagen-uno, video, imagen-tres)
 const slideImgs = [
   document.getElementById("imagen-uno"),
-  document.getElementById("imagen-dos"),
+  document.getElementById("slide2").querySelector("video"),
   document.getElementById("imagen-tres"),
 ];
 
@@ -63,7 +70,11 @@ slideImgs.forEach((imgEl, idx) => {
   if (!imgEl) return;
   const li = imgEl.closest("li");
   if (srcs[idx]) {
-    imgEl.src = srcs[idx];
+    if (imgEl.tagName === "VIDEO") {
+      imgEl.src = srcs[idx];
+    } else {
+      imgEl.src = srcs[idx];
+    }
     if (li) li.style.display = ""; // asegurar que se muestre
   } else {
     // no hay imagen: ocultar la diapositiva
@@ -71,23 +82,16 @@ slideImgs.forEach((imgEl, idx) => {
   }
 });
 
-// audio (si lo tuvieras)
+// audio (por hacer)
 if (info.audio) {
   // ejemplo: colocar atributo data-audio o crear un reproductor
   // document.getElementById("audio-btn").dataset.src = info.audio;
 }
 
-// volver al mapa: sumar 1 a "temas visitados" local (si querés)
+// volver al mapa: sumar 1 a "temas visitados" localStorage
 const btnVolver = document.getElementById("btn-volver");
 if (btnVolver) {
   btnVolver.onclick = () => {
-    // opcional: marcar tema visitado en localStorage
-    // const key = `temasVisitados_${region}`;
-    // let visitados = JSON.parse(localStorage.getItem(key)) || [];
-    // if (!visitados.includes("DANZAS")) {
-    //   visitados.push("DANZAS");
-    //   localStorage.setItem(key, JSON.stringify(visitados));
-    // }
     let exp = parseInt(localStorage.getItem("exp")) || 0;
     exp += 1;
     localStorage.setItem("exp", exp);

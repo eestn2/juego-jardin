@@ -1,7 +1,8 @@
 const infoPorRegion = {
   Noreste: {
     titulo: "Turismo del Noreste",
-    texto: "Aquí hay un reconocido tren llamado 'Tren del cielo', que atraviesa paisajes impresionantes.",
+    texto:
+      "Aquí hay un reconocido tren llamado 'Tren del cielo', que atraviesa paisajes impresionantes.",
     srcs: [
       "./imgs/NORTE(LUCIANA)/TURISMO/esta-uno.jpeg",
       "./imgs/NORTE(LUCIANA)/TURISMO/esta-dos.jpeg",
@@ -9,34 +10,43 @@ const infoPorRegion = {
     ],
   },
   Patagonia: {
-    titulo: "Flora y Fauna de la Patagonia",
-    texto: "Aquí hay guanacos, ñandúes, etc.",
+    titulo: "Turismo de la Patagonia",
+    texto:
+      "Aquí está el parque nacional Huapi, bariloche y su Centro Cívico, etc.",
     srcs: [
-      "./imgs/PATAGONIA/FAUNA/ejemplo1.jpg",
-      "./imgs/PATAGONIA/FAUNA/ejemplo2.jpg",
+      "./imgs/patagonia(SOFIA-y-CANDELA)/TURISMO/este.png",
+      "./imgs/patagonia(SOFIA-y-CANDELA)/TURISMO/esti.png",
+      "./imgs/patagonia(SOFIA-y-CANDELA)/TURISMO/esta.png",
     ],
     audio: "./audios/fyf/patagonia.mp3",
   },
   Cuyo: {
-    titulo: "Flora y Fauna de Cuyo",
-    texto: "Aquí hay cactus, cóndores, etc.",
+    titulo: "Turismo de Cuyo",
+    texto:
+      "Aquí se destaca principalmente el enoturismo (rutas del vino, visitas a bodegas) y el turismo de aventura como rafting, rappel y cabalgatas.",
     srcs: [
-      "./imgs/CUYO/FAUNA/ejemplo1.jpg",
-      "./imgs/CUYO/FAUNA/ejemplo2.jpg",
-      "./imgs/CUYO/FAUNA/ejemplo3.jpg",
+      "./imgs/cuyo(JULIANA)/TURISMO/enoturismo.jpg",
+      "./imgs/cuyo(JULIANA)/TURISMO/rafting.jpg",
+      "./imgs/cuyo(JULIANA)/TURISMO/cabalgatas.jpg",
     ],
   },
   Centro: {
-    titulo: "Flora y Fauna del Centro",
-    texto: "Info del centro...",
-    srcs: [],
+    titulo: "Turismo del Centro",
+    texto:
+      "Aquí encontramos el Parque Nacional Iguazú, en Córdoba ofrecen paseos por las Sierras o conocer el pajaro cucú, en VCP",
+    srcs: [
+      "./imgs/centro(AGUSTINA)/TURISMO/PARQUENACIONAL/parque-Iguazu.jpg",
+      "./imgs/centro(AGUSTINA)/TURISMO/treking.jpg",
+      "./imgs/centro(AGUSTINA)/TURISMO/cucu.jpg",
+    ],
   },
   Noroeste: {
-    titulo: "Flora y Fauna del Noroeste",
-    texto: "Aquí hay alpacas, vicuñas, etc.",
+    titulo: "Turismo del Noroeste",
+    texto: "Aquí se ofrece un turismo con atractivos como la Quebrada de Humahuaca (Jujuy) y la ciudad de Salta",
     srcs: [
-      "./imgs/NORTE(LUCIANA)/TURISMO/esta-uno.jpeg",
-      "./imgs/NORTE(LUCIANA)/TURISMO/esta-dos.jpeg",
+      "./imgs/NORTE(LUCIANA)/TURISMO/humahuaca.jpg",
+      "./imgs/NORTE(LUCIANA)/TURISMO/humahuaca2.jpg",
+      "./imgs/NORTE(LUCIANA)/TURISMO/salta.jpg"
     ],
   },
 };

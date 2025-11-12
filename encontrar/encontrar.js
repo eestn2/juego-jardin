@@ -89,36 +89,41 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Lista de minijuegos por región
     const juegosPorRegion = {
-      Noroeste: ["../mapa-y-puzzle/puzzzlee", "/encontrar"],
-      Noreste: ["../mapa-y-puzzle/puzzzlee", "/encontrar"],
-      Cuyo: ["../mapa-y-puzzle/puzzzlee", "/encontrar"],
-      Centro: ["../mapa-y-puzzle/puzzzlee", "/encontrar"],
-      Patagonia: ["../mapa-y-puzzle/puzzzlee", "/encontrar"],
+      Noroeste: ["../mapa-y-puzzle/puzzzlee", "../encontrar/encontrar"],
+      Noreste: ["../mapa-y-puzzle/puzzzlee", "../encontrar/encontrar"],
+      Cuyo: ["../mapa-y-puzzle/puzzzlee", "../encontrar/encontrar"],
+      Centro: ["../mapa-y-puzzle/puzzzlee", "../encontrar/encontrar"],
+      Patagonia: ["../mapa-y-puzzle/puzzzlee", "../encontrar/encontrar"],
     };
 
-    // Guardar progreso de minijuegos jugados
-    const actual = window.location.pathname
-      .split("/")
-      .pop()
-      .replace(/\.html?$/, "");
+    const normalize = (s) =>
+      String(s || "")
+        .replace(/\\/g, "/")
+        .replace(/.*\//, "") // keep basename
+        .replace(/\.html?$/, ""); // remove extension
+
+    const actual = normalize(window.location.pathname.split("/").pop());
     const completados =
       JSON.parse(localStorage.getItem("juegosCompletados")) || {};
     const jugados = completados[region] || [];
+
     if (!jugados.includes(actual)) {
       jugados.push(actual);
       completados[region] = jugados;
       localStorage.setItem("juegosCompletados", JSON.stringify(completados));
     }
 
-    const juegos = juegosPorRegion[region] || [];
-    const juegosRestantes = juegos.filter(
-      (j) => !jugados.includes(j.replace(/.*\//, ""))
-    );
+    // use both paths and normalized names
+    const juegosPaths = juegosPorRegion[region] || [];
+    const juegosNorm = juegosPaths.map(normalize);
+    const juegosRestantesNorm = juegosNorm.filter((j) => !jugados.includes(j));
 
-    if (juegosRestantes.length > 0) {
-      // Ir al siguiente minijuego pendiente
-      const siguienteJuego = juegosRestantes[0];
-      window.location.href = `${siguienteJuego}.html?region=${encodeURIComponent(
+    if (juegosRestantesNorm.length > 0) {
+      // find the index in the original paths for the next remaining game
+      const nextNorm = juegosRestantesNorm[0];
+      const idx = juegosNorm.indexOf(nextNorm);
+      const siguientePath = juegosPaths[idx]; // keeps ../mapa-y-puzzle/ prefix
+      window.location.href = `${siguientePath}.html?region=${encodeURIComponent(
         region
       )}`;
     } else {
@@ -132,8 +137,6 @@ document.addEventListener("DOMContentLoaded", () => {
         if (isNaN(monedas)) monedas = 15;
         monedas = Math.max(0, monedas - 3);
         localStorage.setItem("monedas", monedas);
-
-       
       }
 
       window.location.href = "../mapa-y-puzzle/mapa-test.html";
@@ -159,7 +162,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     localStorage.setItem("estadoRegiones", JSON.stringify(estadoRegiones));
   }
-
 
   // Reemplaza el onclick del botón continuar:
   document.getElementById("btnContinuar").onclick =

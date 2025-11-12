@@ -1,7 +1,7 @@
 const infoPorRegion = {
   Noreste: {
     titulo: "Pueblos orignarios del Noreste",
-    texto: "Aquí se pueden encontrar Guaraníes, Tobas (Qom), Wichís entre muchos otros ",
+    texto: "Aquí se pueden encontrar Guaraníes, Tobas (Qom), Wichís, entre muchos otros ",
     srcs: [
       "./imgs/NORTE(LUCIANA)/PUEBLOS-ORIGINARIOS/Guarani.jpg",
       "./imgs/NORTE(LUCIANA)/PUEBLOS-ORIGINARIOS/tobas.jpg",
@@ -10,33 +10,39 @@ const infoPorRegion = {
   },
   Patagonia: {
     titulo: "Pueblos orignarios de la Patagonia",
-    texto: "Aquí hay guanacos, ñandúes, etc.",
+    texto: "Aquí están los originarios tehuelches",
     srcs: [
-      "./imgs/PATAGONIA/FAUNA/ejemplo1.jpg",
-      "./imgs/PATAGONIA/FAUNA/ejemplo2.jpg",
+      "./imgs/patagonia(SOFIA-y-CANDELA)/PUEBLOS-ORIGINARIOS/tehuelches.png",
+      "./imgs/patagonia(SOFIA-y-CANDELA)/PUEBLOS-ORIGINARIOS/tehuelche2.png",
+      "./imgs/patagonia(SOFIA-y-CANDELA)/PUEBLOS-ORIGINARIOS/tehuelches3.png"
     ],
     audio: "./audios/fyf/patagonia.mp3",
   },
   Cuyo: {
     titulo: "Pueblos orignarios de Cuyo",
-    texto: "Aquí hay cactus, cóndores, etc.",
+    texto: "Aquí hay diaguitas, capayanes, pehuenches etc.",
     srcs: [
-      "./imgs/CUYO/FAUNA/ejemplo1.jpg",
-      "./imgs/CUYO/FAUNA/ejemplo2.jpg",
-      "./imgs/CUYO/FAUNA/ejemplo3.jpg",
+      "./imgs/cuyo(JULIANA)/PUEBLO-ORIGINARIO/diaguitas.png",
+      "./imgs/cuyo(JULIANA)/PUEBLO-ORIGINARIO/capayanes.png",
+      "./imgs/cuyo(JULIANA)/PUEBLO-ORIGINARIO/pehuenches.png",
     ],
   },
   Centro: {
     titulo: "Pueblos orignarios del Centro",
-    texto: "Info del centro...",
-    srcs: [],
+    texto: "Aquí se pueden encontrar comechingones, sanavirones, ranqueles, entre otros ",
+    srcs: [
+      "./imgs/centro(AGUSTINA)/PUEBLOS-ORIGINARIOS/comechingones.jpg",
+      "./imgs/centro(AGUSTINA)/PUEBLOS-ORIGINARIOS/sanavirones.jpg",
+      "./imgs/centro(AGUSTINA)/PUEBLOS-ORIGINARIOS/ranqueles.jpg",
+    ],
   },
   Noroeste: {
     titulo: "Pueblos orignarios del Noroeste",
     texto: "Aquí se pueden encontrar Kollas, Diaguitas y Diaguitas-Calchaquíes entre muchos otros ",
     srcs: [
-      "./imgs/NORTE(LUCIANA)/PUEBLOS-ORIGINARIOS/esta-uno.jpeg",
-      "./imgs/NORTE(LUCIANA)/PUEBLOS-ORIGINARIOS/esta-dos.jpeg",
+      "./imgs/NORTE(LUCIANA)/PUEBLOS-ORIGINARIOS/kollas.jpg",
+      "./imgs/NORTE(LUCIANA)/PUEBLOS-ORIGINARIOS/diaguitas.jpg",
+      "./imgs/NORTE(LUCIANA)/PUEBLOS-ORIGINARIOS/diaguitas2.jpg"
     ],
   },
 };
@@ -68,8 +74,10 @@ slideImgs.forEach((imgEl, idx) => {
   } else {
     // no hay imagen: ocultar la diapositiva
     if (li) li.style.display = "none";
+    
   }
 });
+
 
 // audio (si lo tuvieras)
 if (info.audio) {

@@ -1,7 +1,7 @@
 const infoPorRegion = {
   Noreste: {
     titulo: "Recetas del Noreste",
-    texto: "Aquí hay recetas conocidas como la humita, el tamal, el chipá, etc..",
+    texto: "Aquí hay recetas conocidas como la humita, el tamal, el chipá, etc.",
     srcs: [
       "./imgs/NORTE(LUCIANA)/RECETAS/Humita.jpg",
       "./imgs/NORTE(LUCIANA)/RECETAS/tamales.jpg",
@@ -10,33 +10,39 @@ const infoPorRegion = {
   },
   Patagonia: {
     titulo: "Recetas de la Patagonia",
-    texto: "Aquí hay guanacos, ñandúes, etc.",
+    texto: "Aquí suelen preparar trucha al limón con papines andinos pisados, cordero al asador, curanto, etc.",
     srcs: [
-      "./imgs/PATAGONIA/RECETAS/ejemplo1.jpg",
-      "./imgs/PATAGONIA/RECETAS/ejemplo2.jpg",
+      "./imgs/patagonia(SOFIA-y-CANDELA)/RECETAS/trucha.png",
+      "./imgs/patagonia(SOFIA-y-CANDELA)/RECETAS/cordero.png",
+      "./imgs/patagonia(SOFIA-y-CANDELA)/RECETAS/curanto.png",
     ],
     audio: "./audios/fyf/patagonia.mp3",
   },
   Cuyo: {
     titulo: "Recetas de Cuyo",
-    texto: "Aquí hay cactus, cóndores, etc.",
+    texto: "Aquí se acostumbra a comer Tomaticán Cuyano, Tortitas mendocinas,sancocho de gallina, etc.",
     srcs: [
-      "./imgs/CUYO/RECETAS/ejemplo1.jpg",
-      "./imgs/CUYO/RECETAS/ejemplo2.jpg",
-      "./imgs/CUYO/RECETAS/ejemplo3.jpg",
+      "./imgs/cuyo(JULIANA)/RECETAS/tomatican.jpg",
+      "./imgs/cuyo(JULIANA)/RECETAS/tortitas.jpg",
+      "./imgs/cuyo(JULIANA)/RECETAS/sancocho.jpg",
     ],
   },
   Centro: {
     titulo: "Recetas del Centro",
-    texto: "Info del centro...",
-    srcs: [],
+    texto: "Las recetas características de esta región son el asado por la influencia ganadera, pastas, milanesas y empanadas debido a la inmigración italiana y española",
+    srcs: [
+      "./imgs/centro(AGUSTINA)/RECETAS/asado.jpg",
+      "./imgs/centro(AGUSTINA)/RECETAS/pastas.jpg",
+      "./imgs/centro(AGUSTINA)/RECETAS/milanesas-empanadas.jpg",
+    ],
   },
   Noroeste: {
     titulo: "Recetas del Noroeste",
-    texto: "Aquí hay alpacas, vicuñas, etc.",
+    texto: "Aquí se suele preparar empanadas cortadas a cuchillo con papa y verdeo, carbonada, pastel de Cambray",
     srcs: [
-      "./imgs/NORTE(LUCIANA)/RECETAS/esta-uno.jpeg",
-      "./imgs/NORTE(LUCIANA)/RECETAS/esta-dos.jpeg",
+      "./imgs/NORTE(LUCIANA)/RECETAS/empanada.jpg",
+      "./imgs/NORTE(LUCIANA)/RECETAS/carbonada.jpg",
+      "./imgs/NORTE(LUCIANA)/RECETAS/pastel.jpg"
     ],
   },
 };

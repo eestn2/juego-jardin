@@ -10,33 +10,39 @@ const infoPorRegion = {
   },
   Patagonia: {
     titulo: "Paisajes de la Patagonia",
-    texto: "Aquí hay guanacos, ñandúes, etc.",
+    texto: "Aquí hay paisajes que incluyen la Cordillera de los Andes con sus montañas, glaciares y lagos; la estepa patagónica, caracterizada por su aridez y vientos; y la costa atlántica, con playas y acantilados.",
     srcs: [
-      "./imgs/PATAGONIA/FAUNA/ejemplo1.jpg",
-      "./imgs/PATAGONIA/FAUNA/ejemplo2.jpg",
+      "./imgs/patagonia(SOFÍA-y-CANDELA)/PAISAJES/esta.png",
+      "./imgs/patagonia(SOFÍA-y-CANDELA)/PAISAJES/este.png",
+      "./imgs/patagonia(SOFÍA-y-CANDELA)/PAISAJES/esti.png",
     ],
     audio: "./audios/fyf/patagonia.mp3",
   },
   Cuyo: {
     titulo: "Paisajes de Cuyo",
-    texto: "Aquí hay cactus, cóndores, etc.",
+    texto: "Aquí hay paisajes como la Cordillera de los Andes, con picos como el Aconcagua, y zonas áridas o semidesérticas.",
     srcs: [
-      "./imgs/CUYO/FAUNA/ejemplo1.jpg",
-      "./imgs/CUYO/FAUNA/ejemplo2.jpg",
-      "./imgs/CUYO/FAUNA/ejemplo3.jpg",
+      "./imgs/cuyo(JULIANA)/PAISAJE/esta.png",
+      "./imgs/cuyo(JULIANA)/PAISAJE/este.png",
+      "./imgs/cuyo(JULIANA)/PAISAJE/esti.png",
     ],
   },
   Centro: {
     titulo: "Paisajes del Centro",
-    texto: "Info del centro...",
-    srcs: [],
+    texto: "Aquí hay paisajes como la llanura pampeana, las Sierras Pampeanas, y el paisaje de la Mesopotamia",
+    srcs: [
+      "./imgs/centro(AGUSTINA)/PAISAJES/llanura.jpg",
+      "./imgs/centro(AGUSTINA)/PAISAJES/sierras.jpg",
+      "./imgs/centro(AGUSTINA)/PAISAJES/mesopotamia.jpg",
+    ],
   },
   Noroeste: {
     titulo: "Paisajes del Noroeste",
-    texto: "Aquí hay alpacas, vicuñas, etc.",
+    texto: "Aquí hay paisajes caracteristicos como el contraste entre la alta montaña (Puna) y las zonas húmedas y selváticas (Yungas).",
     srcs: [
       "./imgs/NORTE(LUCIANA)/PAISAJES/ESTA-CUATRO.jpeg",
       "./imgs/NORTE(LUCIANA)/PAISAJES/esta-cinco.jpeg",
+      "./imgs/NORTE(LUCIANA)/PAISAJES/estaseis.jpeg"
     ],
   },
 };
@@ -73,7 +79,7 @@ slideImgs.forEach((imgEl, idx) => {
 
 // audio (si lo tuvieras)
 if (info.audio) {
-  // ejemplo: colocar atributo data-audio o crear un reproductor
+  // est colocar atributo data-audio o crear un reproductor
   // document.getElementById("audio-btn").dataset.src = info.audio;
 }
 

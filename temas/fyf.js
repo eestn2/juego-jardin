@@ -1,7 +1,7 @@
 const infoPorRegion = {
   Noreste: {
     titulo: "Flora y Fauna del Noreste",
-    texto: "Aquí hay yaguareté, yacarés, etc.",
+    texto: "Aquí hay una amplia variedad de animales, como el yaguarete, llamas, el osezno de anteojos, etc.",
     srcs: [
       "./imgs/NORTE(LUCIANA)/FAUNA-Y-FLORA/esta-uno.jpeg",
       "./imgs/NORTE(LUCIANA)/FAUNA-Y-FLORA/esta-dos.jpeg",
@@ -10,33 +10,40 @@ const infoPorRegion = {
   },
   Patagonia: {
     titulo: "Flora y Fauna de la Patagonia",
-    texto: "Aquí hay guanacos, ñandúes, etc.",
+    texto: "Aquí hay liebres, plantas caracteristicas como la amancay, pumas, etc.",
     srcs: [
-      "./imgs/PATAGONIA/FAUNA/ejemplo1.jpg",
-      "./imgs/PATAGONIA/FAUNA/ejemplo2.jpg",
+      "./imgs/patagonia(SOFIA-y-CANDELA)/FAUNA-Y-FLORA/liebre.png",
+      "./imgs/patagonia(SOFIA-y-CANDELA)/FAUNA-Y-FLORA/planta-amancay.png",
+      "./imgs/patagonia(SOFIA-y-CANDELA)/FAUNA-Y-FLORA/puma.png",
+
     ],
     audio: "./audios/fyf/patagonia.mp3",
   },
   Cuyo: {
     titulo: "Flora y Fauna de Cuyo",
-    texto: "Aquí hay cactus, cóndores, etc.",
+    texto: "Aquí hay cactus, especies como guanacos, tuco-tuco, etc.",
     srcs: [
-      "./imgs/CUYO/FAUNA/ejemplo1.jpg",
-      "./imgs/CUYO/FAUNA/ejemplo2.jpg",
-      "./imgs/CUYO/FAUNA/ejemplo3.jpg",
+      "./imgs/cuyo(JULIANA)/FAUNA-Y-FLORA/flora.png",
+      "./imgs/cuyo(JULIANA)/FAUNA-Y-FLORA/guanaco.jpg",
+      "./imgs/cuyo(JULIANA)/FAUNA-Y-FLORA/tuco-tuco.jpg",
     ],
   },
   Centro: {
     titulo: "Flora y Fauna del Centro",
-    texto: "Info del centro...",
-    srcs: [],
+    texto: "Aquí encontraremos a animales como el coatí, el aguará guazú, el tuyuyu coral, etc.",
+    srcs: [
+      "./imgs/centro(AGUSTINA)/FAUNA-Y-FLORA/FAUNA/COATIS.jpg",
+      "./imgs/centro(AGUSTINA)/FAUNA-Y-FLORA/FAUNA/aguara-guazu.jpg",
+      "./imgs/centro(AGUSTINA)/FAUNA-Y-FLORA/FAUNA/Tuyuyu-coral.jpg",
+    ],
   },
   Noroeste: {
     titulo: "Flora y Fauna del Noroeste",
-    texto: "Aquí hay alpacas, vicuñas, etc.",
+    texto: "Aquí hay llamas, vicuñas, el cóndor andino etc.",
     srcs: [
-      "./imgs/NORTE(LUCIANA)/FAUNA-Y-FLORA/esta-uno.jpeg",
-      "./imgs/NORTE(LUCIANA)/FAUNA-Y-FLORA/esta-dos.jpeg",
+      "./imgs/NORTE(LUCIANA)/FAUNA-Y-FLORA/llama1.jpeg",
+      "./imgs/NORTE(LUCIANA)/FAUNA-Y-FLORA/vicunia.jpg",
+      "./imgs/NORTE(LUCIANA)/FAUNA-Y-FLORA/descarga.jpg"
     ],
   },
 };
