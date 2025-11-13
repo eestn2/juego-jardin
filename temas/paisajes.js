@@ -12,9 +12,9 @@ const infoPorRegion = {
     titulo: "Paisajes de la Patagonia",
     texto: "Aquí hay paisajes que incluyen la Cordillera de los Andes con sus montañas, glaciares y lagos; la estepa patagónica, caracterizada por su aridez y vientos; y la costa atlántica, con playas y acantilados.",
     srcs: [
-      "./imgs/patagonia(SOFÍA-y-CANDELA)/PAISAJES/esta.png",
-      "./imgs/patagonia(SOFÍA-y-CANDELA)/PAISAJES/este.png",
-      "./imgs/patagonia(SOFÍA-y-CANDELA)/PAISAJES/esti.png",
+      "./imgs/patagonia(SOFIA-y-CANDELA)/PAISAJES/esta.png",
+      "./imgs/patagonia(SOFIA-y-CANDELA)/PAISAJES/este.png",
+      "./imgs/patagonia(SOFIA-y-CANDELA)/PAISAJES/esti.png",
     ],
     audio: "./audios/fyf/patagonia.mp3",
   },

@@ -87,61 +87,69 @@ document.addEventListener("DOMContentLoaded", () => {
     const params = new URLSearchParams(window.location.search);
     const region = params.get("region");
 
-    // Lista de minijuegos por región
-    const juegosPorRegion = {
-      Noroeste: ["../mapa-y-puzzle/puzzzlee", "../encontrar/encontrar"],
-      Noreste: ["../mapa-y-puzzle/puzzzlee", "../encontrar/encontrar"],
-      Cuyo: ["../mapa-y-puzzle/puzzzlee", "../encontrar/encontrar"],
-      Centro: ["../mapa-y-puzzle/puzzzlee", "../encontrar/encontrar"],
-      Patagonia: ["../mapa-y-puzzle/puzzzlee", "../encontrar/encontrar"],
-    };
+  // Lista de minijuegos por región
+  const juegosPorRegion = {
+    Noroeste: ["../mapa-y-puzzle/puzzzlee", "../encontrar/encontrar"],
+    Noreste: ["../mapa-y-puzzle/puzzzlee", "../encontrar/encontrar"],
+    Cuyo: ["../mapa-y-puzzle/puzzzlee", "../encontrar/encontrar"],
+    Centro: ["../mapa-y-puzzle/puzzzlee", "../encontrar/encontrar"],
+    Patagonia: ["../mapa-y-puzzle/puzzzlee", "../encontrar/encontrar"],
+  };
 
-    const normalize = (s) =>
-      String(s || "")
-        .replace(/\\/g, "/")
-        .replace(/.*\//, "") // keep basename
-        .replace(/\.html?$/, ""); // remove extension
+  const normalize = (s) =>
+    String(s || "")
+      .replace(/\\/g, "/")
+      .replace(/.*\//, "")
+      .replace(/\.html?$/, "");
 
-    const actual = normalize(window.location.pathname.split("/").pop());
-    const completados =
-      JSON.parse(localStorage.getItem("juegosCompletados")) || {};
-    const jugados = completados[region] || [];
+  const actual = normalize(window.location.pathname.split("/").pop());
+  const completados =
+    JSON.parse(localStorage.getItem("juegosCompletados")) || {};
+  const jugados = completados[region] || [];
 
-    if (!jugados.includes(actual)) {
-      jugados.push(actual);
-      completados[region] = jugados;
-      localStorage.setItem("juegosCompletados", JSON.stringify(completados));
-    }
-
-    // use both paths and normalized names
-    const juegosPaths = juegosPorRegion[region] || [];
-    const juegosNorm = juegosPaths.map(normalize);
-    const juegosRestantesNorm = juegosNorm.filter((j) => !jugados.includes(j));
-
-    if (juegosRestantesNorm.length > 0) {
-      // find the index in the original paths for the next remaining game
-      const nextNorm = juegosRestantesNorm[0];
-      const idx = juegosNorm.indexOf(nextNorm);
-      const siguientePath = juegosPaths[idx]; // keeps ../mapa-y-puzzle/ prefix
-      window.location.href = `${siguientePath}.html?region=${encodeURIComponent(
-        region
-      )}`;
-    } else {
-      // Si era el último, marcar región completada y dar monedas
-      const progreso =
-        JSON.parse(localStorage.getItem("progresoRegiones")) || {};
-      if (!progreso[region]) {
-        progreso[region] = true;
-        localStorage.setItem("progresoRegiones", JSON.stringify(progreso));
-        let monedas = parseInt(localStorage.getItem("monedas"));
-        if (isNaN(monedas)) monedas = 15;
-        monedas = Math.max(0, monedas - 3);
-        localStorage.setItem("monedas", monedas);
-      }
-
-      window.location.href = "../mapa-y-puzzle/mapa-test.html";
-    }
+  if (!jugados.includes(actual)) {
+    jugados.push(actual);
+    completados[region] = jugados;
+    localStorage.setItem("juegosCompletados", JSON.stringify(completados));
   }
+
+  const juegosPaths = juegosPorRegion[region] || [];
+  const juegosNorm = juegosPaths.map(normalize);
+  const juegosRestantesNorm = juegosNorm.filter((j) => !jugados.includes(j));
+
+  if (juegosRestantesNorm.length > 0) {
+    // Ir al siguiente minijuego pendiente
+    const nextNorm = juegosRestantesNorm[0];
+    const idx = juegosNorm.indexOf(nextNorm);
+    const siguientePath = juegosPaths[idx];
+    window.location.href = `${siguientePath}.html?region=${encodeURIComponent(
+      region
+    )}`;
+
+    const target = new URL(
+      siguientePath.endswith(".html") ? siguientePath : `${siguientePath}.html`,
+      window.location.href
+    );
+    target.searchParams.set("region", region);
+    window.location.href =target.href;
+  } else {
+    // Si era el último, marcar región completada, sacar 3 monedas y dar 1 exp
+    let progreso = JSON.parse(localStorage.getItem("progresoRegiones")) || {};
+    if (!progreso[region]) {
+      progreso[region] = true;
+      localStorage.setItem("progresoRegiones", JSON.stringify(progreso));
+
+      // Quitar 3 monedas al completar todos los juegos de la región
+      let monedas = parseInt(localStorage.getItem("monedas")) || 15;
+      monedas = Math.max(0, monedas - 3);
+      localStorage.setItem("monedas", monedas);
+    }
+    // Desbloquear nuevas regiones
+    if (typeof desbloquearRegiones === "function") desbloquearRegiones(region);
+    window.location.href = "../mapa-y-puzzle/mapa-test.html";
+  }
+}
+  
   // Función para desbloquear nuevas regiones
   function desbloquearRegiones(regionCompletada) {
     const estadoRegiones =
@@ -151,7 +159,7 @@ document.addEventListener("DOMContentLoaded", () => {
       Noreste: ["Cuyo"],
       Cuyo: ["Patagonia", "Noroeste"],
       Noroeste: [],
-      Patagonia: [],
+      Patagonia: ["Centro"],
       Centro: [],
     };
 

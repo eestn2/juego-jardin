@@ -13,9 +13,9 @@ const infoPorRegion = {
     titulo: "Danzas de la Patagonia",
     texto: "Aquí hay danzas como la pericona, el chamamé patagónico, el chorrillero, etc.",
     srcs: [
-      "./imgs/patagonia(SOFÍA-y-CANDELA)/DANZAS/pericona.jpg",
+      "./imgs/patagonia(SOFIA-y-CANDELA)/DANZAS/pericona.jpg",
       "./videos/danzas/patagonia.mp4",
-      "./imgs/patagonia(SOFÍA-y-CANDELA)/DANZAS/chorrillero.jpg",
+      "./imgs/patagonia(SOFIA-y-CANDELA)/DANZAS/chorrillero.jpg",
     ],
     audio: "./audios/fyf/patagonia.mp3",
   },
@@ -33,7 +33,7 @@ const infoPorRegion = {
     texto: "Aquí hay danzas como el gato, chamamé, la ranchera, etc.",
     srcs: [
       "./imgs/centro(AGUSTINA)/DANZAS/gato.jpg",
-      "./videos/danzas/.mp4",
+      "./videos/danzas/centro.mp4",
       "./imgs/centro(AGUSTINA)/DANZAS/ranchera.jpeg",
     ],
   },
@@ -41,9 +41,9 @@ const infoPorRegion = {
     titulo: "Danzas del Noroeste",
     texto: "Aquí hay danzas como la cueca, carnavalito, etc.",
     srcs: [
-      "./imgs/NORTE(LUCIANA)/DANZAS/esta-uno.jpeg",
-      "/videos/danzas/carnavalito.mp4",
-      "./imgs/NORTE(LUCIANA)/DANZAS/esta-tres.jpeg",
+      "./imgs/NORTE(LUCIANA)/DANZAS/cueca.jpg",
+      "/videos/danzas/Carnavalito.mp4",
+      "./imgs/NORTE(LUCIANA)/DANZAS/gato-tres.jpg",
     ],
   },
 };

@@ -40,7 +40,7 @@ const infoPorRegion = {
     titulo: "Recetas del Noroeste",
     texto: "Aquí se suele preparar empanadas cortadas a cuchillo con papa y verdeo, carbonada, pastel de Cambray",
     srcs: [
-      "./imgs/NORTE(LUCIANA)/RECETAS/empanada.jpg",
+      "./imgs/NORTE(LUCIANA)/RECETAS/empanadas.jpg",
       "./imgs/NORTE(LUCIANA)/RECETAS/carbonada.jpg",
       "./imgs/NORTE(LUCIANA)/RECETAS/pastel.jpg"
     ],

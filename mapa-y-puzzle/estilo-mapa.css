@@ -72,8 +72,12 @@ body {
 }
 
 object#mapa {
-  height: 300%;
-  display: flex;
+  width: 90vw;
+  max-width: 800px;
+  aspect-ratio: 4/3;
+  height: auto;
+  display: block;
+  margin: 0 auto;
 }
 
 #region-info {
@@ -160,7 +164,8 @@ object#mapa {
   background-color: #c0392b;
 }
 
-@media (max-width: 4670px) {
+
+@media (max-width: 460px) {
   .monedas-y-exp img {
     width: 30px;
   }
@@ -173,6 +178,7 @@ object#mapa {
 
   .region-datos {
     font-size: 0.8rem;
+    width: 80%;
   }
 
   #region-info {
@@ -182,13 +188,9 @@ object#mapa {
   }
 
   object#mapa {
-    width: 250%;
+    width: 90vw;
   }
 
-  .region-datos {
-    width: 80%;
-    font-size: 0.8rem;
-  }
   .region-datos button {
     font-size: 0.7rem;
   }
@@ -294,35 +296,7 @@ object#mapa {
   }
 
   object#mapa {
-    height: 80%;
-  }
-}
-@media (min-width: 2560px) {
-  .monedas-y-exp img {
-    width: 120px;
-  }
-
-  .cantidad-moneda,
-  .cantidad-exp {
-    font-size: 6rem;
-    padding: 10px 30px;
-  }
-
-  .region-datos {
-    font-size: 4.5rem;
-  }
-
-  .region-datos button {
-    font-size: 4rem;
-  }
-
-  #region-info {
-    font-size: 2rem;
-    width: 200vw;
-  }
-
-  object#mapa {
-    height: 80%;
+    width: 60vw;
   }
 }
 
@@ -352,6 +326,41 @@ object#mapa {
   }
 
   object#mapa {
+    width: 60vw;
+  }
+}
+
+@media (min-width: 2560px) {
+  .monedas-y-exp img {
+    width: 120px;
+  }
+
+  .cantidad-moneda,
+  .cantidad-exp {
+    font-size: 6rem;
+    padding: 10px 30px;
+  }
+
+  .region-datos {
+    font-size: 4.5rem;
+  }
+
+  .region-datos button {
+    font-size: 4rem;
+  }
+
+  #region-info {
+    font-size: 2rem;
+    width: 200vw;
+  }
+
+  object#mapa {
     height: 80%;
+  }
+}
+@media (min-width: 1024px) and (max-width: 1366px) {
+  object#mapa {
+    width: 80vw;
+    max-width: 700px;
   }
 }

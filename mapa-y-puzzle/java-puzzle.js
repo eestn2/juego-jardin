@@ -300,11 +300,11 @@ function irAlSiguienteJuego() {
 
   // Lista de minijuegos por región
   const juegosPorRegion = {
-    Noroeste: ["../mapa-y-puzzle/puzzzlee", "../encontrar/encontrar"],
-    Noreste: ["../mapa-y-puzzle/puzzzlee", "../encontrar/encontrar"],
-    Cuyo: ["../mapa-y-puzzle/puzzzlee", "../encontrar/encontrar"],
-    Centro: ["../mapa-y-puzzle/puzzzlee", "../encontrar/encontrar"],
-    Patagonia: ["../mapa-y-puzzle/puzzzlee", "../encontrar/encontrar"],
+    Noroeste: ["./puzzzlee", "../encontrar/encontrar"],
+    Noreste: ["./puzzzlee", "../encontrar/encontrar"],
+    Cuyo: ["./puzzzlee", "../encontrar/encontrar"],
+    Centro: ["./puzzzlee", "../encontrar/encontrar"],
+    Patagonia: ["./puzzzlee", "../encontrar/encontrar"],
   };
 
   const normalize = (s) =>
@@ -314,7 +314,8 @@ function irAlSiguienteJuego() {
       .replace(/\.html?$/, "");
 
   const actual = normalize(window.location.pathname.split("/").pop());
-  const completados = JSON.parse(localStorage.getItem("juegosCompletados")) || {};
+  const completados =
+    JSON.parse(localStorage.getItem("juegosCompletados")) || {};
   const jugados = completados[region] || [];
 
   if (!jugados.includes(actual)) {
@@ -323,15 +324,23 @@ function irAlSiguienteJuego() {
     localStorage.setItem("juegosCompletados", JSON.stringify(completados));
   }
 
-  const juegos = (juegosPorRegion[region] || []).map(normalize);
-  const juegosRestantes = juegos.filter((j) => !jugados.includes(j));
+  const juegosPaths = juegosPorRegion[region] || [];
+  const juegosNorm = juegosPaths.map(normalize);
+  const juegosRestantesNorm = juegosNorm.filter((j) => !jugados.includes(j));
 
-  if (juegosRestantes.length > 0) {
+  if (juegosRestantesNorm.length > 0) {
     // Ir al siguiente minijuego pendiente
-    const siguienteJuego = juegosRestantes[0];
-    window.location.href = `${siguienteJuego}.html?region=${encodeURIComponent(
-      region
-    )}`;
+    const nextNorm = juegosRestantesNorm[0];
+    const idx = juegosNorm.indexOf(nextNorm);
+    const siguientePath = juegosPaths[idx];
+
+    // Remove the duplicate redirect code below - use only this one
+    const target = new URL(
+      siguientePath.endsWith(".html") ? siguientePath : `${siguientePath}.html`,
+      window.location.href
+    );
+    target.searchParams.set("region", region);
+    window.location.href =target.href;
   } else {
     // Si era el último, marcar región completada, sacar 3 monedas y dar 1 exp
     let progreso = JSON.parse(localStorage.getItem("progresoRegiones")) || {};
@@ -339,15 +348,13 @@ function irAlSiguienteJuego() {
       progreso[region] = true;
       localStorage.setItem("progresoRegiones", JSON.stringify(progreso));
 
-      // Quitar 3 monedas al completar todos los juegos de la región
-      let monedas = parseInt(localStorage.getItem("monedas"));
-      if (isNaN(monedas)) monedas = 15;
+      let monedas = parseInt(localStorage.getItem("monedas")) || 15;
       monedas = Math.max(0, monedas - 3);
       localStorage.setItem("monedas", monedas);
-
     }
-    // Desbloquear nuevas regiones
-    if (typeof desbloquearRegiones === "function") desbloquearRegiones(region);
+    if (typeof desbloquearRegiones === "function") {
+      desbloquearRegiones(region);
+    }
     window.location.href = "./mapa-test.html";
   }
 }
@@ -374,7 +381,7 @@ function desbloquearRegiones(regionCompletada) {
     Noreste: ["Cuyo"],
     Cuyo: ["Patagonia", "Noroeste"],
     Noroeste: [],
-    Patagonia: [],
+    Patagonia: ["Centro"],
     Centro: [],
   };
 

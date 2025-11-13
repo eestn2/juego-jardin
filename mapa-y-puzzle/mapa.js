@@ -72,9 +72,7 @@ document.getElementById("mapa").addEventListener("load", function () {
     provs.forEach((id) => (provinciaARegion[id] = region));
   });
 
-
   //Habilitar region centro
-
 
   Object.entries(provincias).forEach(([id]) => {
     const el = svgDoc.getElementById(id);
@@ -83,7 +81,7 @@ document.getElementById("mapa").addEventListener("load", function () {
       const region = provinciaARegion[id];
 
       // Solo deshabilitar regiones no desbloqueadas
-      if (!estadoRegiones[region] ) {
+      if (!estadoRegiones[region]) {
         el.style.opacity = "0.5";
         el.style.pointerEvents = "none";
       }
@@ -107,7 +105,7 @@ document.getElementById("mapa").addEventListener("load", function () {
           regionBox.style.display = "block";
         }
       });
-      
+
       el.addEventListener("mouseover", () => {
         if (region && !progreso[region]) {
           regiones[region].forEach((provId) => {
@@ -129,14 +127,18 @@ document.getElementById("mapa").addEventListener("load", function () {
         if (region && !progreso[region]) {
           regiones[region].forEach((provId) => {
             const p = svgDoc.getElementById(provId);
-            if (p) p.setAttribute("fill", p.dataset.originalColor || "#6f9c76", opacity = "1" );
+            if (p)
+              p.setAttribute(
+                "fill",
+                p.dataset.originalColor || "#6f9c76",
+                (opacity = "1")
+              );
           });
         }
         regionBox.style.display = "none";
       });
 
       el.addEventListener("click", () => {
-        
         if (region) {
           const datosBox = document.querySelector(".region-datos");
           if (datosBox) {
@@ -166,7 +168,7 @@ document.getElementById("mapa").addEventListener("load", function () {
                   marcarTemaVisitado(tema, region);
                   btn.disabled = true;
                   chequeartemasVisitados(region);
-                  window.location.href = `../temas/${tema}.html?region=${region}`,
+                  (window.location.href = `../temas/${tema}.html?region=${region}`),
                     "_blank";
                 };
                 // Verificar si el tema ya fue visitado
@@ -189,7 +191,6 @@ document.getElementById("mapa").addEventListener("load", function () {
             if (btnJugar) {
               btnJugar.disabled = true; // Deshabilitado por defecto
               btnJugar.setAttribute("style", "background-color: red");
-
               if (obtenerTemasVisitados(region).length >= 6) {
                 btnJugar.disabled = false;
                 btnJugar.setAttribute("style", "");
@@ -252,14 +253,12 @@ function guardarProgreso(progreso) {
   localStorage.setItem("progresoRegiones", JSON.stringify(progreso));
 }
 
-//CAMBIAR ESTO A EXP
 function agregarExp(cantidadexp) {
   let experiencia = parseInt(localStorage.getItem("exp")) || 0;
   experiencia += cantidadexp; // Sumar la cantidad recibida
   localStorage.setItem("exp", experiencia);
   actualizarContadorExp();
 }
-//AGREGAR ESTO Y MODIFICAR SI ES NECESARIO
 
 function actualizarContadorExp() {
   const contadorExp = document.getElementById("contador-exp");
@@ -322,12 +321,11 @@ function obtenerTemasVisitados(region) {
   return JSON.parse(localStorage.getItem(key)) || [];
 }
 
-
 // Marcar región como completa y pintarla de verde
 function marcarRegionComoCompleta(region, svgDoc, regiones) {
   regiones[region].forEach((provId) => {
     const p = svgDoc.getElementById(provId);
-    if (p) p.setAttribute("fill", "green");
+    if (p) p.setAttribute("fill", "green", (opacity = "1"));
   });
 }
 
@@ -370,10 +368,7 @@ document.addEventListener("DOMContentLoaded", () => {
         localStorage.removeItem("temasVisitados_Patagonia");
         localStorage.removeItem("temasVisitados_Centro");
         localStorage.removeItem("exp");
-        localStorage.setItem(
-          "regionesDesbloqueadas",
-          JSON.stringify(["Centro"])
-        );
+        localStorage.setItem("regionesDesbloqueadas");
         window.location.reload();
       }
     });
@@ -402,19 +397,25 @@ document.addEventListener("DOMContentLoaded", () => {
     mostrarContenedor(!isOpen);
   }
 
-  if (iconMoneda) iconMoneda.addEventListener("click", (e) => {
-    e.stopPropagation();
-    toggleContenedor();
-    
-    contenedorInfo.querySelector("strong").textContent = `Monedas`;
-    contenedorInfo.querySelector("span").textContent = `Se utilizan para viajar a otras regiones`;
-  });
-  if (iconExp) iconExp.addEventListener("click", (e) => {
-    e.stopPropagation();
-    toggleContenedor();
-    contenedorInfo.querySelector("strong").textContent = `Experiencia`;
-    contenedorInfo.querySelector("span").textContent = `Se recibe experiencia cuando aprendes algo nuevo sobre una región`;
-  });
+  if (iconMoneda)
+    iconMoneda.addEventListener("click", (e) => {
+      e.stopPropagation();
+      toggleContenedor();
+
+      contenedorInfo.querySelector("strong").textContent = `Monedas`;
+      contenedorInfo.querySelector(
+        "span"
+      ).textContent = `Se utilizan para viajar a otras regiones`;
+    });
+  if (iconExp)
+    iconExp.addEventListener("click", (e) => {
+      e.stopPropagation();
+      toggleContenedor();
+      contenedorInfo.querySelector("strong").textContent = `Experiencia`;
+      contenedorInfo.querySelector(
+        "span"
+      ).textContent = `Se recibe experiencia cuando aprendes algo nuevo sobre una región`;
+    });
 
   // Cerrar al click fuera del contenedor
   document.addEventListener("click", (e) => {
