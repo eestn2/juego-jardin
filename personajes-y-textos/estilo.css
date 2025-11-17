@@ -27,14 +27,39 @@ body {
 }
 
 #dialogue-box {
-  max-width: fit-content;
-  max-width: fit-content;
+  width: 80%;
   background: rgba(255, 255, 255, 0.9);
-  padding: 10px;
+  padding: 10px 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  position: absolute;
+  bottom: -40%;
+  left: 60%;
+  transform: translateX(-50%);
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-family: "Fredoka", cursive;
+  text-align: center;
+  transition: bottom 0.5s ease;
+  overflow: hidden;
+  backdrop-filter: blur(5px);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  animation: slideUp 0.5s forwards;
+    max-width: fit-content;
+}
+@keyframes slideUp {
+  from {
+    bottom: -40%;
+  }
+  to {
+    bottom: 20px;
+  }
 }
 
 #dialogue-text {
-  font-size: 2rem;
+  font-size: 2.5rem;
 }
 
 #personaje {
@@ -77,23 +102,74 @@ svg {
   width: 20px;
 }
 
-@media (max-width: 450px) {
-  * {
-    margin: 0;
-    padding: 0%;
-  }
-  #character img {
-    width: 150px;
-  }
 
+#audio {
+  border: none;
+  border-radius: 20px;
+  padding: 10px;
+  transition: transform 0.3s;
+  display: flex;
+  cursor: pointer;
+}
+#audio:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+  background-color: rgba(200, 200, 200, 0.365);
+}
+
+#audio img {
+  width: 30px;
+  height: auto;
+}
+
+
+@media (max-width: 320px) {
   #dialogue-box {
     background: rgba(255, 255, 255, 0.9);
+    width: 80%;
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
     max-width: fit-content;
-    max-height: fit-content;
   }
 
   #personaje {
     z-index: 4;
+    width: 100%;
+    display: flexbox;
+    flex-direction: row;
+    position: absolute;
+  }
+
+  #dialogue-text {
+    font-size: 0.8rem;
+  }
+
+  #next-btn svg {
+    width: 40px;
+  }
+
+  #character img {
+    width: 60%;
+  }
+}
+@media (min-width: 321px) {
+  * {
+    margin: 0;
+    padding: 0%;
+  }
+
+  #dialogue-box {
+    background: rgba(255, 255, 255, 0.9);
+    width: 80%;
+    bottom: 0%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  #personaje {
+    z-index: 4;
+    margin-top: 30%;
     width: 100%;
     display: flexbox;
     flex-direction: row;
@@ -106,5 +182,104 @@ svg {
 
   #next-btn svg {
     width: 50px;
+  }
+
+  #character img {
+    width: 40%;
+  }
+  
+}
+@media (min-width: 480px) {
+  #dialogue-box {
+    background: rgba(255, 255, 255, 0.9);
+    width: 80%;
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: fit-content;
+  }
+
+  #dialogue-text {
+    font-size: 1.2rem;
+  }
+
+  #next-btn svg {
+    width: 55px;
+    height: 55px;
+  }
+  #character img {
+    width: 30%;
+  }
+}
+@media (min-width: 620px) {
+  #dialogue-box {
+    background: rgba(255, 255, 255, 0.9);
+    width: 80%;
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: fit-content;
+  }
+
+  #dialogue-text {
+    font-size: 1.5rem;
+  }
+
+  #next-btn svg {
+    width: 60px;
+    height: 60px;
+  }
+  #character img {
+    width: 20%;
+  }
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+  #dialogue-box {
+    background: rgba(255, 255, 255, 0.9);
+    width: 80%;
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: fit-content;
+  }
+  #personaje {
+    margin-top: 45%;
+    align-self: center;
+  }
+  #dialogue-text {
+    font-size: 1.9rem;
+  }
+  #next-btn svg {
+    width: 65px;
+    height: 65px;
+  }
+  #character img {
+    width: 20%;
+  }
+}
+@media (min-width: 1024px) {
+  #dialogue-box {
+    background: rgba(255, 255, 255, 0.9);
+    width: 80%;
+    bottom: 70%;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: fit-content;
+  }
+
+  #personaje {
+    margin-top: 45%;
+    align-self: center;
+  }
+  #dialogue-text {
+    font-size: 2.2rem;
+  }
+
+  #next-btn svg {
+    width: 70px;
+    height: 70px;
+  }
+  #character img {
+    width: 20%;
   }
 }

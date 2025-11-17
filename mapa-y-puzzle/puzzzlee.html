@@ -2,13 +2,14 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1", maximum-scale=1, user-scalable=no/>
+
     <title>Rompecabezas</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Baloo+2&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="estilo-puzzle.css" />
+    <link rel="stylesheet" href="./estilo-puzzle.css" />
   </head>
   <body>
     <div class="header">
@@ -36,7 +37,6 @@
 
     <button
       id="boton-volver"
-      onclick="window.location.href='mapa-test.html'"
       class="boton"
     >
       Volver al mapa
@@ -47,11 +47,13 @@
     <div id="contenedor"></div>
 
     <div id="mensaje">
-      <b>¡Felicitaciones!</b>
-      <b>Completaste el rompecabezas.</b>
+      <h2>¡Felicitaciones!</h2>
+      <p>Completaste el rompecabezas.</p>
+      <p id="infoAnimal">infoo</p>
+      <button id="btnNivel" class="boton">Siguiente nivel</button>
       <button id="btnContinuar" class="boton">Continuar</button>
     </div>
 
-    <script src="java-puzzle.js"></script>
+    <script src="./java-puzzle.js"></script>
   </body>
 </html>

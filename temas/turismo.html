@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./estilo.css" />
+  </head>
+  <body>
+    <div id="titulo"><h1>Turismo</h1></div>
+    <div class="datos-y-audio">
+      <p id="info">INFORMACION RESUMIDA</p>
+
+      <button src="./audios/" title="escuchar">
+        <img src="../imgs/audio.png" alt="audio" />
+      </button>
+    </div>
+
+    <div class="container">
+      <ul class="slider">
+        <li id="slide1">
+          <img id="imagen-uno" src="uno.png" />
+        </li>
+        <li id="slide2">
+          <img id="imagen-dos" src="mapa.png" />
+        </li>
+        <li id="slide3">
+          <img id="imagen-tres" src="web.png" />
+        </li>
+      </ul>
+
+      <ul class="menu">
+        <li>
+          <a href="#slide1">1</a>
+        </li>
+        <li>
+          <a href="#slide2">2</a>
+        </li>
+        <li>
+          <a href="#slide3">3</a>
+        </li>
+      </ul>
+    </div>
+    <button id="btn-volver">Volver al mapa</button>
+  </body>
+  <script src="./turismo.js"></script>
+  <script src="./slider-bg.js"></script>
+</html>

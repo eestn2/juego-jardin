@@ -1,0 +1,274 @@
+body {
+  background-color: #c1ff72;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-family: "MiFuente", sans-serif;
+}
+@font-face {
+  font-family: "MiFuente";
+  src: url("../encontrar/tipografia/Letters_for_Learners.ttf")
+    format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+#titulo {
+  text-align: center;
+  color: black;
+  font-weight: bold;
+  background-color: white;
+  font-size: 1.2rem;
+  margin: 20px auto;
+  padding: 10px;
+  max-width: fit-content;
+  border-radius: 100px;
+}
+
+.datos-y-audio {
+  color: white;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #91bf56;
+  padding: 5px 10px;
+  margin: 10px auto;
+  width: fit-content;
+  border-radius: 15px;
+  font-size: 1.5rem;
+}
+
+p {
+  padding-right: 20px;
+  color: white;
+}
+
+.datos-y-audio button {
+  border: none;
+  border-radius: 20px;
+  padding: 10px;
+  transition: transform 0.3s;
+}
+.datos-y-audio button:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+  background-color: rgb(200, 200, 200);
+}
+
+.datos-y-audio img {
+  width: 30px;
+  height: auto;
+}
+
+.container {
+  margin: auto;
+  background-color: white;
+  max-width: 80%;
+  padding: 20px;
+  padding-top: 50px;
+  border-radius: 10px;
+}
+
+ul,
+li {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+/* asegurar que el li sea contenedor relativo */
+ul.slider li {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1s;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: slide 15s infinite;
+  /* nuevo: variable de fondo y overflow para el desenfoque */
+  --bg: none;
+  overflow: hidden;
+}
+
+/* pseudo-fondo borroso que usa la variable --bg */
+ul.slider li::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--bg);
+  background-size: cover;
+  background-position: center;
+  filter: blur(5px) saturate(1.05);
+  transform: scale(1); /* evita bordes negros al difuminar */
+  z-index: 0;
+  transition: opacity 0.3s;
+}
+
+/* opcional: oscurecer ligeramente el fondo para mejor contraste */
+ul.slider li::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.08));
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* la imagen principal por encima del fondo borroso */
+ul.slider li img {
+  position: relative;
+  z-index: 2;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+  border-radius: 5px;
+}
+
+ul.slider {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  height: auto;
+  aspect-ratio: 16 / 9; /* hace que se mantenga la proporción */
+  overflow: hidden;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 15px;
+  padding: 10px 0px;
+  box-shadow: 0px 5px 15px 0px rgba(31, 30, 30, 0.2);
+}
+
+ul.slider li {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1s;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: slide 15s infinite;
+}
+
+ul.slider li img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Animación automática */
+ul.slider li {
+  animation: slide 15s infinite;
+  transition: opacity 0.3s ease;
+}
+
+/* Cada imagen aparece en distinto tiempo */
+ul.slider li:nth-child(1) {
+  animation-delay: 0s;
+}
+/* Definición de la animación */
+@keyframes slide {
+  0% {
+    opacity: 0;
+  }
+  5% {
+    opacity: 1;
+  }
+  30% {
+    opacity: 1;
+  }
+  35% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Menú para navegación manual */
+.menu {
+  text-align: center;
+  margin: 20px;
+}
+
+.menu li {
+  display: inline-block;
+  text-align: center;
+}
+
+/* Estilo de los botones del menú */
+.menu li a {
+  display: inline-block;
+  color: white;
+  text-decoration: none;
+  background-color: grey;
+  padding: 10px;
+  width: 20px;
+  height: 20px;
+  font-size: 20px;
+  border-radius: 100%;
+}
+
+/*Control manual con :target*/
+ul.slider li:target {
+  opacity: 1;
+  z-index: 3;
+  pointer-events: auto;
+  animation-play-state: paused;
+}
+
+/* Cuando hay target nativo: ocultar y pausar los demás */
+ul.slider:has(li:target) li:not(:target) {
+  opacity: 0 !important;
+  pointer-events: none;
+  animation: none !important;
+  z-index: 0;
+}
+
+/* fallback: cuando JS pone clase .manual (para navegadores sin :has) */
+ul.slider.manual li {
+  animation: none !important;
+}
+ul.slider.manual li:not(.active) {
+  opacity: 0 !important;
+  pointer-events: none;
+  z-index: 0;
+}
+ul.slider.manual li.active {
+  opacity: 1 !important;
+  z-index: 3 !important;
+}
+
+/* Asegurar transición suave al mostrar/ocultar */
+ul.slider li {
+  transition: opacity 0.3s ease;
+}
+
+#btn-volver {
+  margin: 20px auto;
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: white;
+  background-color: #41a044;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#btn-volver:hover {
+  background-color: #246324;
+}

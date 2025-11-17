@@ -43,8 +43,8 @@ document.getElementById("mapa").addEventListener("load", function () {
   };
   // Estado de regiones desbloqueadas
   let estadoRegiones = JSON.parse(localStorage.getItem("estadoRegiones")) || {
-    Centro: true,
-    Noreste: false,
+    Centro: false,
+    Noreste: true,
     Cuyo: false,
     Noroeste: false,
     Patagonia: false,
@@ -60,48 +60,53 @@ document.getElementById("mapa").addEventListener("load", function () {
 
   // Juegos por región
   const juegosPorRegion = {
-    Noroeste: ["./puzzzlee", "../mini_juego_jardin_lugar/lugar"],
-    Noreste: ["./puzzzlee", "../mini_juego_jardin_lugar/lugar"],
-    Cuyo: ["./puzzzlee", "../mini_juego_jardin_encontrar_al_animal/encontrar"],
-    Centro: [
-      "./puzzzlee",
-      "../mini_juego_jardin_encontrar_al_animal/encontrar",
-    ],
-    Patagonia: ["./puzzzlee", "../mini_juego_jardin_lugar/lugar"],
+    Noroeste: ["./puzzzlee.html", "../encontrar/encontrar.html"],
+    Noreste: ["./puzzzlee.html", "../encontrar/encontrar.html"],
+    Cuyo: ["./puzzzlee.html", "../encontrar/encontrar.html"],
+    Centro: ["../encontrar/encontrar.html", "./puzzzlee.html"],
+    Patagonia: ["./puzzzlee.html", "../encontrar/encontrar.html"],
   };
-
-  // 🔓 Desbloquear automáticamente la región Centro si no hay progreso
-  if (!localStorage.getItem("regionesDesbloqueadas")) {
-    localStorage.setItem("regionesDesbloqueadas", JSON.stringify(["Centro"]));
-  } else {
-    const desbloqueadas = JSON.parse(
-      localStorage.getItem("regionesDesbloqueadas")
-    );
-    if (desbloqueadas.length === 0) {
-      localStorage.setItem("regionesDesbloqueadas", JSON.stringify(["Centro"]));
-    }
-  }
 
   const provinciaARegion = {};
   Object.entries(regiones).forEach(([region, provs]) => {
     provs.forEach((id) => (provinciaARegion[id] = region));
   });
 
-  Object.entries(provincias).forEach(([id, nombre]) => {
+  //Habilitar region centro
+
+  Object.entries(provincias).forEach(([id]) => {
     const el = svgDoc.getElementById(id);
     if (el) {
       el.style.cursor = "pointer";
       const region = provinciaARegion[id];
+
+      // Solo deshabilitar regiones no desbloqueadas
       if (!estadoRegiones[region]) {
         el.style.opacity = "0.5";
         el.style.pointerEvents = "none";
       }
-      const color = coloresRegion[region] || "#6f9c76";
 
+      const color = coloresRegion[region] || "#6f9c76";
       el.setAttribute("fill", color);
       el.dataset.originalColor = color;
 
-      el.addEventListener("mouseenter", () => {
+      el.addEventListener("click", () => {
+        if (region && !progreso[region]) {
+          regiones[region].forEach((provId) => {
+            const p = svgDoc.getElementById(provId);
+            if (p) p.setAttribute("fill", "#f1c40f");
+          });
+
+          const provNombres = regiones[region]
+            .map((pid) => provincias[pid])
+            .join(", ");
+          regionTitle.textContent = region;
+          regionProvincias.textContent = provNombres;
+          regionBox.style.display = "block";
+        }
+      });
+
+      el.addEventListener("mouseover", () => {
         if (region && !progreso[region]) {
           regiones[region].forEach((provId) => {
             const p = svgDoc.getElementById(provId);
@@ -118,142 +123,125 @@ document.getElementById("mapa").addEventListener("load", function () {
       });
 
       el.addEventListener("mouseleave", () => {
+        // Restaurar color original si la región no está completa
         if (region && !progreso[region]) {
           regiones[region].forEach((provId) => {
             const p = svgDoc.getElementById(provId);
-            if (p) p.setAttribute("fill", p.dataset.originalColor || "#6f9c76");
+            if (p)
+              p.setAttribute(
+                "fill",
+                p.dataset.originalColor || "#6f9c76",
+                (opacity = "1")
+              );
           });
         }
-
         regionBox.style.display = "none";
       });
 
       el.addEventListener("click", () => {
         if (region) {
-          if (progreso[region] === true) {
-            alert(`Ya completaste la región "${region}".`);
-            return;
-          }
+          const datosBox = document.querySelector(".region-datos");
+          if (datosBox) {
+            datosBox.querySelector(
+              "p"
+            ).textContent = `¡Estás explorando la región ${region}! Elige qué quieres descubrir:`;
+            datosBox.style.display = "block";
+            setTimeout(() => {
+              datosBox.scrollIntoView({ behavior: "smooth" });
+            }, 300);
 
-          const confirmacionBox = document.getElementById("confirmacion");
-          const mensaje = document.getElementById("mensaje-confirmacion");
-          const nmrCorrecto = document.getElementById("nmr-correcto");
-          const nmrIncorrecto = document.getElementById("nmr-incorrecto");
+            // Configurar botones de temas
+            const temas = [
+              "fauna-y-flora",
+              "paisajes",
+              "danzas",
+              "recetas",
+              "turismo",
+              "pueblos-originarios",
+            ];
 
-          if (region === "Centro") {
-            // Saltar la verificación de monedas
-            const juegos = juegosPorRegion[region];
-            const jugados = obtenerJuegosCompletados()[region] || [];
-            const juegosRestantes = juegos.filter((j) => !jugados.includes(j));
+            temas.forEach((tema) => {
+              const btn = datosBox.querySelector(`.btn-${tema}`);
 
-            if (juegosRestantes.length > 0) {
-              localStorage.setItem("regionActual", region);
-              const juegoAleatorio =
-                juegosRestantes[
-                  Math.floor(Math.random() * juegosRestantes.length)
-                ];
-
-              // NO marcar como jugado aquí
-
-              window.location.href = `${juegoAleatorio}.html?region=${encodeURIComponent(
-                region
-              )}`;
-            } else {
-              alert("Ya completaste todos los minijuegos de esta región.");
-            }
-          } else {
-            // Procedimiento normal con resta de monedas
-            const precioRegion = Math.floor(Math.random() * 3) + 3;
-            const monedasActuales =
-              parseInt(localStorage.getItem("monedas")) || 0;
-            const resultadoCorrecto = monedasActuales - precioRegion;
-
-            mensaje.textContent = `La región "${region}" cuesta ${precioRegion} monedas y tienes ${monedasActuales} monedas. ¿Cuántas monedas te quedarían?`;
-
-            nmrCorrecto.textContent = resultadoCorrecto;
-            nmrIncorrecto.textContent =
-              resultadoCorrecto + (Math.random() < 0.5 ? 1 : -1);
-            confirmacionBox.style.display = "block";
-
-            nmrCorrecto.onclick = () => {
-              restarMonedas(precioRegion);
-              actualizarContadorMonedas();
-              // ... resto del flujo original ...
-            };
-
-            nmrIncorrecto.onclick = () => {
-              mensaje.textContent = "Número incorrecto, prueba de nuevo.";
-            };
-          }
-
-          // Asignar valores a botones
-          nmrCorrecto.textContent = resultadoCorrecto;
-          nmrIncorrecto.textContent =
-            resultadoCorrecto + (Math.random() < 0.5 ? 1 : -1);
-
-          confirmacionBox.style.display = "block";
-
-          nmrCorrecto.onclick = () => {
-            // Restar el costo real
-            restarMonedas(precioRegion);
-            actualizarContadorMonedas();
-
-            const juegos = juegosPorRegion[region];
-            const jugados = obtenerJuegosCompletados()[region] || [];
-            const juegosRestantes = juegos.filter((j) => !jugados.includes(j));
-
-            if (juegosRestantes.length > 0) {
-              localStorage.setItem("regionActual", region);
-              const juegoAleatorio =
-                juegosRestantes[
-                  Math.floor(Math.random() * juegosRestantes.length)
-                ];
-
-              // Guardar como jugado
-              const completados = obtenerJuegosCompletados();
-              completados[region] = [...jugados, juegoAleatorio];
-              guardarJuegosCompletados(completados);
-
-              // Verificar si se completaron todos
-              if (completados[region].length >= juegos.length) {
-                const progreso = obtenerProgreso();
-                progreso[region] = true;
-                guardarProgreso(progreso);
-                agregarMonedas(3);
-                desbloquearRegiones(region);
+              if (btn) {
+                btn.onclick = () => {
+                  marcarTemaVisitado(tema, region);
+                  btn.disabled = true;
+                  chequeartemasVisitados(region);
+                  (window.location.href = `../temas/${tema}.html?region=${region}`),
+                    "_blank";
+                };
+                // Verificar si el tema ya fue visitado
+                const visitados = obtenerTemasVisitados(region);
+                if (visitados.includes(tema)) {
+                  btn.disabled = true;
+                  btn.setAttribute("style", "background-color: green");
+                } else {
+                  btn.disabled = false;
+                  btn.setAttribute("style", "");
+                }
               }
+            });
 
-              window.location.href = `${juegoAleatorio}.html?region=${encodeURIComponent(
-                region
-              )}`;
-            } else {
-              alert("Ya completaste todos los minijuegos de esta región.");
+            // Verificar temas visitados para habilitar botón de jugar
+            chequeartemasVisitados(region);
+
+            // Configurar botón de jugar
+            const btnJugar = datosBox.querySelector(".btn-jugar");
+            if (btnJugar) {
+              btnJugar.disabled = true; // Deshabilitado por defecto
+              btnJugar.setAttribute("style", "background-color: red");
+              if (obtenerTemasVisitados(region).length >= 6) {
+                btnJugar.disabled = false;
+                btnJugar.setAttribute("style", "");
+              }
+              btnJugar.onclick = () => {
+                const juegos = juegosPorRegion[region];
+                if (juegos && juegos.length > 0) {
+                  const juegosCompletados = obtenerJuegosCompletados();
+                  const juegosNoCompletados = juegos.filter(
+                    (j) => !juegosCompletados[j]
+                  );
+                  if (juegosNoCompletados.length === 0) {
+                    alert("¡Ya completaste todos los juegos de esta región!");
+                    return;
+                  }
+                  const juegoAleatorio =
+                    juegosNoCompletados[
+                      Math.floor(Math.random() * juegosNoCompletados.length)
+                    ];
+                  window.location.href = `${juegoAleatorio}?region=${region}`;
+                } else {
+                  alert("No hay juegos disponibles para esta región.");
+                }
+              };
             }
-          };
-
-          nmrIncorrecto.onclick = () => {
-            mensaje.textContent = "Número incorrecto, prueba de nuevo.";
-          };
-
-          confirmacionBox.scrollIntoView({ behavior: "smooth" });
+          }
         }
       });
     }
   });
+
+  function chequeartemasVisitados(region) {
+    const visitados = obtenerTemasVisitados(region);
+    const btnJugar = document.querySelector(".btn-jugar");
+    if (btnJugar) {
+      btnJugar.disabled = visitados.length < 6; // Habilitar si se visitaron todos los temas
+    }
+  }
+
   // Verificar qué regiones ya están completas al cargar el mapa
   const progresoActual = obtenerProgreso();
 
-  Object.keys(progresoActual).forEach((regionNombre) => {
-    if (progresoActual[regionNombre] === true) {
-      marcarRegionComoCompleta(regionNombre, svgDoc, regiones);
+  Object.keys(progresoActual).forEach((region) => {
+    if (progresoActual[region] === true) {
+      marcarRegionComoCompleta(region, svgDoc, regiones);
     }
   });
 
   // Verificar si todo el mapa ya fue completado
-  verificarMapaCompleto(regiones, svgDoc);
+  verificarMapaCompleto(regiones, svgDoc, progresoActual);
 });
-
-// --- NUEVO CÓDIGO PARA GESTIÓN DE PROGRESO ---
 
 // Cada región tiene 3 niveles. El progreso se guarda por región.
 function obtenerProgreso() {
@@ -265,17 +253,25 @@ function guardarProgreso(progreso) {
   localStorage.setItem("progresoRegiones", JSON.stringify(progreso));
 }
 
-function agregarMonedas(cantidad) {
-  let monedas = parseInt(localStorage.getItem("monedas")) || 0;
-  monedas += cantidad;
-  localStorage.setItem(monedas);
-  actualizarContadorMonedas();
+function agregarExp(cantidadexp) {
+  let experiencia = parseInt(localStorage.getItem("exp")) || 0;
+  experiencia += cantidadexp; // Sumar la cantidad recibida
+  localStorage.setItem("exp", experiencia);
+  actualizarContadorExp();
+}
+
+function actualizarContadorExp() {
+  const contadorExp = document.getElementById("contador-exp");
+  if (contadorExp) {
+    const exp = parseInt(localStorage.getItem("exp")) || 0;
+    contadorExp.textContent = `${exp}`;
+  }
 }
 
 function actualizarContadorMonedas() {
   const contador = document.getElementById("contador-monedas");
   if (contador) {
-    const monedas = parseInt(localStorage.getItem("monedas")) || 0;
+    const monedas = parseInt(localStorage.getItem("monedas")) || 15;
     contador.textContent = `${monedas}`;
   }
 }
@@ -289,17 +285,18 @@ function restarMonedas(cantidad) {
 
 // Al cargar el mapa, actualiza el contador de monedas
 document.addEventListener("DOMContentLoaded", actualizarContadorMonedas);
+document.addEventListener("DOMContentLoaded", actualizarContadorExp);
 
 function desbloquearRegiones(regionCompletada) {
   const estadoRegiones =
     JSON.parse(localStorage.getItem("estadoRegiones")) || {};
 
   const desbloqueoPorRegion = {
-    Centro: ["Noreste", "Cuyo"],
-    Noreste: ["Noroeste"],
-    Cuyo: ["Patagonia"],
+    Noreste: ["Cuyo"],
+    Cuyo: ["Patagonia", "Noroeste"],
     Noroeste: [],
-    Patagonia: [],
+    Patagonia: ["Centro"],
+    Centro: [],
   };
 
   const nuevas = desbloqueoPorRegion[regionCompletada] || [];
@@ -309,16 +306,31 @@ function desbloquearRegiones(regionCompletada) {
 
   localStorage.setItem("estadoRegiones", JSON.stringify(estadoRegiones));
 }
+// Guardar y obtener temas visitados
+function marcarTemaVisitado(tema, region) {
+  const key = `temasVisitados_${region}`;
+  let temasVisitados = JSON.parse(localStorage.getItem(key)) || [];
+  if (!temasVisitados.includes(tema)) {
+    temasVisitados.push(tema);
+    localStorage.setItem(key, JSON.stringify(temasVisitados));
+  }
+  return temasVisitados;
+}
+function obtenerTemasVisitados(region) {
+  const key = `temasVisitados_${region}`;
+  return JSON.parse(localStorage.getItem(key)) || [];
+}
+
 // Marcar región como completa y pintarla de verde
-function marcarRegionComoCompleta(regionNombre, svgDoc, regiones) {
-  regiones[regionNombre].forEach((provId) => {
+function marcarRegionComoCompleta(region, svgDoc, regiones) {
+  regiones[region].forEach((provId) => {
     const p = svgDoc.getElementById(provId);
-    if (p) p.setAttribute("fill", "green");
+    if (p) p.setAttribute("fill", "green", (opacity = "1"));
   });
 }
 
 // Mostrar mensaje de felicitación si todas las regiones están completas
-function verificarMapaCompleto(regiones, svgDoc) {
+function verificarMapaCompleto(regiones, _svgDoc) {
   const progreso = obtenerProgreso();
   const regionesCompletas = Object.keys(regiones).every(
     (r) => progreso[r] === true
@@ -348,48 +360,79 @@ document.addEventListener("DOMContentLoaded", () => {
         localStorage.removeItem("progresoRegiones");
         localStorage.removeItem("juegosCompletados");
         localStorage.removeItem("monedas");
+        localStorage.removeItem("exp");
         localStorage.removeItem("estadoRegiones");
-        localStorage.setItem("monedas", "0");
-        localStorage.setItem(
-          "regionesDesbloqueadas",
-          JSON.stringify(["Centro"])
-        );
+        localStorage.removeItem("temasVisitados_Noreste");
+        localStorage.removeItem("temasVisitados_Cuyo");
+        localStorage.removeItem("temasVisitados_Noroeste");
+        localStorage.removeItem("temasVisitados_Patagonia");
+        localStorage.removeItem("temasVisitados_Centro");
+        localStorage.removeItem("exp");
+        localStorage.setItem("regionesDesbloqueadas");
         window.location.reload();
       }
     });
   }
-});
-btnConfirmar.onclick = () => {
-  const juegos = juegosPorRegion[region];
-  const jugados = obtenerJuegosCompletados()[region] || [];
-
-  const juegosRestantes = juegos.filter((j) => !jugados.includes(j));
-
-  if (juegosRestantes.length > 0) {
-    localStorage.setItem("regionActual", region);
-
-    const juegoAleatorio =
-      juegosRestantes[Math.floor(Math.random() * juegosRestantes.length)];
-
-    // Guardar como "jugado"
-    const completados = obtenerJuegosCompletados();
-    completados[region] = [...jugados, juegoAleatorio];
-    guardarJuegosCompletados(completados);
-
-    // Verificar si se completaron todos
-    if (completados[region].length >= juegos.length) {
-      const progreso = obtenerProgreso();
-      progreso[region] = true;
-      guardarProgreso(progreso);
-      agregarMonedas(3); // <--- Agrega monedas al completar la región
-    }
-
-    descontarMoneda(); // <--- Descuenta moneda al entrar a un minijuego
-
-    window.location.href = `${juegoAleatorio}.html?region=${encodeURIComponent(
-      region
-    )}`;
-  } else {
-    alert("Ya completaste todos los minijuegos de esta región.");
+  const btnCancelar = document.querySelector(".cerrar");
+  const datosBox = document.querySelector(".region-datos");
+  if (btnCancelar && datosBox) {
+    btnCancelar.addEventListener("click", () => {
+      datosBox.style.display = "none";
+    });
   }
-};
+
+  // abrir/cerrar contenedor-info-botones al click en moneda o exp
+  const iconMoneda = document.getElementById("Icono-moneda");
+  const iconExp = document.getElementById("Icono-exp");
+  const contenedorInfo = document.querySelector(".contenedor-info-botones");
+  contenedorInfo.style.display = "none";
+  function mostrarContenedor(visible) {
+    if (!contenedorInfo) return;
+    contenedorInfo.style.display = visible ? "flex" : "none";
+  }
+
+  function toggleContenedor() {
+    if (!contenedorInfo) return;
+    const isOpen = getComputedStyle(contenedorInfo).display !== "none";
+    mostrarContenedor(!isOpen);
+  }
+
+  if (iconMoneda)
+    iconMoneda.addEventListener("click", (e) => {
+      e.stopPropagation();
+      toggleContenedor();
+
+      contenedorInfo.querySelector("strong").textContent = `Monedas`;
+      contenedorInfo.querySelector(
+        "span"
+      ).textContent = `Se utilizan para viajar a otras regiones`;
+    });
+  if (iconExp)
+    iconExp.addEventListener("click", (e) => {
+      e.stopPropagation();
+      toggleContenedor();
+      contenedorInfo.querySelector("strong").textContent = `Experiencia`;
+      contenedorInfo.querySelector(
+        "span"
+      ).textContent = `Se recibe experiencia cuando aprendes algo nuevo sobre una región`;
+    });
+
+  // Cerrar al click fuera del contenedor
+  document.addEventListener("click", (e) => {
+    if (!contenedorInfo) return;
+    const target = e.target;
+    if (
+      getComputedStyle(contenedorInfo).display !== "none" &&
+      !contenedorInfo.contains(target) &&
+      target !== iconMoneda &&
+      target !== iconExp
+    ) {
+      mostrarContenedor(false);
+    }
+  });
+
+  // Cerrar con Escape
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") mostrarContenedor(false);
+  });
+});

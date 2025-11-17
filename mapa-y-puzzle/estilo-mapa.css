@@ -2,7 +2,9 @@
   text-transform: uppercase;
   font-family: "Chewy";
 }
-
+html {
+  scroll-behavior: smooth;
+}
 body {
   text-align: center;
   display: flex;
@@ -11,45 +13,105 @@ body {
   background-color: #9fc9eee3;
 }
 
-object#mapa {
-  height: 80%;
+.barra-superior {
+  position: fixed;
+  top: 10px;
+  right: 10px;
   display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 999;
+}
+.monedas-y-exp {
+  position: static;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  align-items: center;
+  background-color: #fcfa9d;
+  border: 2px solid rgba(214, 143, 62, 0.637);
+  border-radius: 10px;
+  padding: 5px 10px;
+  gap: 0px;
+}
+
+.monedas-y-exp img {
+  width: 40px;
+  cursor: pointer;
+}
+
+.cantidad-moneda,
+.cantidad-exp {
+  font-size: 1.2rem;
+  padding: 2px 8px;
+}
+
+.contenedor-info-botones {
+  max-width: min-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 5px;
+  background-color: rgba(241, 224, 72, 0.619);
+  border-radius: 10px;
+  margin-top: 20px;
+  margin-right: 20px;
+  color: rgb(90, 136, 16);
+  box-shadow: 0px 5px 5px 0px rgb(104, 101, 84);
+  padding: 10px;
+}
+.contenedor-info-botones #objeto {
+  text-decoration: underline wavy rgb(97, 180, 3);
+  color:rgb(90, 136, 16);
+  background-color: #ffffff8b ;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+object#mapa {
+  width: 90vw;
+  max-width: 800px;
+  aspect-ratio: 4/3;
+  height: auto;
+  display: block;
+  margin: 0 auto;
 }
 
 #region-info {
   position: absolute;
   right: 0%;
-  bottom: 30%;
+  bottom: 0%;
   background: rgba(0, 0, 0, 0.75);
   color: #fff;
   padding: 12px 16px;
   border-radius: 8px;
-  max-width: 250px;
+  width: fit-content;
   font-size: 1rem;
   display: none;
   z-index: 998;
   margin: 50px;
 }
 
-#confirmacion {
+.region-datos {
   margin: 10px;
   padding: 20px 20px;
   background-color: #454fbc91;
   color: white;
   border: none;
   border-radius: 6px;
-  cursor: pointer;
   box-shadow: 0 3px 6px black;
   font-family: "Chewy", cursive;
-  display: none;
   text-shadow: 1.5px 0px 5px rgba(39, 0, 79, 0.823);
   font-size: 1rem;
+  display: none;
 }
 
-#nmr-correcto,
-#nmr-incorrecto {
+.region-datos button {
   margin: 10px;
-  padding: 10px 20px;
+  padding: 10px 10px;
   color: rgb(5, 24, 27);
   border: none;
   border-radius: 6px;
@@ -57,7 +119,37 @@ object#mapa {
   font-size: 0.9rem;
 }
 
+.botonesabajo {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.btn-jugar {
+  background-color: #eb8074;
+}
+.region-datos button:hover {
+  background-color: #34495e;
+  color: white;
+}
 
+.cerrar {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 5px;
+  height: 30px;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
 #btn-reiniciar {
   margin: 10px;
   padding: 8px 16px;
@@ -71,40 +163,50 @@ object#mapa {
 #btn-reiniciar:hover {
   background-color: #c0392b;
 }
-.monedas {
-  position: fixed;
-  top: 10px;
-  right: 10px;
-  display: flex;
-  align-items: center;
-  background-color: #fcfa9d;
-  border: 2px solid rgba(214, 143, 62, 0.637);
-  border-radius: 10px;
-  padding: 5px 10px;
-  gap: 0px;
-  z-index: 999;
-}
 
-.monedas img {
-  width: 40px;
-}
 
-.cantidad-moneda {
-  font-size: 1.2rem;
-  padding: 2px 8px;
-}
+@media (max-width: 460px) {
+  .monedas-y-exp img {
+    width: 30px;
+  }
 
+  .cantidad-moneda,
+  .cantidad-exp {
+    font-size: 1rem;
+    padding: 2px 6px;
+  }
+
+  .region-datos {
+    font-size: 0.8rem;
+    width: 80%;
+  }
+
+  #region-info {
+    font-size: 0.8rem;
+    bottom: 10%;
+    max-width: 150px;
+  }
+
+  object#mapa {
+    width: 90vw;
+  }
+
+  .region-datos button {
+    font-size: 0.7rem;
+  }
+}
 @media (min-width: 480px) {
-  .monedas img {
+  .monedas-y-exp img {
     width: 50px;
   }
 
-  .cantidad-moneda {
+  .cantidad-moneda,
+  .cantidad-exp {
     font-size: 1.5rem;
     padding: 4px 10px;
   }
 
-  #confirmacion {
+  .region-datos {
     font-size: 1.2rem;
   }
 
@@ -112,19 +214,23 @@ object#mapa {
     font-size: 1.2rem;
     bottom: 5%;
   }
+  object#mapa {
+    width: 150%;
+  }
 }
 
 @media (min-width: 768px) {
-  .monedas img {
+  .monedas-y-exp img {
     width: 60px;
   }
 
-  .cantidad-moneda {
+  .cantidad-moneda,
+  .cantidad-exp {
     font-size: 2rem;
     padding: 5px 12px;
   }
 
-  #confirmacion {
+  .region-datos {
     font-size: 1.5rem;
   }
 
@@ -138,26 +244,26 @@ object#mapa {
 }
 
 @media (min-width: 1024px) {
-  .monedas img {
+  .monedas-y-exp img {
     width: 80px;
   }
 
-  .cantidad-moneda {
+  .cantidad-moneda,
+  .cantidad-exp {
     font-size: 3rem;
     padding: 6px 15px;
   }
 
-  #confirmacion {
+  .region-datos {
     font-size: 2rem;
   }
 
-  #nmr-correcto,
-  #nmr-incorrecto {
-    font-size: 1.8rem;
+  .region-datos button {
+    font-size: 1.3rem;
   }
 
   #region-info {
-    font-size: 2rem;
+    font-size: 1.5rem;
   }
 
   object#mapa {
@@ -165,59 +271,96 @@ object#mapa {
   }
 }
 
-@media (min-width: 1440px) {
-  .monedas img {
-    width: 100px;
+@media (min-width: 1920px) {
+  .monedas-y-exp img {
+    width: 110px;
   }
 
-  .cantidad-moneda {
+  .cantidad-moneda,
+  .cantidad-exp {
+    font-size: 5rem;
+    padding: 10px 25px;
+  }
+
+  .region-datos {
     font-size: 4rem;
-    padding: 8px 20px;
   }
 
-  #confirmacion {
+  .region-datos button {
     font-size: 3rem;
-  }
-
-  #nmr-correcto,
-  #nmr-incorrecto {
-    font-size: 2.5rem;
   }
 
   #region-info {
     font-size: 3.5rem;
+    width: 300px;
   }
 
   object#mapa {
+    width: 60vw;
+  }
+}
+
+@media (min-width: 1440px) {
+  .monedas-y-exp img {
+    width: 100px;
+  }
+
+  .cantidad-moneda,
+  .cantidad-exp {
+    font-size: 4rem;
+    padding: 10px 40px;
+  }
+
+  .region-datos {
+    font-size: 2rem;
     width: 50%;
+  }
+
+  .region-datos button {
+    font-size: 1.5rem;
+  }
+
+  #region-info {
+    font-size: 2rem;
+    width: 300vw;
+  }
+
+  object#mapa {
+    width: 60vw;
   }
 }
 
 @media (min-width: 2560px) {
-  .monedas img {
+  .monedas-y-exp img {
     width: 120px;
   }
 
-  .cantidad-moneda {
+  .cantidad-moneda,
+  .cantidad-exp {
     font-size: 6rem;
     padding: 10px 30px;
   }
 
-  #confirmacion {
+  .region-datos {
     font-size: 4.5rem;
   }
 
-  #nmr-correcto,
-  #nmr-incorrecto {
+  .region-datos button {
     font-size: 4rem;
   }
 
   #region-info {
-    font-size: 5rem;
-    max-width: 500px;
+    font-size: 2rem;
+    width: 200vw;
   }
 
   object#mapa {
     height: 80%;
+  }
+}
+@media (min-width: 1024px) and (max-width: 1366px) {
+  object#mapa {
+    width: 80vw;
+    max-width: 700px;
   }
 }
