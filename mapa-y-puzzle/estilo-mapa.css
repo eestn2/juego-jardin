@@ -65,17 +65,22 @@ body {
 }
 .contenedor-info-botones #objeto {
   text-decoration: underline wavy rgb(97, 180, 3);
-  color:rgb(90, 136, 16);
-  background-color: #ffffff8b ;
+  color: rgb(90, 136, 16);
+  background-color: #ffffff8b;
   padding: 10px;
   border-radius: 10px;
 }
 
+.content-mapa {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 object#mapa {
-  width: 90vw;
-  max-width: 800px;
-  aspect-ratio: 4/3;
   height: auto;
+  max-width: fit-content;
   display: block;
   margin: 0 auto;
 }
@@ -164,8 +169,7 @@ object#mapa {
   background-color: #c0392b;
 }
 
-
-@media (max-width: 460px) {
+@media screen and (min-width: 320px) and (max-width: 479px) {
   .monedas-y-exp img {
     width: 30px;
   }
@@ -183,19 +187,18 @@ object#mapa {
 
   #region-info {
     font-size: 0.8rem;
-    bottom: 10%;
+    bottom: 30%;
     max-width: 150px;
-  }
-
-  object#mapa {
-    width: 90vw;
   }
 
   .region-datos button {
     font-size: 0.7rem;
   }
+  object#mapa {
+    height: 500px;
+  }
 }
-@media (min-width: 480px) {
+@media (min-width: 480px) and (max-width: 1440px) {
   .monedas-y-exp img {
     width: 50px;
   }
@@ -210,157 +213,12 @@ object#mapa {
     font-size: 1.2rem;
   }
 
+  object#mapa {
+    height: 1000px;
+  }
+
   #region-info {
     font-size: 1.2rem;
     bottom: 5%;
-  }
-  object#mapa {
-    width: 150%;
-  }
-}
-
-@media (min-width: 768px) {
-  .monedas-y-exp img {
-    width: 60px;
-  }
-
-  .cantidad-moneda,
-  .cantidad-exp {
-    font-size: 2rem;
-    padding: 5px 12px;
-  }
-
-  .region-datos {
-    font-size: 1.5rem;
-  }
-
-  #region-info {
-    font-size: 1.5rem;
-  }
-
-  object#mapa {
-    width: 70%;
-  }
-}
-
-@media (min-width: 1024px) {
-  .monedas-y-exp img {
-    width: 80px;
-  }
-
-  .cantidad-moneda,
-  .cantidad-exp {
-    font-size: 3rem;
-    padding: 6px 15px;
-  }
-
-  .region-datos {
-    font-size: 2rem;
-  }
-
-  .region-datos button {
-    font-size: 1.3rem;
-  }
-
-  #region-info {
-    font-size: 1.5rem;
-  }
-
-  object#mapa {
-    width: 50%;
-  }
-}
-
-@media (min-width: 1920px) {
-  .monedas-y-exp img {
-    width: 110px;
-  }
-
-  .cantidad-moneda,
-  .cantidad-exp {
-    font-size: 5rem;
-    padding: 10px 25px;
-  }
-
-  .region-datos {
-    font-size: 4rem;
-  }
-
-  .region-datos button {
-    font-size: 3rem;
-  }
-
-  #region-info {
-    font-size: 3.5rem;
-    width: 300px;
-  }
-
-  object#mapa {
-    width: 60vw;
-  }
-}
-
-@media (min-width: 1440px) {
-  .monedas-y-exp img {
-    width: 100px;
-  }
-
-  .cantidad-moneda,
-  .cantidad-exp {
-    font-size: 4rem;
-    padding: 10px 40px;
-  }
-
-  .region-datos {
-    font-size: 2rem;
-    width: 50%;
-  }
-
-  .region-datos button {
-    font-size: 1.5rem;
-  }
-
-  #region-info {
-    font-size: 2rem;
-    width: 300vw;
-  }
-
-  object#mapa {
-    width: 60vw;
-  }
-}
-
-@media (min-width: 2560px) {
-  .monedas-y-exp img {
-    width: 120px;
-  }
-
-  .cantidad-moneda,
-  .cantidad-exp {
-    font-size: 6rem;
-    padding: 10px 30px;
-  }
-
-  .region-datos {
-    font-size: 4.5rem;
-  }
-
-  .region-datos button {
-    font-size: 4rem;
-  }
-
-  #region-info {
-    font-size: 2rem;
-    width: 200vw;
-  }
-
-  object#mapa {
-    height: 80%;
-  }
-}
-@media (min-width: 1024px) and (max-width: 1366px) {
-  object#mapa {
-    width: 80vw;
-    max-width: 700px;
   }
 }

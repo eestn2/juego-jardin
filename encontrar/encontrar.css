@@ -2,6 +2,7 @@
   text-transform: uppercase;
   font-weight: bold;
   font-family: "MiFuente", sans-serif;
+  box-sizing: border-box; /* añadido: hace los tamaños más predecibles en todas las pantallas */
 }
 @font-face {
   font-family: "MiFuente";
@@ -37,7 +38,7 @@ h1 {
 }
 .contenedorInformacion p {
   margin-top: 0;
- font-size: 1.5;
+  font-size: 1.5rem;
   padding: 0;
 }
 #infoTexto {
@@ -104,7 +105,7 @@ h1 {
   z-index: 1;
   height: 70vh;
   justify-content: space-around;
-    background-position: bottom center;
+  background-position: bottom center;
 }
 
 .juego .escondite {
@@ -113,13 +114,12 @@ h1 {
 }
 .escondites {
   display: flex;
-  position: relative;
+  position: absolute;
   flex-direction: row !important;
   width: 90%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translateX(-50%);
   height: 60px;
-  position: absolute;
   bottom: 5%;
   justify-content: space-between;
 }
@@ -129,9 +129,8 @@ h1 {
   width: auto;
   position: absolute;
   bottom: 0;
-  transform: translate(-38%, 0%);
+  transform: translateX(-38%) scale(1.3); /* reemplaza translate(...) + scale: no estándar */
   object-fit: contain;
-  scale: 1.3;
 }
 
 .mensaje {
@@ -163,7 +162,7 @@ h1 {
     font-size: 1rem;
     justify-items: center;
   }
-  h1{
+  h1 {
     width: 90%;
   }
   .juego {
@@ -171,7 +170,7 @@ h1 {
     margin: 0 auto;
     padding: 8px;
     border-width: 3px;
-    background-size:cover;
+    background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
   }
@@ -180,13 +179,13 @@ h1 {
     height: 70px;
     left: 50%;
     bottom: 4%;
-    transform: translate(-50%, 0%);
+    transform: translateX(-50%); /* mantener sólo X */
   }
   .juego .escondite {
     width: 70px;
   }
   .juego .escondite img {
-    scale: 1.2;
+    transform: translateX(-38%) scale(1.2); /* reemplazado */
   }
   .mensaje {
     font-size: 1rem;
@@ -209,20 +208,19 @@ h1 {
     width: 80%;
     margin: 10px auto;
   }
-  button{
+  button {
     font-size: 0.8rem;
   }
   .personaje img {
     width: 80px;
   }
-  
 }
-@media (min-width: 400px){
+@media (min-width: 400px) {
   body {
     font-size: 1.2rem;
     justify-items: center;
   }
-  h1{
+  h1 {
     width: 70%;
   }
   .juego {
@@ -230,7 +228,7 @@ h1 {
     margin: 0 auto;
     padding: 10px;
     border-width: 4px;
-    background-size:cover;
+    background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     background-position: bottom center;
@@ -241,13 +239,13 @@ h1 {
     height: 80px;
     left: 50%;
     bottom: 5%;
-    transform: translate(-50%, 0%);
+    transform: translateX(-50%);
   }
   .juego .escondite {
     width: 80px;
   }
   .juego .escondite img {
-    scale: 1.3;
+    transform: translateX(-38%) scale(1.3);
   }
   .mensaje {
     font-size: 1.2rem;
@@ -270,7 +268,7 @@ h1 {
     width: 90%;
     margin: 10px auto;
   }
-  button{
+  button {
     font-size: 1rem;
   }
   .personaje img {
@@ -282,7 +280,7 @@ h1 {
     font-size: 1.5rem;
     justify-items: center;
   }
-  h1{
+  h1 {
     width: 50%;
   }
   .juego {
@@ -290,7 +288,7 @@ h1 {
     margin: 0 auto;
     padding: 15px;
     border-width: 4px;
-    background-size:cover;
+    background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     background-position: bottom center;
@@ -300,13 +298,13 @@ h1 {
     height: 100px;
     left: 50%;
     bottom: 6%;
-    transform: translate(-50%, 0%);
+    transform: translateX(-50%);
   }
   .juego .escondite {
     width: 90px;
   }
   .juego .escondite img {
-    scale: 1.4;
+    transform: translateX(-38%) scale(1.4);
   }
   .mensaje {
     font-size: 1.5rem;
@@ -325,13 +323,12 @@ h1 {
     width: 40%;
     margin: 10px auto;
   }
-  button{
+  button {
     font-size: 1.2rem;
   }
   .personaje img {
     width: 120px;
   }
-  
 }
 
 @media (min-width: 992px) {
@@ -339,7 +336,7 @@ h1 {
     font-size: 1.7rem;
     justify-items: center;
   }
-  h1{
+  h1 {
     width: 50%;
   }
   .juego {
@@ -347,7 +344,7 @@ h1 {
     margin: 0 auto;
     padding: 18px;
     border-width: 5px;
-    background-size:cover;
+    background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     background-position: bottom center;
@@ -357,13 +354,13 @@ h1 {
     height: 100px;
     left: 50%;
     bottom: 7%;
-    transform: translate(-50%, 0%);
+    transform: translateX(-50%);
   }
   .juego .escondite {
     width: 100px;
   }
   .juego .escondite img {
-    scale: 1.5;
+    transform: translateX(-38%) scale(1.5);
   }
   .mensaje {
     font-size: 1.7rem;
@@ -382,13 +379,12 @@ h1 {
     width: 30%;
     margin: 10px auto;
   }
-  button{
+  button {
     font-size: 1.5rem;
   }
   .personaje img {
     width: 150px;
   }
-  
 }
 
 @media (min-width: 1024px) {
@@ -396,7 +392,7 @@ h1 {
     font-size: 2rem;
     justify-items: center;
   }
-  h1{
+  h1 {
     width: 55%;
   }
   .juego {
@@ -404,7 +400,7 @@ h1 {
     margin: 0 auto;
     padding: 20px;
     border-width: 5px;
-    background-size:cover;
+    background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     background-position: bottom center;
@@ -414,13 +410,13 @@ h1 {
     height: 130px;
     left: 50%;
     bottom: 8%;
-    transform: translate(-50%, 0%);
+    transform: translateX(-50%);
   }
   .juego .escondite {
     width: 110px;
   }
   .juego .escondite img {
-    scale: 1.5;
+    transform: translateX(-38%) scale(1.5);
   }
   .mensaje {
     font-size: 2rem;
@@ -439,13 +435,12 @@ h1 {
     width: 30%;
     margin: 10px auto;
   }
-  button{
+  button {
     font-size: 1.8rem;
   }
   .personaje img {
     width: 180px;
   }
-  
 }
 
 @media (min-width: 1200px) {
@@ -453,7 +448,7 @@ h1 {
     font-size: 2.5rem;
     justify-items: center;
   }
-  h1{
+  h1 {
     width: 40%;
   }
   .juego {
@@ -461,7 +456,7 @@ h1 {
     margin: 0 auto;
     padding: 20px;
     border-width: 5px;
-    background-size:cover;
+    background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     background-position: bottom center;
@@ -471,13 +466,13 @@ h1 {
     height: 150px;
     left: 50%;
     bottom: 8%;
-    transform: translate(-50%, 0%);
+    transform: translateX(-50%);
   }
   .juego .escondite {
     width: 110px;
   }
   .juego .escondite img {
-    scale: 1.5;
+    transform: translateX(-38%) scale(1.5);
   }
   .mensaje {
     font-size: 2rem;
@@ -496,7 +491,7 @@ h1 {
     width: 30%;
     margin: 10px auto;
   }
-  button{
+  button {
     font-size: 1.7rem;
   }
   .personaje img {
@@ -504,12 +499,11 @@ h1 {
   }
 }
 @media (min-width: 1440px) {
-
   body {
     font-size: 2.5rem;
     justify-items: center;
   }
-  h1{
+  h1 {
     width: 40%;
   }
   .juego {
@@ -517,7 +511,7 @@ h1 {
     margin: 0 auto;
     padding: 20px;
     border-width: 5px;
-    background-size:cover;
+    background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     background-position: bottom center;
@@ -527,13 +521,13 @@ h1 {
     height: 150px;
     left: 50%;
     bottom: 8%;
-    transform: translate(-50%, 0%);
+    transform: translateX(-50%);
   }
   .juego .escondite {
     width: 110px;
   }
   .juego .escondite img {
-    scale: 1.5;
+    transform: translateX(-38%) scale(1.5);
   }
   .mensaje {
     font-size: 2.5rem;
@@ -552,7 +546,7 @@ h1 {
     width: 30%;
     margin: 10px auto;
   }
-  button{
+  button {
     font-size: 2rem;
   }
   .personaje img {
@@ -560,12 +554,11 @@ h1 {
   }
 }
 @media (min-width: 2560px) {
-
   body {
     font-size: 5rem;
     justify-items: center;
   }
-  h1{
+  h1 {
     width: 50%;
   }
   .juego {
@@ -573,7 +566,7 @@ h1 {
     margin: 0 auto;
     padding: 20px;
     border-width: 5px;
-    background-size:cover;
+    background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     background-position: bottom center;
@@ -584,13 +577,13 @@ h1 {
     height: 250px;
     left: 50%;
     bottom: 8%;
-    transform: translate(-50%, 0%);
+    transform: translateX(-50%);
   }
   .juego .escondite {
     width: 110px;
   }
   .juego .escondite img {
-    scale: 1.5;
+    transform: translateX(-38%) scale(1.5);
   }
   .mensaje {
     font-size: 4.5rem;
@@ -609,15 +602,14 @@ h1 {
     width: 30%;
     margin: 20px auto;
   }
-  .abajo img{
+  .abajo img {
     width: 60px;
   }
-  button{
+  button {
     font-size: 4rem;
     padding: 10px 10px;
   }
   .personaje img {
     width: 400px;
   }
-  
 }

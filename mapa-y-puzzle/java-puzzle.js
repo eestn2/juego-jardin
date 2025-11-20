@@ -85,7 +85,7 @@ const imagenesPorRegion = {
   ],
   Patagonia: [
     {
-      src: "./imgs/patagonica/condor.jfif",
+      src: "./imgs/patagonica/condor.jpg",
       nombre: "Cóndor",
       info: "El cóndor andino es el ave voladora más grande de Sudamérica.",
     },
@@ -95,7 +95,7 @@ const imagenesPorRegion = {
       info: "El huemul es un ciervo en peligro de extinción, símbolo nacional de Argentina.",
     },
     {
-      src: "./imgs/patagonica/pinguino.jfif",
+      src: "./imgs/patagonica/pinguino.jpg",
       nombre: "Pingüino",
       info: "El pingüino de Magallanes es típico de las costas patagónicas.",
     },
@@ -133,6 +133,14 @@ function obtenerImagenParaRegion(region) {
 // Almacenar imágenes usadas por región
 const imagenesUsadasPorRegion = {};
 
+// Pre-cargar todas las rutas de imagen de la región al inicio (opcional pero reduce parpadeo)
+function precargarImagenesDeRegion(region) {
+  const lista = imagenesPorRegion[region] || [];
+  lista.forEach((i) => {
+    const im = new Image();
+    im.src = i.src;
+  });
+}
 // Iniciar nivel
 let imagenSeleccionada = null; // <-- Variable global
 
@@ -141,11 +149,16 @@ function iniciarNivel(nivel) {
   seleccionada = null;
   nivelTexto.textContent = `Nivel: ${nivel}`;
 
-  imagenSeleccionada = obtenerImagenParaRegion(region); // <-- Guardar imagen global
-  if (!imagenSeleccionada) {
+  const imagenObj = obtenerImagenParaRegion(region); // <-- obtener objeto
+  if (!imagenObj) {
     alert("No hay imágenes disponibles para esta región.");
     return;
   }
+  imagenSeleccionada = imagenObj; // guardar global
+
+  // Pre-cargar la imagen antes de construir las piezas para evitar parpadeo
+  const imgLoader = new Image();
+  imgLoader.src = imagenSeleccionada.src;
 
   // Ocultar mensaje y botones al iniciar nivel
   document.getElementById("mensaje").style.display = "none";
@@ -153,43 +166,49 @@ function iniciarNivel(nivel) {
   document.getElementById("btnContinuar").style.display = "none";
   document.getElementById("personaje").style.display = "flex";
 
-  // Crear posiciones correctas
-  const posiciones = [];
-  for (let y = 0; y < total; y++) {
-    for (let x = 0; x < total; x++) {
-      posiciones.push({ x, y });
+  const construirPiezas = () => {
+    // Crear posiciones correctas
+    const posiciones = [];
+    for (let y = 0; y < total; y++) {
+      for (let x = 0; x < total; x++) {
+        posiciones.push({ x, y });
+      }
     }
-  }
 
-  // Mezclar posiciones
-  let mezcladas;
-  do {
-    mezcladas = [...posiciones].sort(() => Math.random() - 0.5);
-  } while (
-    mezcladas.some(
-      (mez, i) => mez.x === posiciones[i].x && mez.y === posiciones[i].y
-    )
-  );
+    // Mezclar posiciones
+    let mezcladas;
+    do {
+      mezcladas = [...posiciones].sort(() => Math.random() - 0.5);
+    } while (
+      mezcladas.some(
+        (mez, i) => mez.x === posiciones[i].x && mez.y === posiciones[i].y
+      )
+    );
 
-  // Crear piezas
-  posiciones.forEach((pos, i) => {
-    const pieza = document.createElement("div");
-    pieza.className = "pieza";
+    // Crear piezas
+    posiciones.forEach((pos, i) => {
+      const pieza = document.createElement("div");
+      pieza.className = "pieza";
 
-    const mez = mezcladas[i];
+      const mez = mezcladas[i];
 
-    pieza.style.backgroundImage = `url('${imagenSeleccionada.src}')`;
-    pieza.style.backgroundSize = `${total * 100}% ${total * 100}%`;
-    pieza.style.backgroundPosition = `-${pos.x * 100}% -${pos.y * 100}%`;
+      pieza.style.backgroundImage = `url('${imagenSeleccionada.src}')`;
+      pieza.style.backgroundSize = `${total * 100}% ${total * 100}%`;
+      pieza.style.backgroundPosition = `-${pos.x * 100}% -${pos.y * 100}%`;
 
-    pieza.dataset.correct = `${pos.x}-${pos.y}`;
-    pieza.dataset.current = `${mez.x}-${mez.y}`;
-    pieza.style.gridColumnStart = mez.x + 1;
-    pieza.style.gridRowStart = mez.y + 1;
+      pieza.dataset.correct = `${pos.x}-${pos.y}`;
+      pieza.dataset.current = `${mez.x}-${mez.y}`;
+      pieza.style.gridColumnStart = mez.x + 1;
+      pieza.style.gridRowStart = mez.y + 1;
 
-    pieza.addEventListener("click", () => seleccionar(pieza));
-    contenedor.appendChild(pieza);
-  });
+      pieza.addEventListener("click", () => seleccionar(pieza));
+      contenedor.appendChild(pieza);
+    });
+  };
+
+  imgLoader.onload = construirPiezas;
+  // en error, construir igualmente para no bloquear UI
+  imgLoader.onerror = construirPiezas;
 }
 
 // Seleccionar piezas
@@ -333,14 +352,12 @@ function irAlSiguienteJuego() {
     const nextNorm = juegosRestantesNorm[0];
     const idx = juegosNorm.indexOf(nextNorm);
     const siguientePath = juegosPaths[idx];
-
-    // Remove the duplicate redirect code below - use only this one
     const target = new URL(
       siguientePath.endsWith(".html") ? siguientePath : `${siguientePath}.html`,
       window.location.href
     );
     target.searchParams.set("region", region);
-    window.location.href =target.href;
+    window.location.href = target.href;
   } else {
     // Si era el último, marcar región completada, sacar 3 monedas y dar 1 exp
     let progreso = JSON.parse(localStorage.getItem("progresoRegiones")) || {};
@@ -359,19 +376,23 @@ function irAlSiguienteJuego() {
   }
 }
 
-// Iniciar primer nivel al cargar
-iniciarNivel(nivelActual);
-
+// Eliminar handler global duplicado para btnNivel (si existía)
+// Reemplazar duplicados de listeners por uno solo (al final del archivo)
 document.getElementById("boton-volver").onclick = function () {
   window.location.href = "./mapa-test.html";
 };
 const btnContinuar = document.getElementById("btnContinuar");
-document.getElementById("btnContinuar").onclick = function () {
-  irAlSiguienteJuego();
-};
+// solo un handler
 if (btnContinuar) {
+  btnContinuar.removeEventListener("click", irAlSiguienteJuego);
   btnContinuar.addEventListener("click", irAlSiguienteJuego);
 }
+
+// llamar precarga opcional y comenzar al cargar la página
+window.addEventListener("load", () => {
+  precargarImagenesDeRegion(region);
+  iniciarNivel(nivelActual);
+});
 
 function desbloquearRegiones(regionCompletada) {
   const estadoRegiones =
