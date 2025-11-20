@@ -76,7 +76,8 @@ document.addEventListener("DOMContentLoaded", () => {
       juegoActivo = true;
 
       // Mezclar animales y asignar a los arbustos
-      const animalesMezclados = animales.sort(() => Math.random() - 0.5);
+      // usar slice() para no mutar el array original
+      const animalesMezclados = animales.slice().sort(() => Math.random() - 0.5);
 
       for (let i = 1; i <= 3; i++) {
         const arbustoImg = document.getElementById(`esconditeImg${i}`);
@@ -106,9 +107,10 @@ document.addEventListener("DOMContentLoaded", () => {
         // Mostrar mensaje ganador
         const mensajeGanador = document.getElementById("mensajeGanador");
         mensajeGanador.style.display = "block";
+        // establecer texto correctamente y luego hacer scroll
         mensajeGanador.querySelector("h2").textContent =
-          mensajeGanador.scrollIntoView({ behavior: "smooth" });
-        arbustoImg.dataset.correcto === "true" ? "¡Felicitaciones!" : "¡Ups!";
+          arbustoImg.dataset.correcto === "true" ? "¡Felicitaciones!" : "¡Ups!";
+        mensajeGanador.scrollIntoView({ behavior: "smooth" });
         mensajeGanador.querySelector("p").textContent =
           arbustoImg.dataset.mensaje;
 
@@ -192,6 +194,27 @@ document.addEventListener("DOMContentLoaded", () => {
           let monedas = parseInt(localStorage.getItem("monedas")) || 15;
           monedas = Math.max(0, monedas - 3);
           localStorage.setItem("monedas", monedas);
+
+          // ============================
+          // Desbloquear regiones relacionadas (actualiza localStorage directamente
+          // para no depender de una función externa que exista sólo en mapa.js)
+          // ============================
+          const desbloqueoPorRegion = {
+            Noreste: ["Cuyo"],
+            Cuyo: ["Patagonia", "Noroeste"],
+            Noroeste: [],
+            Patagonia: ["Centro"],
+            Centro: [],
+          };
+
+          const estadoRegiones =
+            JSON.parse(localStorage.getItem("estadoRegiones")) || {};
+          const nuevos = desbloqueoPorRegion[region] || [];
+          nuevos.forEach((r) => {
+            estadoRegiones[r] = true;
+          });
+          localStorage.setItem("estadoRegiones", JSON.stringify(estadoRegiones));
+          // ============================
         }
         if (typeof desbloquearRegiones === "function")
           desbloquearRegiones(region);
