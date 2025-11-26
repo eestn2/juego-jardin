@@ -42,8 +42,8 @@ const infoPorRegion = {
     texto: "Aquí hay danzas como la cueca, carnavalito, etc.",
     srcs: [
       "./imgs/NORTE(LUCIANA)/DANZAS/cueca.jpg",
-      "/videos/danzas/Carnavalito.mp4",
-      "./imgs/NORTE(LUCIANA)/DANZAS/gato-tres.jpg",
+      "./videos/danzas/Carnavalito.mp4",
+      "./imgs/NORTE(LUCIANA)/DANZAS/gato_tres.jpg",
     ],
   },
 };

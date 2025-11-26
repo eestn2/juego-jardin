@@ -79,11 +79,13 @@ body {
 }
 
 object#mapa {
+  width: 100%;
+  max-width: 900px;
   height: auto;
-  max-width: fit-content;
   display: block;
   margin: 0 auto;
 }
+
 
 #region-info {
   position: absolute;

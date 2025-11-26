@@ -278,7 +278,6 @@ function verificarTodo() {
     infoAnimal.textContent = `${imagenSeleccionada.nombre} : ${imagenSeleccionada.info}`;
 
     if (nivelActual < nivelMax) {
-      mensaje.scrollIntoView({ behavior: "smooth" });
       btnNivel.style.display = "inline-block";
       btnContinuar.style.display = "none";
       btnNivel.textContent = "Siguiente nivel";
@@ -292,7 +291,6 @@ function verificarTodo() {
       btnContinuar.style.display = "inline-block";
       btnContinuar.textContent = "Finalizar";
       BtnVolver.style.display = "none";
-      btnContinuar.scrollIntoView({ behavior: "smooth" });
       btnContinuar.onclick = function () {
         mensaje.style.display = "none";
         irAlSiguienteJuego();

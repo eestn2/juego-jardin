@@ -123,7 +123,7 @@ document.addEventListener("DOMContentLoaded", () => {
         } else {
           btnContinuar.style.display = "none";
           juegoActivo = false; // bloquear mientras se reinicia
-          setTimeout(reiniciarJuego, 5000);
+          setTimeout(reiniciarJuego, 4000);
         }
       };
     });
